@@ -15,20 +15,20 @@ class Home extends Component {
 	
     render() {
 		
+		const {data} = this.props;
+			const sectionData = data
+				.map(q => {
+					return(
+						<Collapsible transitionTime={200} trigger={q.title} key={q.id}> <Section data={this.props.data[q.id]} /> </Collapsible>
+					)
+				})
+		
 		return(
 			<div className="App">
 			
 			<div className='section' ref={this.dragBox}>
 
-				<Collapsible transitionTime={200} trigger="Test Section" ref="P1">
-					<Section data={this.props.data}
-					/>
-				</Collapsible>
-				
-				<Collapsible transitionTime={200} trigger="Test Section 2" ref="P1">
-					<Section data={this.props.data}
-					/>
-				</Collapsible>
+				{sectionData}
 				
 				</div>
 				
