@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import  './Section.css';
-import Collapsible from 'react-collapsible';
-import TextBox from '../../components/TextBox/TextBox';
+import Question from '../../components/Question/Question';
 
 class Section extends Component {
+	
+	textRes =(text) => {
+		this.props.callbackDash(text);
+	}
 
     render() {
 		
@@ -11,13 +13,15 @@ class Section extends Component {
 			const questionData = data.questions
 				.map(q => {
 					return(
-						<Collapsible transitionTime={200} trigger={q.question} key={q.id}> <TextBox /> </Collapsible>
+						<Question question={q.question} key={q.id} id={q.id} callbackQ={this.textRes} />
 					)
 				})
 		
 		return(
         <div className="App">	
-				{questionData};
+			<div>
+					{questionData}
+			</div>
 		</div>
 		
 		);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import styles from './TextBox.css';
+import './TextBox.css';
 
 class TextBox extends Component {
 
@@ -16,16 +16,16 @@ class TextBox extends Component {
 	change(value) {
 	  
 		this.setState({ text: value });
+		this.props.callbackText(this.state);
 	
 	}
 
 	render() {
 		return (
-			<div>
+			<div className="innerTextBox">
 			
 				 <ReactQuill 
 					theme='snow'
-					className="textBox"
 					value={this.state.text}
 					onChange={this.change} 
 				/>

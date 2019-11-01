@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
+
+html
+{
+	overflow-y: scroll;
+}
+
+.section
+{
+	background-color: #f0f0f0;
+	width: 100%;
+	padding-bottom: 150px;
+	border: 1px silver solid;
+	border-radius: 5px;
+	padding-left: 3px;
+	padding-top: 3px;
+	padding-right: 14px;
+}
+
+.Collapsible
+{
+	background-color: #ededed;
+	border: 1px silver outset;
+	border-radius: 5px;
+	padding-left: .5%;
+	padding-right: .5%;
+	padding-top: .5%;
+	padding-bottom: .5%;
+	width: 100%;	
+}
+
+.Collapsible__trigger
+{
+	background-color: #f2f2f2;
+	border: 2px solid silver;
+	border-radius: 5px;
+	display: block;
+	color: #212121;
+	font-weight: 500;
+	font-family: Montserrat, sans-serif;
+	text-align: left;
+	padding-top: 15px;
+	padding-left: 2%;
+	padding-bottom: 15px;
+ }
+ 
+.Collapsible__contentInner
+{	
+	float: left;
+	width: 95%;
+	padding-top: 5px;
+	padding-left: 2%;
+	background-color: #e8e8e8;
+}
+
