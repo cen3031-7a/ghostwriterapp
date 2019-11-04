@@ -9,12 +9,12 @@ class TextBox extends Component {
 	 
 		super(props);
 		this.state = { text: '' };
-		this.change = this.change.bind(this);
+		this.onChange = this.onChange.bind(this);
 	
 	}
 
-	change(value) {
-	  
+	onChange(value) {
+		
 		this.setState({ text: value });
 		this.props.callbackText(this.state);
 	
@@ -27,7 +27,7 @@ class TextBox extends Component {
 				 <ReactQuill 
 					theme='snow'
 					value={this.state.text}
-					onChange={this.change} 
+					onChange={this.onChange} 
 				/>
 				
 			</div>

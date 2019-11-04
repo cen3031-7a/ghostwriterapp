@@ -43,6 +43,11 @@ html
 	padding-left: 2%;
 	padding-bottom: 15px;
  }
+ .Collapsible__trigger:hover
+{
+	cursor: pointer;
+	background-color: #ddd;
+ }
  
 .Collapsible__contentInner
 {	

@@ -4,6 +4,19 @@ import Dashboard from '../../components/Dashboard/Dashboard'
 
 class QuestionPage extends Component {
 	
+	constructor() {
+	 
+		super();
+		this.state = {text: ''};
+
+	}
+	
+	qPage = (text) =>
+	{
+		this.setState({text: text.text});
+		//console.log(this.state);
+	}
+	
     render() {
 		
 		return(
@@ -16,7 +29,7 @@ class QuestionPage extends Component {
 				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
 				
 				<div className="Dashboard">
-				<Dashboard data={this.props.data}/>
+				<Dashboard data={this.props.data} callbackQPage={this.qPage}/>
 				</div>
 				
 				<div style={{width: '20%'}}>  </div>

@@ -10,7 +10,7 @@ class Home extends Component {
 	parentDash = (text) =>
 	{
 		
-		console.log(text);
+		this.props.callbackQPage(text);
 		
 	}
 	
