@@ -3,7 +3,8 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes');
+    exampleRouter = require('../routes/examples.server.routes'),
+    sectionRouter = require('../routes/sections.server.routes');
 
 module.exports.init = () => {
     /* 
@@ -27,6 +28,9 @@ module.exports.init = () => {
 
     // add a router
     app.use('/api/example', exampleRouter);
+
+    // add a router
+    app.use('/api/sections', sectionRouter);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files

@@ -17,10 +17,12 @@ var userSchema = new Schema({
     sectionendage: Number,
     questions: [{
         questionid: String,
-        response: String
-    }]
+        response: String,
+        _id: false
+    }],
+    _id: false
   }]
-});
+}, {versionKey:false});
 
 /* Use your schema to instantiate a Mongoose model */
 var User = mongoose.model('User', userSchema);
