@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import  './QuestionPage.css';
-import Dashboard from '../../components/Dashboard/Dashboard'
+import Dashboard from '../../components/Dashboard/Dashboard';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class QuestionPage extends Component {
 	

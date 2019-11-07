@@ -7,54 +7,29 @@ html
 
 .section
 {
-	background-color: #f0f0f0;
+	background-color: #white;
 	width: 100%;
-	padding-bottom: 150px;
 	border: 1px silver solid;
 	border-radius: 5px;
-	padding-left: 3px;
-	padding-top: 3px;
-	padding-right: 14px;
+	padding: 1%;
+	padding-bottom: 150px;
 }
 
-.Collapsible
+.accordion
 {
-	background-color: #ededed;
-	border: 1px silver outset;
-	border-radius: 5px;
-	padding-left: .5%;
-	padding-right: .5%;
-	padding-top: .5%;
-	padding-bottom: .5%;
-	width: 100%;	
+	padding-left: .25%;
+	padding-right: .25%;
+	padding-top: 1%;
 }
 
-.Collapsible__trigger
+.accHeader
 {
-	background-color: #f2f2f2;
-	border: 2px solid silver;
-	border-radius: 5px;
-	display: block;
-	color: #212121;
-	font-weight: 500;
 	font-family: Montserrat, sans-serif;
-	text-align: left;
-	padding-top: 15px;
-	padding-left: 2%;
-	padding-bottom: 15px;
- }
- .Collapsible__trigger:hover
-{
-	cursor: pointer;
-	background-color: #ddd;
- }
- 
-.Collapsible__contentInner
-{	
-	float: left;
-	width: 95%;
-	padding-top: 5px;
-	padding-left: 2%;
-	background-color: #e8e8e8;
+	font-size: .9rem;
+	color: #2b2b2b;
 }
 
+.accHeader:hover
+{
+	background-color: #ddd;
+}

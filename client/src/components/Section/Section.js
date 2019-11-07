@@ -16,6 +16,7 @@ class Section extends Component {
 						<Question question={q.question} key={q.id} id={q.id} callbackQ={this.textRes} />
 					)
 				})
+				
 		
 		return(
         <div className="App">	
@@ -27,6 +28,10 @@ class Section extends Component {
 		);
 		
     }
+	
+	componentDidMount() {
+		
+	}
   
 }
 

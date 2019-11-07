@@ -1,16 +1,6 @@
 .ql-editor
 {	
-	min-height: 150px;
-	border: 2px groove;
-	border-radius: 2px;
-	
-}
 
-.innerTextBox
-{
-	background-color: white;
-	width: 100%;
-	border: 2px inset;
-	border-radius: 5px;
+	min-height: 150px;
 	
 }
