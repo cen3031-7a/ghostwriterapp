@@ -63,7 +63,7 @@ exports.update = function(req, res) {
       console.log('removed questions');
     }
   } else { // Section doesn't exist yet
-    delete req.body.removequestions;
+    req.body.removequestions = undefined;
     console.log('inserting section');
     section = new Section(req.body);
     section.sectionid = req.params.sectionId;
