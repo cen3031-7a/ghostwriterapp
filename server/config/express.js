@@ -2,8 +2,8 @@ const path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
+    session = require('express-session'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes'),
     sectionRouter = require('../routes/sections.server.routes'),
     userRouter = require('../routes/users.server.routes');
 
@@ -27,6 +27,35 @@ module.exports.init = () => {
     // body parsing middleware
     app.use(bodyParser.json());
 
+    // set up passport for authentication
+    require("./config/passport")(passport);
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    // to handle the session
+    app.use(
+      session({
+        name: "sid",
+        resave: false,
+        saveUninitialized: false,
+        secret: "secret",
+        store: new MongoStore,
+        cookie: {
+          httpOnly: true,
+          secure: false,
+          maxAge: 1000 * 60 * 60 * 24 * 1 // 1 day
+        }
+      })
+    );
+
+    // enabling the session with express-session 
+    app.use((req, res, next) => {
+      if (req.session) {
+        res.locals.session = req.session;
+      }
+      next();
+    });
+
     // Add auth middleware
     app.use('/api', function(req, res, next) {// Dummy function
 
@@ -41,9 +70,6 @@ module.exports.init = () => {
       req.userid = "aec2ac9a-0754-4218-bbe4-3071779efc24";
       next();
     });
-
-    // add a router
-    app.use('/api/example', exampleRouter);
 
     // add a router
     app.use('/api/sections', sectionRouter);

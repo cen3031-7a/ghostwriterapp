@@ -7,8 +7,8 @@
 /* Dependencies */
 var users = require('../controllers/users.server.controller.js'),
     express = require('express'), //refers to Express the middleware helper for Node.js
+    passport = require('passport'), // reffers to the passport authentication library
     router = express.Router(); //refers to the Router() function in Express the middleware helper for Node.js
-
 
 
 router.use('/', users.userFromId);
@@ -29,6 +29,17 @@ router.route('/timeline')
 router.route('/question/response')
   .post(users.response);
 
+router.route('/login/local')
+  .post(users.local_login);
+
+router.route('/login/facebook')
+  .post(users.facebook_login)
+
+router.route('/login/google')
+  .post(users.google_login)
+
+router.route('/logout')
+  .post(users.logout)
 
 
 module.exports = router;

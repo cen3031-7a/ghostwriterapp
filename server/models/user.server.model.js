@@ -1,15 +1,17 @@
 /* Import mongoose and define any variables needed to create the schema */
-var mongoose = require('mongoose'), 
+var mongoose = require('mongoose'),
+    bcrypt = require('bcryptjs'),
     Schema = mongoose.Schema;
 
 /* Create your schema */
 var userSchema = new Schema({
   userid: { type: String, required: true },
-  firstname: String,
-  lastname: String,
-  email: String,
+  firstname: {type: String, required: true},
+  password: {type: String, required: true},
+  lastname: {type: String, required: true},
+  email: {type: String, required: true},
   age: Number,
-  accounttype: String,
+  accounttype: {type: String, required: true},
   timeline: [{
     sectionid: String,
     sectiontitle: String,
@@ -23,6 +25,13 @@ var userSchema = new Schema({
     _id: false
   }]
 }, {versionKey:false});
+
+userSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+};
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 /* Use your schema to instantiate a Mongoose model */
 var User = mongoose.model('User', userSchema);

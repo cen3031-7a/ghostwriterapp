@@ -1,6 +1,7 @@
 
 /* Dependencies */
-var mongoose = require('mongoose'), 
+var mongoose = require('mongoose'),
+    bcrypt = require('bcryptjs'),
     User = require('../models/user.server.model.js'),
     Section = require('../models/section.server.model.js');
   
@@ -18,6 +19,8 @@ router.route('/question/response')
   .post(users.response);
 
 */
+
+
 
 exports.info = function(req, res) {
   var resp = req.user;
