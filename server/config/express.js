@@ -3,7 +3,9 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes');
+    exampleRouter = require('../routes/examples.server.routes'),
+    sectionRouter = require('../routes/sections.server.routes'),
+    userRouter = require('../routes/users.server.routes');
 
 module.exports.init = () => {
     /* 
@@ -25,8 +27,27 @@ module.exports.init = () => {
     // body parsing middleware
     app.use(bodyParser.json());
 
+    // Add auth middleware
+    app.use('/api', function(req, res, next) {// Dummy function
+
+      if(req.headers.Authorization) {
+        console.log('Auth found.');
+        console.log(req.header('Authorization'));
+      } else {
+        console.log('Auth not found');
+      }
+
+      // req.userid should be set by this function
+      req.userid = "aec2ac9a-0754-4218-bbe4-3071779efc24";
+      next();
+    });
+
     // add a router
     app.use('/api/example', exampleRouter);
+
+    // add a router
+    app.use('/api/sections', sectionRouter);
+    app.use('/api/users', userRouter)
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
