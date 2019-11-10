@@ -32,21 +32,25 @@ router.route('/question/response')
 router.route('/verify')
   .get(users.verify)
 
-router.route('/login/local')
-  .post(users.local_login);
+router.get('/login/local')
+  .get(users.local_login)
 
 router.route('/login/facebook')
-  .post(users.facebook_login)
+  .get(users.facebook_login)
+
+router.route('/login/facebook/callback')
+  .get(users.facebook_callback)
 
 router.route('/login/google')
-  .post(users.google_login)
+  .get(users.google_login)
+
+router.route('/login/google/callback')
+  .get(users.google_callback)
 
 router.route('/logout')
   .post(users.logout)
 
 router.route('/register')
   .post(users.register)
-
-// to do put the callback routes
 
 module.exports = router;

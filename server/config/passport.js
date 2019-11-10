@@ -58,6 +58,7 @@ module.exports = function(passport) {
       });
   }))};
 
+  // google
   module.exports = function(passport){
     passport.use(new GoogleStrategy({
       clientID: GOOGLE_CLIENT_ID,

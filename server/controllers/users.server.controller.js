@@ -19,7 +19,7 @@ router.route('/question/response')
   .post(users.response);
 
 */
-exports.verify = (res, req) => {
+/* exports.verify = (res, req) => {
   if (req.isAuthenticated()) {
     const clientUser = {
       userid: req.user.userid,
@@ -70,11 +70,23 @@ exports.local_login = (res, req) => {
     message: "successful login",
     user: req.user
   });
-}
+} */
 
-exports.facebook_login
+exports.local_login = passport.authenticate('local', {
+  successRedirect: '/Questions',
+  failureRedirect: '/login'});
 
-exports.google_login
+exports.facebook_login = passport.authenticate('facebook');
+
+exports.facebook_callback = passport.authenticate('facebook', { 
+  successRedirect: '/Questions',
+  failureRedirect: '/login' });
+
+exports.google_login = passport.authenticate('google');
+
+exports.google_callback = passport.authenticate('facebook', { 
+  successRedirect: '/Questions',
+  failureRedirect: '/login' });
 
 exports.logout
 
