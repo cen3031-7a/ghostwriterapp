@@ -29,6 +29,9 @@ router.route('/timeline')
 router.route('/question/response')
   .post(users.response);
 
+router.route('/verify')
+  .get(users.verify)
+
 router.route('/login/local')
   .post(users.local_login);
 
@@ -41,5 +44,9 @@ router.route('/login/google')
 router.route('/logout')
   .post(users.logout)
 
+router.route('/register')
+  .post(users.register)
+
+// to do put the callback routes
 
 module.exports = router;

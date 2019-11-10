@@ -19,7 +19,66 @@ router.route('/question/response')
   .post(users.response);
 
 */
+exports.verify = (res, req) => {
+  if (req.isAuthenticated()) {
+    const clientUser = {
+      userid: req.user.userid,
+      firstname: req.user.firstname,
+      lastname: req.user.lastname,
+      email: req.user.email,
+      accounttype: req.user.accounttype,
+      loggedIn: true
+    };
+    return res.send({
+      success: true,
+      message: "Valid session",
+      user: clientUser
+    });
+  } else {
+    emptyUser = {
+      userid: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      accounttype: "",
+      loggedIn: false
+    };
+    return res.send({
+      success: false,
+      message: "Couldn't find session",
+      user: emptyUser
+    });
+  }
+}
 
+exports.local_login = (res, req) => {
+  passport.authenticate("local");
+  req.session.userid = req.user.userid;
+  res.locals.user = req.user;
+  res.locals.session = req.session;
+  const client = {
+    userid: req.user.userid,
+    firstname: req.user.firstname,
+    lastname: req.user.lastname,
+    email: req.user.email,
+    accountype: req.user.accounttype,
+    loggedIn: true
+  };
+
+  return res.send({
+    success: true,
+    message: "successful login",
+    user: req.user
+  });
+}
+
+exports.facebook_login
+
+exports.google_login
+
+exports.logout
+
+exports.register
 
 
 exports.info = function(req, res) {
