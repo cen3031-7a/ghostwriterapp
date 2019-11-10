@@ -56,7 +56,7 @@ module.exports = function(passport) {
         });
         done(null, user);
       });
-  }));
+  }))};
 
   module.exports = function(passport){
     passport.use(new GoogleStrategy({
@@ -79,7 +79,7 @@ module.exports = function(passport) {
         });
         done(null, user);
       });
-  }));
+  }))};
 
 
   //Sessions
