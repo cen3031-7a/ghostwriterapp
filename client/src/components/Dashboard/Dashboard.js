@@ -12,58 +12,67 @@ class Home extends Component {
 	constructor(props)
 	{
 		super(props);
-		this.state = {
+		this.state = 
+		{
 			order: []
 		}
 	}
 	
-	orderUpdate(value) {
+	orderUpdate(value)
+	{
 	  
-		this.setState({
-				order: value
-			})
+		this.setState ({
+			order: value
+		})
 			
-		console.log(this.state.order);
-		
-		
-  }
+		this.props.callbackOrder(value);
+
+	}
 	
 	parentDash = (text) =>
 	{
-		
+
 		this.props.callbackQPage(text);
 		
 	}
 	
     render() {
 		
-		const {data} = this.props;
-			sectionData = data
-				.map(q => {
-					return(
-						<Accordion id={q.id} defaultActiveKey="0" style={{backgroundColor: 'white'}} key={q.id}>
-							<Card style={{borderRadius: '3px', backgroundColor: '#fafafa', border: '.5px solid silver'}}>
-								<Accordion.Toggle as={Card.Header} className="accHeader" eventKey="1">
-									{q.title}
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey="1">
-									<Card.Body>
-										<Section className="SECTION" data={this.props.data[q.id]} id={q.id} callbackDash={this.parentDash} />
-									</Card.Body>
-								</Accordion.Collapse>
-							</Card>
-						</Accordion>
-					)
-				})
+		const data = this.props.data;
+		const resData = this.props.resData;
+		
+		sectionData = resData
+			.map((q, i) => {
+
+				return(
 				
-				console.log(sectionData)
+					<Accordion id={q.sectionid} defaultActiveKey="0" style={{backgroundColor: 'white'}} key={q.sectionid}>
+						<Card style={{borderRadius: '3px', backgroundColor: '#fafafa', border: '.5px solid silver'}}>
+						
+							<Accordion.Toggle as={Card.Header} className="accHeader" eventKey="1">
+								{data[data.findIndex((e) => e.sectionid === q.sectionid)].sectionname}
+							</Accordion.Toggle>
+							
+							<Accordion.Collapse eventKey="1">
+								<Card.Body>
+									<Section className="SECTION" data={q} resData={data[data.findIndex((e) => e.sectionid === q.sectionid)]} id={q.sectionid} callbackDash={this.parentDash} />
+								</Card.Body>
+							</Accordion.Collapse>
+
+						</Card>
+					</Accordion>
+					
+				)
+				
+			})
 		
 		return(
+		
 			<div className="App">
 			
-			<div className="section" ref={this.dragBox}>
+				<div className="section" ref={this.dragBox}>
 
-				{sectionData}
+					{sectionData}
 				
 				</div>
 				
@@ -73,7 +82,7 @@ class Home extends Component {
 		
     }
   
-  dragBox = (componentBackingInstance) => {
+	dragBox = (componentBackingInstance) => {
 	  
 		if (componentBackingInstance) {
 			
@@ -84,7 +93,7 @@ class Home extends Component {
 			 var newOrder = [];
 	
 			  for(var i = 0; i < target.childNodes.length; i++)
-				  newOrder[i] = target.childNodes[i].id;
+				  newOrder[i] = {sectionid: target.childNodes[i].id};
 			  
 			 this.orderUpdate(newOrder);
 				  

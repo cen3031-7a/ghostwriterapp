@@ -6,11 +6,11 @@ import './TextBox.css';
 class TextBox extends Component {
 
 	constructor(props) {
-	 
+
 		super(props);
-		this.state = { text: '' };
+		this.state = {text: this.props.resText.response};
 		this.onChange = this.onChange.bind(this);
-	
+
 	}
 
 	onChange(value) {
@@ -21,19 +21,21 @@ class TextBox extends Component {
 	}
 
 	render() {
+
 		return (
 			<div className="innerTextBox">
 			
 				 <ReactQuill 
 					theme='snow'
-					value={this.state.text}
+					value={this.state.text || ''}
 					onChange={this.onChange} 
 				/>
 				
 			</div>
 		)
+
 	}
-  
+
 }
 
 export default TextBox;
