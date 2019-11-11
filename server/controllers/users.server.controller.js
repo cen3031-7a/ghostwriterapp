@@ -1,6 +1,6 @@
 
 /* Dependencies */
-var mongoose = require('mongoose'), 
+var passport = require('passport'),
     User = require('../models/user.server.model.js'),
     Section = require('../models/section.server.model.js');
   
@@ -18,6 +18,91 @@ router.route('/question/response')
   .post(users.response);
 
 */
+/* exports.verify = (res, req) => {
+  if (req.isAuthenticated()) {
+    const clientUser = {
+      userid: req.user.userid,
+      firstname: req.user.firstname,
+      lastname: req.user.lastname,
+      email: req.user.email,
+      accounttype: req.user.accounttype,
+      loggedIn: true
+    };
+    return res.send({
+      success: true,
+      message: "Valid session",
+      user: clientUser
+    });
+  } else {
+    emptyUser = {
+      userid: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      accounttype: "",
+      loggedIn: false
+    };
+    return res.send({
+      success: false,
+      message: "Couldn't find session",
+      user: emptyUser
+    });
+  }
+}
+
+exports.local_login = (res, req) => {
+  passport.authenticate("local");
+  req.session.userid = req.user.userid;
+  res.locals.user = req.user;
+  res.locals.session = req.session;
+  const client = {
+    userid: req.user.userid,
+    firstname: req.user.firstname,
+    lastname: req.user.lastname,
+    email: req.user.email,
+    accountype: req.user.accounttype,
+    loggedIn: true
+  };
+
+  return res.send({
+    success: true,
+    message: "successful login",
+    user: req.user
+  });
+} */
+
+exports.local_login = () => {
+  passport.authenticate('local', {successRedirect: '/Questions', failureRedirect: '/login'})};
+
+exports.facebook_login = () => {
+  passport.authenticate('facebook')};
+
+exports.facebook_callback = () => {
+  passport.authenticate('facebook', {successRedirect: '/Questions', failureRedirect: '/login' })};
+
+exports.google_login = () => {
+  passport.authenticate('google')};
+
+exports.google_callback = passport.authenticate('facebook', { 
+  successRedirect: '/Questions',
+  failureRedirect: '/login' });
+
+exports.logout = (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.send({
+        success: false,
+        message: "Server error: couldn't destroy session (log user out)"
+      });
+    }
+    req.logout();
+    res.clearCookie("sid").send({
+      success: true,
+      message: "Successfully logged out"
+    });
+  });
+}
+
 
 exports.info = function(req, res) {
   var resp = req.user;

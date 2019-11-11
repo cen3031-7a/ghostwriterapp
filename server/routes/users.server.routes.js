@@ -10,7 +10,6 @@ var users = require('../controllers/users.server.controller.js'),
     router = express.Router(); //refers to the Router() function in Express the middleware helper for Node.js
 
 
-
 router.use('/', users.userFromId);
 
 /* 
@@ -29,6 +28,19 @@ router.route('/timeline')
 router.route('/question/response')
   .post(users.response);
 
+router.get('/login/local')
+  .get(users.local_login)
 
+router.route('/login/facebook')
+  .get(users.facebook_login)
+
+router.route('/login/facebook/callback')
+  .get(users.facebook_callback)
+
+router.route('/login/google')
+  .get(users.google_login)
+
+router.route('/login/google/callback')
+  .get(users.google_callback)
 
 module.exports = router;
