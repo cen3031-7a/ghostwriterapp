@@ -1,7 +1,6 @@
 
 /* Dependencies */
-var mongoose = require('mongoose'),
-    bcrypt = require('bcryptjs'),
+var passport = require('passport'),
     User = require('../models/user.server.model.js'),
     Section = require('../models/section.server.model.js');
   
@@ -72,25 +71,37 @@ exports.local_login = (res, req) => {
   });
 } */
 
-exports.local_login = passport.authenticate('local', {
-  successRedirect: '/Questions',
-  failureRedirect: '/login'});
+exports.local_login = () => {
+  passport.authenticate('local', {successRedirect: '/Questions', failureRedirect: '/login'})};
 
-exports.facebook_login = passport.authenticate('facebook');
+exports.facebook_login = () => {
+  passport.authenticate('facebook')};
 
-exports.facebook_callback = passport.authenticate('facebook', { 
-  successRedirect: '/Questions',
-  failureRedirect: '/login' });
+exports.facebook_callback = () => {
+  passport.authenticate('facebook', {successRedirect: '/Questions', failureRedirect: '/login' })};
 
-exports.google_login = passport.authenticate('google');
+exports.google_login = () => {
+  passport.authenticate('google')};
 
 exports.google_callback = passport.authenticate('facebook', { 
   successRedirect: '/Questions',
   failureRedirect: '/login' });
 
-exports.logout
-
-exports.register
+exports.logout = (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.send({
+        success: false,
+        message: "Server error: couldn't destroy session (log user out)"
+      });
+    }
+    req.logout();
+    res.clearCookie("sid").send({
+      success: true,
+      message: "Successfully logged out"
+    });
+  });
+}
 
 
 exports.info = function(req, res) {

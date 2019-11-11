@@ -28,7 +28,7 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // set up passport for authentication
-    require("./config/passport")(passport);
+    var passport = require('./passport')(passport);
     app.use(passport.initialize());
     app.use(passport.session());
 
