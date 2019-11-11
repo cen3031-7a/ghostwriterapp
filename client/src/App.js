@@ -117,7 +117,9 @@ class App extends Component {
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
 					<Route exact path="/Questions" render={() => <QuestionPage questions={this.state.data} resData={this.state.resData} response={this.postText} secOrder={this.postOrder} />}/>
-					
+					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>

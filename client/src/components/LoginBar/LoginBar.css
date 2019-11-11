@@ -1,0 +1,20 @@
+.btn-group-vertical > button{
+    margin-bottom:30px;
+    border-radius:5px;
+}
+
+.btn-box
+{
+	position: fixed;
+	top: 17%;
+    padding: 1%;
+    padding-top: 3%;
+	text-align: center;
+	display: block;
+	background-color: #f0f0f0;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 7px;
+	width: 15%;
+	height: 40%;
+	float: left;
+}
