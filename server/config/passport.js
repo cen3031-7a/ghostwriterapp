@@ -7,7 +7,7 @@ const bcrypyt = require("bcryptjs");
 const User = require("../models/user.server.model.js");
 
 // local
-module.exports = function(passport) {
+module.exports = () => {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
       User.findOne({ email: email })
@@ -36,7 +36,7 @@ module.exports = function(passport) {
   );
 
   //facebook
-  module.exports = function(passport){
+  module.exports = () => {
     passport.use(new FacebookStrategy({
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
@@ -60,7 +60,7 @@ module.exports = function(passport) {
   }))};
 
   // google
-  module.exports = function(passport){
+  module.exports = () => {
     passport.use(new GoogleStrategy({
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,

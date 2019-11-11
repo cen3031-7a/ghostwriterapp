@@ -1,9 +1,12 @@
 const path = require('path'),
+    mongooseSetup = require("./database"),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     session = require('express-session'),
+    MongoStore = require("connect-mongo")(session),
     bodyParser = require('body-parser'),
+    passport = require('passport'),
     sectionRouter = require('../routes/sections.server.routes'),
     userRouter = require('../routes/users.server.routes');
 
@@ -12,11 +15,11 @@ module.exports.init = () => {
         connect to database
         - reference README for db uri
     */
-    mongoose.connect(process.env.DB_URI || require('./config.js').db.uri, {
+    /* const connection = mongoose.connect(process.env.DB_URI || require('./config.js').db.uri, {
         useNewUrlParser: true
     });
     mongoose.set('useCreateIndex', true);
-    mongoose.set('useFindAndModify', false);
+    mongoose.set('useFindAndModify', false); */
 
     // initialize app
     const app = express();
@@ -28,7 +31,6 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // set up passport for authentication
-    var passport = require('./passport')(passport);
     app.use(passport.initialize());
     app.use(passport.session());
 
@@ -39,7 +41,7 @@ module.exports.init = () => {
         resave: false,
         saveUninitialized: false,
         secret: "secret",
-        store: new MongoStore,
+        store: new MongoStore({ mongooseConnection: mongooseSetup.connection}),
         cookie: {
           httpOnly: true,
           secure: false,
