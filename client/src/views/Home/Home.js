@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from '../../assets/logo.svg';
-import './Home.css';
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import  './Home.css';
 
-function Home() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                </a>
-            </header>
-        </div>
-    );
+class Home extends Component {
+	
+    render() {
+		
+		return(
+			<div className="App">
+				<div>
+				 <Link id="question-link" to="/Questions">
+					<button style={{width: '100px', height: '100px'}}>CLICK FOR QUESTIONS </button>
+				</Link>
+				</div>
+			</div>
+
+		);
+		
+    }
+
 }
+
 
 export default Home;

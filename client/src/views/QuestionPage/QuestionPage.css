@@ -1,0 +1,33 @@
+html
+{
+	overflow-y: scroll;
+}
+
+body
+{
+	background-color: #e0e0e0;
+}
+
+.toolbar
+{
+	position: fixed;
+	top: 25%;
+	padding: 1%;
+	text-align: center;
+	display: block;
+	background-color: grey;
+	border: 2px grey groove;
+	border-radius: 5px;
+	width: 16%;
+	font-family: Helvetica;
+	color: white;
+	height: 50%;
+	float: left;
+}
+
+.Dashboard
+{
+	padding-left: 1.5%;
+	width: 60%;
+	float: left;
+}
