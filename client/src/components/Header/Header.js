@@ -8,8 +8,8 @@ const Header = () => {
             {/* Logo */}
             <div className='header-logo'>
 
-                <a target='_blank' rel='noopener noreferrer' href='https://shop.kanyewest.com/'>
-                    <img src='https://emoji.slack-edge.com/TFGAN084X/kanye/6710558d75aec680.png' id="logo-image" />
+                <a target='_blank' rel='noopener noreferrer' href='/'>
+                    <img src='http://www.transparentpng.com/thumb/ghost/qImZcm-ghost-comictransparent-picture.png' id="logo-image" />
                 </a>
 
                 <Link id="logo-link" to="/">
