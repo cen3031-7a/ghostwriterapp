@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import  './QuestionPage.css';
 import Dashboard from '../../components/Dashboard/Dashboard';
+import Toolbar from '../../components/Toolbar/Toolbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class QuestionPage extends Component {
@@ -26,6 +27,8 @@ class QuestionPage extends Component {
 	{
 		this.props.secOrder(order);
 	}
+
+	
 	
     render() {
 		
@@ -35,7 +38,12 @@ class QuestionPage extends Component {
 			
 				<div style={{paddingTop: '50px'}} />
 				
-				<div className="toolbar" > Toolbar </div>
+				<div className="toolbar" >
+					<Toolbar 
+					data={this.props.questions}
+					toggleSelected = {this.props.toggleSelected}
+					/>
+				</div>
 				
 				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
 				
