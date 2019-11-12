@@ -4,26 +4,49 @@ import './Header.css';
 
 const Header = () => {
     return (
-        <div className='topnav'>
+        <div className='header'>
             {/* Logo */}
-            <Link id="logo-link" to="/">
-			LINK
-            </Link>
+            <div className='header-logo'>
 
-            {/* Page Links */}
-            <div className="topnav-right">
-                <Link className="topnav-link" to='/Register'>Sign in</Link>
-                <Link className="topnav-link" to='/projects'>Projects</Link>
-                <a className="topnav-link" target='_blank' rel="noopener noreferrer" href="https://www.facebook.com/groups/ufosc/events/?source=4&action_history=null&filter=calendar">
-                    Events
-                    <i className="fas fa-external-link-alt external-link" data-fa-transform="up-6"></i>
+                <a href='/'>
+                    <img src='http://www.transparentpng.com/thumb/ghost/qImZcm-ghost-comictransparent-picture.png' id="logo-image" />
                 </a>
-                <a className="topnav-link" target='_blank' rel="noopener noreferrer" href="https://github.com/ufosc/club-resources">
-                    Resources
-                    <i className="fas fa-external-link-alt external-link" data-fa-transform="up-6 right-4"></i>
-                </a>
-                <Link className="topnav-link" to="/about">About</Link>
+
+                <Link id="logo-link" to="/">
+			    Ghost Writer
+                </Link>
+
             </div>
+            <div className="navbar">
+
+                <div id="pages" align="left">
+                    <Link id="homepage" to='/Home'>Home</Link>
+                    <Link id="aboutpage" to='/Home'>About</Link>
+                    <Link id="questionpage" to='/Questions'>Questions</Link>
+                </div>
+
+                <div id="account" align="right">
+                    <a href='/Account'>
+                        <img src='https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1' id="account-image"/>
+                    </a>
+                    <a href='/'>
+                        <button type="button" id="sign-out">Sign Out</button>
+                    </a>
+                </div>
+
+            </div>
+            {/* Page Links */}
+            {/* <div className="header-right">
+                <Link className="header-link" to='/Register'>Sign in</Link>
+                <Link className="header-link" to='/projects'>Projects</Link>
+                <a className="header-link" target='_blank' rel="noopener noreferrer" href="https://www.facebook.com/groups/ufosc/events/?source=4&action_history=null&filter=calendar">
+                    Events
+                </a>
+                <a className="header-link" target='_blank' rel="noopener noreferrer" href="https://github.com/ufosc/club-resources">
+                    Resources
+                </a>
+                <Link className="header-link" to="/about">About</Link>
+            </div> */}
         </div>
     )
 }
