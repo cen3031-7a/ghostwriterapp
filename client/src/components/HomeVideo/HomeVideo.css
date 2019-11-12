@@ -1,0 +1,19 @@
+html
+{
+	overflow-y: scroll;
+}
+
+.player-wrapper {
+    width: auto; 
+    height: auto; 
+    margin-bottom: 10px;
+  }
+  
+  .react-player {
+    padding-top: 56.25%; 
+    position: relative; 
+  }
+  
+  .react-player > div {
+    position: absolute; 
+  }
