@@ -8,7 +8,7 @@ const Header = () => {
             {/* Logo */}
             <div className='header-logo'>
 
-                <a target='_blank' rel='noopener noreferrer' href='/'>
+                <a href='/'>
                     <img src='http://www.transparentpng.com/thumb/ghost/qImZcm-ghost-comictransparent-picture.png' id="logo-image" />
                 </a>
 
