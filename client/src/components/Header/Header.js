@@ -22,7 +22,7 @@ const Header = () => {
                 <div id="pages" align="left">
                     <Link id="homepage" to='/Home'>Home</Link>
                     <Link id="aboutpage" to='/about'>About</Link>
-                    <Link id="questionpage" to='/Questions'>My Questions</Link>
+                    <Link id="questionpage" to='/Questions'>Questions</Link>
                 </div>
 
                 <div id="account" align="right">
