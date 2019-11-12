@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import  './About.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class Login extends Component{
+class About extends Component{
     render(){
         return(
             <div className="about-box">
@@ -20,4 +20,4 @@ class Login extends Component{
     }
 }
 
-export default Login;
+export default About;
