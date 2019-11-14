@@ -30,18 +30,6 @@ class LoginBar extends Component{
                             >
                             Login
                         </Button>
-
-                        &nbsp;&nbsp;&nbsp;
-
-                        <Button
-                            tag={Link}
-                            to="/Loginfb"
-                            outline color="primary"
-                            size="lg"
-                            block
-                            >
-                            Login via Facebook
-                        </Button>
                 </ButtonGroup>
 
             </div>

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { Route, Switch, Redirect  } from 'react-router-dom';
 import Home from "./views/Home/Home";
-import QuestionPage from "./views/QuestionPage/QuestionPage"
+import QuestionPage from "./views/QuestionPage/QuestionPage";
+import Login from "./views/Login/Login";
 import NotFound from "./views/NotFound";
 import Header from "./components/Header/Header";
 
@@ -117,9 +118,8 @@ class App extends Component {
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
 					<Route exact path="/Questions" render={() => <QuestionPage questions={this.state.data} resData={this.state.resData} response={this.postText} secOrder={this.postOrder} />}/>
-					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Login" render={() => <Login data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>

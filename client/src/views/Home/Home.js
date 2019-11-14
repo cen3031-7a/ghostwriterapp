@@ -13,11 +13,6 @@ class Home extends Component {
 		return(
 			
 			<div className="App">
-				<div>
-				<Link id="question-link" to="/Questions">
-					<button style={{width: '100px', height: '100px'}}>CLICK FOR QUESTIONS </button>
-				</Link>
-				</div>
 				<div class="container">
 					<div class="row">
 						<div class="col-10">
