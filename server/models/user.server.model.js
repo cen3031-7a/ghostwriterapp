@@ -9,6 +9,7 @@ var userSchema = new Schema({
   lastname: String,
   email: String,
   age: Number,
+  password: String,
   accounttype: String,
   timeline: [{
     sectionid: String,

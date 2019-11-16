@@ -12,7 +12,7 @@ class LoginBar extends Component{
                 <ButtonGroup vertical>
                         <Button
                             tag={Link}
-                            to="/Signup"
+                            to="/Register"
                             outline color="danger"
                             size="lg"
                             block
