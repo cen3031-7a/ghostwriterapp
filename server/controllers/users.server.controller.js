@@ -2,8 +2,8 @@
 /* Dependencies */
 var mongoose = require('mongoose'), 
     User = require('../models/user.server.model.js'),
-    Section = require('../models/section.server.model.js');
-  
+    Section = require('../models/section.server.model.js'),
+    passport = require('passport');
 
 /*
 
@@ -18,6 +18,31 @@ router.route('/question/response')
   .post(users.response);
 
 */
+// login functions
+exports.google_login = function(res, req) {
+  console.log("got to google login")
+  passport.authenticate('google', { scope: 
+    [ 'https://www.googleapis.com/auth/plus.login',
+    , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] });
+}
+
+exports.google_callback = (res, req) => {
+  passport.authenticate('google', {failureRedirect: '/Login'},
+  function(res, req) {
+    req.headers.Authorization = true;
+  });
+}
+
+exports.facebook_login = function(res, req) {
+  passport.authenticate('facebook');
+}
+
+exports.facebook_callback = (res, req) => {
+  passport.authenticate('facebook', {failureRedirect: '/Login'},
+  function(res, req) {
+    req.headers.Authorization = true;
+  });
+}
 
 exports.info = function(req, res) {
   var resp = req.user;

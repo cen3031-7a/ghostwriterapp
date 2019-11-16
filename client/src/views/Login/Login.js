@@ -37,7 +37,7 @@ class Login extends Component {
 
                         <Button
                             tag={Link}
-                            to="/Facebook"               
+                            to="/api/users/auth/facebook"               
                             outline color="dark"
                             size="lg"
                             block
@@ -49,7 +49,7 @@ class Login extends Component {
 
                         <Button
                             tag={Link}
-                            to="/Google"               
+                            to="/api/users/auth/google"               
                             outline color="dark"
                             size="lg"
                             block

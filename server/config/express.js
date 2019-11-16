@@ -5,7 +5,8 @@ const path = require('path'),
     bodyParser = require('body-parser'),
     exampleRouter = require('../routes/examples.server.routes'),
     sectionRouter = require('../routes/sections.server.routes'),
-    userRouter = require('../routes/users.server.routes');
+    userRouter = require('../routes/users.server.routes'),
+    passport = require('passport');
 
 module.exports.init = () => {
     /* 
@@ -13,7 +14,8 @@ module.exports.init = () => {
         - reference README for db uri
     */
     mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
@@ -26,6 +28,14 @@ module.exports.init = () => {
 
     // body parsing middleware
     app.use(bodyParser.json());
+
+    // passport initialization
+    app.use(passport.initialize());
+    app.use(passport.session());
+    require('./passport').googleLogin
+    require('./passport').facebookLogin
+    require('./passport').init
+
 
     // Add auth middleware
     app.use('/api', function(req, res, next) {// Dummy function

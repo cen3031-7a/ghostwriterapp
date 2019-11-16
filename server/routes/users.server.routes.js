@@ -29,6 +29,16 @@ router.route('/timeline')
 router.route('/question/response')
   .post(users.response);
 
+router.route('/auth/google')
+  .get(users.google_login);
 
+router.route('/auth/google/callback')
+  .get(users.google_callback);
+
+router.route('/auth/facebook')
+  .get(users.facebook_login);
+
+router.route('/auth/facebook/callback')
+  .get(users.facebook_callback);
 
 module.exports = router;

@@ -27,8 +27,15 @@ exports.facebookLogin = () => {
 
             //TODO createorupdate function instead
 
-            new user(userData).save();
-            done(null, profile);
+            user.findOneAndUpdate({ userid: id },
+                {user: userdata},
+                {upsert:  true },
+                function(user, err){
+                    if(err){
+                        return done(err);
+                    }
+                    return done(null, user);
+                });
         }
       
     ))
@@ -66,10 +73,11 @@ exports.localLogin = () => {
     passport.use('local', local())
 };
 
-passport.serializeUser(function(user, done) {
+exports.init = () => {
+    passport.serializeUser(function(user, done) {
     done(null, user);
   });
   
   passport.deserializeUser(function(obj, done) {
     done(null, obj);
-  });
+  });};
