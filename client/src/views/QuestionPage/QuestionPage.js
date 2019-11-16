@@ -27,6 +27,8 @@ class QuestionPage extends Component {
 	{
 		this.props.secOrder(order);
 	}
+
+	
 	
     render() {
 		
