@@ -3,9 +3,11 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes'),
+    session = require('express-session'),
+    cookieparser = require('cookie-parser'),
     sectionRouter = require('../routes/sections.server.routes'),
     userRouter = require('../routes/users.server.routes'),
+    config = require('./config'),
     passport = require('passport');
 
 module.exports.init = () => {
@@ -26,15 +28,18 @@ module.exports.init = () => {
     // enable request logging for development debugging
     app.use(morgan('dev'));
 
+    // cookie ability
+    app.use(cookieParser());
+
     // body parsing middleware
     app.use(bodyParser.json());
+
+    // session management in express
+    app.use(session({secret: config.session.secret}));
 
     // passport initialization
     app.use(passport.initialize());
     app.use(passport.session());
-    require('./passport').googleLogin
-    require('./passport').facebookLogin
-    require('./passport').init
 
 
     // Add auth middleware
@@ -51,9 +56,6 @@ module.exports.init = () => {
       req.userid = "aec2ac9a-0754-4218-bbe4-3071779efc24";
       next();
     });
-
-    // add a router
-    app.use('/api/example', exampleRouter);
 
     // add a router
     app.use('/api/sections', sectionRouter);
