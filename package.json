@@ -43,10 +43,7 @@
     "react-quill": "^1.3.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
-<<<<<<< HEAD
     "reactstrap": "^8.1.1",
-=======
->>>>>>> 010d55811606a00e301e33ec32416ff5cb0e45ea
     "should": "^13.2.3",
     "supertest": "^4.0.2",
     "typescript": "^3.6.4"
