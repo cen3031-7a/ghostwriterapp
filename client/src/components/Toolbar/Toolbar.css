@@ -1,5 +1,5 @@
 .SelectSection-wrapper{
-    position: center;
+    position: auto;
     background-color: white;
     color: black;
     padding: 16px;
@@ -12,8 +12,9 @@
 }
 
 .toolbar-wrapper{
-    position: center;
+    position: auto;
     display: inline-block;
+    padding: 5px;
 }
 .hintButton {
 	box-shadow: 0px 1px 0px 0px #f0f7fa;
@@ -21,7 +22,7 @@
 	background-color:#33bdef;
 	border-radius:6px;
 	border:1px solid #057fd0;
-	display:inline-block;
+	display:block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
