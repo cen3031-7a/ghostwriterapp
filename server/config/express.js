@@ -29,7 +29,7 @@ module.exports.init = () => {
     app.use(morgan('dev'));
 
     // cookie ability
-    app.use(cookieParser());
+    app.use(cookieparser());
 
     // body parsing middleware
     app.use(bodyParser.json());

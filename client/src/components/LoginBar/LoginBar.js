@@ -13,7 +13,7 @@ class LoginBar extends Component{
                         <Button
                             tag={Link}
                             to="/Register"
-                            outline color="danger"
+                            outline color="dark"
                             size="lg"
                             block
                             >

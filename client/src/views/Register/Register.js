@@ -34,31 +34,36 @@ class Register extends Component {
                 <form>
                     <input
                         type="text"
-                        name="email" 
+                        name="email"
+                        placeholder="Email" 
                         val = {this.state.email}
                         onChange = {this.change.bind(this)}
                     />
                     <input
                     type="text"
                     name="firstname" 
+                    placeholder="First Name"
                     val = {this.state.firstname}
                     onChange = {this.change.bind(this)}
                     />
                     <input
                         type="text"
-                        name="lastname" 
+                        name="lastname"
+                        placeholder="Last Name" 
                         val = {this.state.lastname}
                         onChange = {this.change.bind(this)}
                     />
                     <input
                         type="text"
-                        name="password" 
+                        name="password"
+                        placeholder="Password" 
                         val = {this.state.password}
                         onChange = {this.change.bind(this)}
                     />
                     <input
                         type="text"
-                        name="confirm_password" 
+                        name="confirm_password"
+                        placeholder="Retype your password" 
                         val = {this.state.confirm_password}
                         onChange = {this.change.bind(this)}
                     />

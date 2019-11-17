@@ -2,62 +2,66 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import  './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, ButtonGroup } from 'reactstrap'
+import { Button } from 'reactstrap'
 
 class Login extends Component {
+    constructor() {
+        super();
+        this.state = {
+            email: " ",
+            password: " "
+        }
+    }
 
+    change(event){
+        this.setState({
+            [event.target.name]: [event.target.value]
+        })
+        console.log(event.target.name + " " + event.target.value)
+    }
+
+    submit(){
+        console.log(this.state);
+    }
     render() {
 		
 		return(
-            <div className="btn-box">
-                <ButtonGroup horizontal>
-                        <Button
-                            tag={Link}
-                            to="/Signup"
-                            outline color="dark"
-                            size="lg"
-                            block
-                            >
-                            Sign Up
-                        </Button>
-
-                        &nbsp;&nbsp;&nbsp;
-
-                        <Button
-                            tag={Link}
-                            to="/Login"               
-                            outline color="dark"
-                            size="lg"
-                            block
-                            >
-                            Login
-                        </Button>
-
-                        &nbsp;&nbsp;&nbsp;
-
-                        <Button
-                            tag={Link}
-                            to="/api/users/auth/facebook"               
-                            outline color="dark"
-                            size="lg"
-                            block
-                            >
-                            Facebook
-                        </Button>
-
-                        &nbsp;&nbsp;&nbsp;
-
-                        <Button
-                            tag={Link}
-                            to="/api/users/auth/google"               
-                            outline color="dark"
-                            size="lg"
-                            block
-                            >
-                            Google
-                        </Button>
-
-                </ButtonGroup>
+            <div className = "Login">
+                <h2>Login</h2>
+                <form>
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        val = {this.state.email}
+                        onChange = {this.change.bind(this)}
+                    />
+                    <input
+                        type="text"
+                        name="password" 
+                        placeholder="Password"
+                        val = {this.state.password}
+                        onChange = {this.change.bind(this)}
+                    />
+                    <input
+                        type="submit"
+                        placeholder="Sign up"
+                        onClick={this.submit.bind(this)}
+                    />
+                </form>
+                <div>
+                    <Button
+                        tag={Link}
+                        to="/auth/google">
+                        Sign in with Google
+                    </Button>
+                    <Button 
+                        tag={Link}
+                        to="auth/facebook">
+                        Sign in with Facebook
+                    </Button>
+                </div>
+                <p>Dont have an account with us? <a href="/Register">Sign up</a></p>
             </div>
         );
     }
