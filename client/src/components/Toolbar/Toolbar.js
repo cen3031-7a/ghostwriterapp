@@ -42,7 +42,7 @@ class Toolbar extends Component {
             <div className = "hintBox">
                 {this.state.hintShowing && <p>hi</p>}
             </div>
-            
+            <br></br>
             <div className="SelectSection-wrapper">
                 <div className="SelectSection-header" onClick = {()=>this.toggleList()}>
                     <b className="SelectSection-header-title">Select Section {listOpen ? <b>^</b>: <b>></b>}</b>
