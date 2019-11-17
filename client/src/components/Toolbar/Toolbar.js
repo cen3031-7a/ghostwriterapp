@@ -51,9 +51,9 @@ class Toolbar extends Component {
                 {listOpen && <ul className="SelectSection-list">
                     {data.map((item) => (
                         <li className="SelectSection-list-item" 
-                            key={item.title}
-                            onClick = {() => this.props.toggleSelected(item.id)}>
-                        {item.title}{item.selected && <b>*</b>}</li>
+                            key={item.sectionname}>
+                        {item.sectionname}
+                        </li>
                     ))}
                 </ul>}
             </div>
