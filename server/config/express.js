@@ -35,7 +35,13 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // session management in express
-    app.use(session({secret: config.session.secret}));
+    app.use(session(
+      {
+        secret: config.session.secret,
+        resave: false,
+        saveUninitialized: false
+      }
+    ));
 
     // passport initialization
     app.use(passport.initialize());
@@ -57,9 +63,42 @@ module.exports.init = () => {
       next();
     });
 
-    // add a router
+    // login routes
+    app.post('/Login', passport.authenticate('local', { failureRedirect: '/login' }),
+    (req, res) => {
+      res.redirect('/');
+    });
+
+    app.get('/auth/google', passport.authenticate('google', 
+      { 
+        scope: [ 'https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read' ] 
+      }
+    ));
+
+    app.get('/auth/google/callback', passport.authenticate('google', 
+      { 
+        successRedirect: '/auth/google/success',
+        failureRedirect: '/auth/google/failure'
+      }),
+      (req, res) => {
+        res.redirect('/Questions')
+      });
+
+    app.get('/auth/facebook', passport.authenticate('facebook'));
+
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', 
+    {
+      failureRedirect: '/Login' 
+    }),
+    (req, res) => {
+      res.redirect('/Questions');
+    });
+
+    // section router
     app.use('/api/sections', sectionRouter);
-    app.use('/api/users', userRouter)
+
+    // user router
+    app.use('/api/users', userRouter);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
