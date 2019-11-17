@@ -16,6 +16,14 @@
     display: inline-block;
     padding: 5px;
 }
+
+.hintBox{
+    background-color: white;
+    background: white;
+    border-color: blue;
+    border-style: solid;
+    color: lightblue;
+}
 .hintButton {
 	box-shadow: 0px 1px 0px 0px #f0f7fa;
 	background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
