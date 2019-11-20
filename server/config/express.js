@@ -8,7 +8,8 @@ const path = require('path'),
     sectionRouter = require('../routes/sections.server.routes'),
     userRouter = require('../routes/users.server.routes'),
     config = require('./config'),
-    passport = require('passport');
+    passport = require('passport'),
+    google = require('../config/auth/google');
 
 module.exports.init = () => {
     /* 
@@ -66,16 +67,16 @@ module.exports.init = () => {
     // login routes
     app.post('/Login', passport.authenticate('local', { failureRedirect: '/login' }),
     (req, res) => {
-      res.redirect('/');
+      res.redirect('/Questions');
     });
 
-    app.get('/auth/google', passport.authenticate('google', 
+    app.get('/auth/google', google.authenticate('google', 
       { 
         scope: [ 'https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read' ] 
       }
     ));
 
-    app.get('/auth/google/callback', passport.authenticate('google', 
+    app.get('/auth/google/callback', google.authenticate('google', 
       { 
         successRedirect: '/auth/google/success',
         failureRedirect: '/auth/google/failure'
