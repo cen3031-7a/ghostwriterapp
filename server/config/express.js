@@ -9,7 +9,9 @@ const path = require('path'),
     userRouter = require('../routes/users.server.routes'),
     config = require('./config'),
     passport = require('passport'),
-    google = require('../config/auth/google');
+    google = require('../config/auth/google'),
+    facebook = require('../config/auth/facebook'),
+    local = require('../config/auth/facebook');
 
 module.exports.init = () => {
     /* 
@@ -65,32 +67,24 @@ module.exports.init = () => {
     });
 
     // login routes
-    app.post('/Login', passport.authenticate('local', { failureRedirect: '/login' }),
+    //// local login: traditional password and username
+    app.post('/Login', local.authenticate('local', { failureRedirect: '/login' }),
     (req, res) => {
       res.redirect('/Questions');
     });
 
-    app.get('/auth/google', google.authenticate('google', 
-      { 
-        scope: [ 'https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read' ] 
-      }
-    ));
+    // google login: login using google to authenticate
+    app.get('/auth/google', google.authenticate('google', { scope: ['profile'] }));
 
-    app.get('/auth/google/callback', google.authenticate('google', 
-      { 
-        successRedirect: '/auth/google/success',
-        failureRedirect: '/auth/google/failure'
-      }),
+    app.get('/auth/google/callback', google.authenticate('google', { failureRedirect: '/auth/google/failure' }),
       (req, res) => {
         res.redirect('/Questions')
       });
 
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    // facebook login: login using facebook for authentication
+    app.get('/auth/facebook', facebook.authenticate('facebook'));
 
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', 
-    {
-      failureRedirect: '/Login' 
-    }),
+    app.get('/auth/facebook/callback', facebook.authenticate('facebook', { failureRedirect: '/Login' }),
     (req, res) => {
       res.redirect('/Questions');
     });

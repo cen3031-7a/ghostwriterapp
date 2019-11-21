@@ -1,13 +1,13 @@
-const google = require('passport-google-oauth20').Strategy;
+const facebook = require('passport-facebook').Strategy;
 const passport = require('passport');
 const user = require('../../models/user.server.model');
 const config = require('../config');
 
 
-passport.use(new google({
-    clientID: config.ids.google.clientid,
-    clientSecret: config.ids.google.clientsecretT,
-    callbackURL: config.ids.google.callbackurl
+passport.use(new facebook({
+    clientID: config.ids.facebook.clientid,
+    clientSecret: config.ids.facebook.clientsecret,
+    callbackURL: config.ids.facebook.callbackurl
   },
   function(accessToken, refreshToken, profile, cb) {
     user.findOrCreate({ userid: profile.id }, function (err, user) {

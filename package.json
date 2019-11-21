@@ -13,7 +13,7 @@
     "start": "node server/server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
-  "proxy": "http://127.0.0.1:5000",
+  "proxy": "http://localhost:5000",
   "repository": {
     "type": "git",
     "url": "https://github.com/UFWebApps/React_Template_Repo.git"
@@ -36,7 +36,7 @@
     "nodemon": "^1.18.10",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
-    "passport-google-oauth2": "^0.2.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "popper.js": "^1.14.7",
     "prop-types": "^15.7.2",
@@ -44,6 +44,8 @@
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.11.0",
     "react-dragula": "^1.1.17",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.0.7",
     "react-player": "^1.14.1",
     "react-quill": "^1.3.3",
     "react-router-dom": "^5.1.2",
