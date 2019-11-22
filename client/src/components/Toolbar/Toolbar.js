@@ -10,7 +10,7 @@ class Toolbar extends Component {
             data: this.props.data,
             listOpen: false,
             hintShowing: false
-		}
+    		}
 	}
     
     toggleList(){
@@ -26,14 +26,22 @@ class Toolbar extends Component {
     }
 
     handleClickOutside(){
-        this.setState({
-            listOpen: false
-        })
+        this.setState({listOpen: false})
+    }
+
+    setSection(sectionid){
+        if(this.props.selectedSections.includes(sectionid)){
+            this.props.removeSection(sectionid)
+        }
+        else{
+            this.props.addSection(sectionid)
+        }
     }
     
     render(){
         const {data, listOpen} = this.state
-        
+        const {selectedSections} = this.props      
+
         return(
             <div className = "toolbar-wrapper">
             <div className = "HintButton-wrapper">
@@ -51,8 +59,9 @@ class Toolbar extends Component {
                 {listOpen && <ul className="SelectSection-list">
                     {data.map((item) => (
                         <li className="SelectSection-list-item" 
-                            key={item.sectionname}>
-                        {item.sectionname}
+                            key={item.sectionname}
+                            onClick = {() => this.setSection(item.sectionid)}>
+                            {item.sectionname} {selectedSections.includes(item.sectionid) ? <b>*</b> : <b></b> }
                         </li>
                     ))}
                 </ul>}
