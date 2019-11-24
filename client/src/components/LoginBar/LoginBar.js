@@ -12,8 +12,8 @@ class LoginBar extends Component{
                 <ButtonGroup vertical>
                         <Button
                             tag={Link}
-                            to="/Signup"
-                            outline color="danger"
+                            to="/Register"
+                            outline color="dark"
                             size="lg"
                             block
                             >
@@ -29,18 +29,6 @@ class LoginBar extends Component{
                             block
                             >
                             Login
-                        </Button>
-
-                        &nbsp;&nbsp;&nbsp;
-
-                        <Button
-                            tag={Link}
-                            to="/Loginfb"
-                            outline color="primary"
-                            size="lg"
-                            block
-                            >
-                            Login via Facebook
                         </Button>
                 </ButtonGroup>
 

@@ -29,6 +29,4 @@ router.route('/timeline')
 router.route('/question/response')
   .post(users.response);
 
-
-
 module.exports = router;

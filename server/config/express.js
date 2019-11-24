@@ -3,9 +3,15 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes'),
+    session = require('express-session'),
+    cookieparser = require('cookie-parser'),
     sectionRouter = require('../routes/sections.server.routes'),
-    userRouter = require('../routes/users.server.routes');
+    userRouter = require('../routes/users.server.routes'),
+    config = require('./config'),
+    passport = require('passport'),
+    google = require('../config/auth/google'),
+    facebook = require('../config/auth/facebook'),
+    local = require('../config/auth/facebook');
 
 module.exports.init = () => {
     /* 
@@ -13,7 +19,8 @@ module.exports.init = () => {
         - reference README for db uri
     */
     mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
@@ -24,8 +31,25 @@ module.exports.init = () => {
     // enable request logging for development debugging
     app.use(morgan('dev'));
 
+    // cookie ability
+    app.use(cookieparser());
+
     // body parsing middleware
     app.use(bodyParser.json());
+
+    // session management in express
+    app.use(session(
+      {
+        secret: config.session.secret,
+        resave: false,
+        saveUninitialized: false
+      }
+    ));
+
+    // passport initialization
+    app.use(passport.initialize());
+    app.use(passport.session());
+
 
     // Add auth middleware
     app.use('/api', function(req, res, next) {// Dummy function
@@ -42,12 +66,34 @@ module.exports.init = () => {
       next();
     });
 
-    // add a router
-    app.use('/api/example', exampleRouter);
+    // login routes
+    //// local login: traditional password and username
+    app.post('/Login', local.authenticate('local', { failureRedirect: '/login' }),
+    (req, res) => {
+      res.redirect('/Questions');
+    });
 
-    // add a router
+    // google login: login using google to authenticate
+    app.get('/auth/google', google.authenticate('google', { scope: ['profile'] }));
+
+    app.get('/auth/google/callback', google.authenticate('google', { failureRedirect: '/auth/google/failure' }),
+      (req, res) => {
+        res.redirect('/Questions')
+      });
+
+    // facebook login: login using facebook for authentication
+    app.get('/auth/facebook', facebook.authenticate('facebook'));
+
+    app.get('/auth/facebook/callback', facebook.authenticate('facebook', { failureRedirect: '/Login' }),
+    (req, res) => {
+      res.redirect('/Questions');
+    });
+
+    // section router
     app.use('/api/sections', sectionRouter);
-    app.use('/api/users', userRouter)
+
+    // user router
+    app.use('/api/users', userRouter);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files

@@ -3,21 +3,6 @@
 var mongoose = require('mongoose'), 
     User = require('../models/user.server.model.js'),
     Section = require('../models/section.server.model.js');
-  
-
-/*
-
-router.route('/info')
-  .get(users.info);
-
-router.route('/timeline')
-  .get(users.gettimeline)
-  .post(users.updatetimeline);
-
-router.route('/question/response')
-  .post(users.response);
-
-*/
 
 exports.info = function(req, res) {
   var resp = req.user;
