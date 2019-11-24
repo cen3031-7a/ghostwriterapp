@@ -7,7 +7,8 @@ const config = require('../config');
 passport.use(new google({
     clientID: config.ids.google.clientid,
     clientSecret: config.ids.google.clientsecretT,
-    callbackURL: config.ids.google.callbackurl
+    callbackURL: config.ids.google.callbackurl,
+    proxy: true
   },
   function(accessToken, refreshToken, profile, cb) {
     user.findOrCreate({ userid: profile.id }, function (err, user) {

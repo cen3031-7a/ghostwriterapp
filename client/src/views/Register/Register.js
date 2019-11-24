@@ -54,14 +54,14 @@ class Register extends Component {
                         onChange = {this.change.bind(this)}
                     />
                     <input
-                        type="text"
+                        type="password"
                         name="password"
                         placeholder="Password" 
                         val = {this.state.password}
                         onChange = {this.change.bind(this)}
                     />
                     <input
-                        type="text"
+                        type="password"
                         name="confirm_password"
                         placeholder="Retype your password" 
                         val = {this.state.confirm_password}

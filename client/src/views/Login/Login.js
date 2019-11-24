@@ -37,7 +37,7 @@ class Login extends Component {
                         onChange = {this.change.bind(this)}
                     />
                     <input
-                        type="text"
+                        type="password"
                         name="password" 
                         placeholder="Password"
                         val = {this.state.password}
@@ -52,12 +52,12 @@ class Login extends Component {
                 <div>
                     <Button
                         tag={Link}
-                        to="/auth/google">
+                        to="http://localhost:5000/auth/google">
                         Sign in with Google
                     </Button>
                     <Button 
                         tag={Link}
-                        to="auth/facebook">
+                        to="http://localhost:5000/auth/facebook">
                         Sign in with Facebook
                     </Button>
                 </div>
