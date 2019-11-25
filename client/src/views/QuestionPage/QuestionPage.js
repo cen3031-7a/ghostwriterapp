@@ -66,9 +66,13 @@ class QuestionPage extends Component {
 				
 				<div style={{width: '20%'}}>  </div>
 				<br></br>
-				<div className = "exportButton-wrapper">
-					<button className = "exportButton">
-						Export
+				<div className = "exportButtons-wrapper">
+					<button className = "downloadFree">
+						Download Free
+					</button>
+					<br></br>
+					<button className = "downloadPaid">
+						Download Paid
 					</button>
 				</div>
 			</div>
