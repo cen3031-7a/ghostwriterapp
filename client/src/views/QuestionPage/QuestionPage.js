@@ -13,9 +13,8 @@ class QuestionPage extends Component {
 		{
 			text: '',
 			block: [],
-			selectedSections: [],
-			order: this.props.questions.map(section => {
-				return section.sectionid
+			selectedSections: this.props.resData.map((id) => {
+				return id.sectionid;
 			})
 		};
 
@@ -27,45 +26,24 @@ class QuestionPage extends Component {
 		this.props.response(restext);
 	}
 
-	setOrder = (order) => {
-		this.setState({order: order})
-		this.secOrder()
-	}
-	
-	secOrder = () => 
-	{
-		var intersection = this.state.order.filter( (e) => {
-			return this.state.selectedSections.indexOf(e) > -1
-		})
-		//this.props.secOrder(intersection);
-		this.setState({order: intersection})
-		console.log(this.state.order)
+	updateSelectedSections = (arg) =>{
+		this.setState({selectedSections: arg})
 		console.log(this.state.selectedSections)
-
-		console.log(intersection)
+		this.secOrder(this.props.questions.filter(item => {
+			return arg.includes(item.sectionid)
+		}))
+		console.log(this.props.questions.filter(item => {
+			return arg.includes(item.sectionid)
+		}))
 	}
-
-	addSection = (sectionId) =>
+	secOrder = (order) => 
 	{
-		let temp = this.state.selectedSections
-		temp.push(sectionId)
-		console.log(sectionId)
-		this.setState({selectedSections: temp})
-		this.secOrder()
+		this.props.secOrder(order);
 	}
 
-	removeSection = (sectionId) =>
-	{
-		let temp = this.state.selectedSections.filter(sectionId => {
-			return this.state.selectedSections.indexOf(sectionId) > -1
-		})
-		this.setState({selectedSections: temp})
-		this.secOrder()
-	}
-	
 	
     render() {
-		
+		console.log(this.state.selectedSections)
 		return(
 		
 			<div className="App">
@@ -76,15 +54,14 @@ class QuestionPage extends Component {
 					<Toolbar 
 					data={this.props.questions}
 					selectedSections = {this.state.selectedSections}
-					addSection = {this.addSection.bind(this)}
-					removeSection = {this.removeSection.bind(this)}
+					updateSelectedSections = {this.updateSelectedSections.bind(this)}
 					/>
 				</div>
 				
 				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
 				
 				<div className="Dashboard">
-					<Dashboard data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.setOrder.bind(this)}/>
+					<Dashboard data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)}/>
 				</div>
 				
 				<div style={{width: '20%'}}>  </div>
