@@ -39,6 +39,7 @@ class QuestionPage extends Component {
 	secOrder = (order) => 
 	{
 		this.props.secOrder(order);
+		this.render()
 	}
 
 	
@@ -70,6 +71,7 @@ class QuestionPage extends Component {
 					<button className = "downloadFree">
 						Download Free
 					</button>
+					<br></br>
 					<br></br>
 					<button className = "downloadPaid">
 						Download Paid
