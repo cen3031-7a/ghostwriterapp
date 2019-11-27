@@ -19,11 +19,29 @@ class Register extends Component {
         this.setState({
             [event.target.name]: [event.target.value]
         })
-        console.log(event.target.name + " " + event.target.value)
     }
 
     submit(){
-        console.log(this.state);
+        fetch('/Register', {
+            method: 'POST',
+            body: 
+                JSON.stringify(
+                    {
+                        email: this.state.email,
+                        firstname: this.state.firstname,
+                        lastname: this.state.lastname,
+                        password: this.state.password,
+                        confirm_password: this.state.confirm_password,
+                    }),
+            headers: 
+            {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response){
+            console.log(response);  
+            return response
+        })
     }
 
     render() {
@@ -68,7 +86,7 @@ class Register extends Component {
                         onChange = {this.change.bind(this)}
                     />
                     <input
-                        type="submit"
+                        type="button"
                         onClick={this.submit.bind(this)}
                     />
                 </form>
