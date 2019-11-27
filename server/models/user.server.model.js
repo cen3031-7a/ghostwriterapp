@@ -1,6 +1,7 @@
 /* Import mongoose and define any variables needed to create the schema */
 var mongoose = require('mongoose'),
     bcyrpt = require('bcryptjs'),
+    uuidv4 = require('uuid/v4'),
     Schema = mongoose.Schema;
 
 /* Create your schema */
@@ -36,6 +37,9 @@ userSchema.pre('save', (next) => {
   }
   //make sure the password saved is hashed
   this.password = this.hashPasword(this.password);
+
+  // make sure the userid is uuid
+  this.userid = uuidv4();
   next();
 });
 

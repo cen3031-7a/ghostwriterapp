@@ -31,9 +31,6 @@ module.exports.init = () => {
     // enable request logging for development debugging
     app.use(morgan('dev'));
 
-    // cookie ability
-    app.use(cookieparser());
-
     // body parsing middleware
     app.use(bodyParser.json());
 
