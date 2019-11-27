@@ -34,6 +34,11 @@ exports.update = function(req, res) {
   console.log('got update request');
   console.log(req.body);
 
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('Not an admin');
+    return;
+  }
+
   if(section) { // Section was present
     console.log('section was present');
     waspresent = true;
@@ -97,6 +102,11 @@ exports.delete = function(req, res) {
   var section = req.section;
   var isPresent = false;
   if(section) isPresent = true;
+
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('Not an admin');
+    return;
+  }
 
   /* Add your code to remove the listins */
 
