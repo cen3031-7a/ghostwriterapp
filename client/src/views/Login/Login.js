@@ -17,11 +17,26 @@ class Login extends Component {
         this.setState({
             [event.target.name]: [event.target.value]
         })
-        console.log(event.target.name + " " + event.target.value)
     }
 
     submit(){
-        console.log(this.state);
+        fetch('/Login', {
+            method: 'POST',
+            body: 
+                JSON.stringify(
+                    {
+                        email: this.state.email,
+                        password: this.state.password
+                    }),
+            headers: 
+            {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response){
+            console.log(response);  
+            return response
+        })
     }
     render() {
 		
@@ -44,8 +59,8 @@ class Login extends Component {
                         onChange = {this.change.bind(this)}
                     />
                     <input
-                        type="submit"
-                        placeholder="Sign up"
+                        type="button"
+                        label="Sign up"
                         onClick={this.submit.bind(this)}
                     />
                 </form>

@@ -4,14 +4,13 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
-    cookieparser = require('cookie-parser'),
     sectionRouter = require('../routes/sections.server.routes'),
     userRouter = require('../routes/users.server.routes'),
     config = require('./config'),
     passport = require('passport'),
     google = require('../config/auth/google'),
     facebook = require('../config/auth/facebook'),
-    local = require('../config/auth/facebook');
+    local = require('../config/auth/local');
 
 module.exports.init = () => {
     /* 
@@ -64,7 +63,8 @@ module.exports.init = () => {
     });
 
     // login routes
-    //// local login: traditional password and username
+    
+    // local login: traditional password and username
     app.post('/Login', local.authenticate('local', { failureRedirect: '/login' }),
     (req, res) => {
       res.redirect('/Questions');
