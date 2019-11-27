@@ -31,6 +31,7 @@ exports.gettimeline = function(req, res) {
         console.log(err);
         res.status(500).send(err);
       } else {
+        console.log(req.user);
         var resp = {timeline:[]};
         for(var secti in req.user.timeline) {
           var sect = {

@@ -57,9 +57,14 @@ exports.update = function(req, res) {
       }
     }
     if(req.body.removequestions) {
-      section.questions = section.questions.filter(function (quest, index, array) {
+      /*section.questions = section.questions.filter(function (quest, index, array) {
         return !req.body.removequestions.includes(quest.questionid);
-      });
+      });*/
+      for(var question in section.questions) {
+        if(req.body.removequestions.includes(section.questions[question].questionid)) {
+          section.questions[question].isDeleted = true;
+        }
+      }
       console.log('removed questions');
     }
   } else { // Section doesn't exist yet
@@ -95,15 +100,21 @@ exports.delete = function(req, res) {
 
   /* Add your code to remove the listins */
 
-  Section.deleteOne(section, err => {
+  if(!isPresent) {
+    res.status(404).end();
+    return;
+  }
+
+  section.isDeleted = true;
+
+  section.save(err => {
     if(err) {
       console.log(err);
-      res.status(400).send(err);
+      res.status(500).send(err);
     } else {
-      if(isPresent)
-        res.status(200).end();
-      else
-        res.status(404).end();
+      console.log('deleted section: ');
+      console.log(section.sectionname);
+      res.status(200).end();
     }
   });
 
@@ -112,6 +123,12 @@ exports.delete = function(req, res) {
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
   /* Add your code */
+  var showDeleted = false;
+  if(req.query.showDeleted == 'true') {
+    showDeleted = true;
+  }
+  console.log('showing deleted:');
+  console.log(showDeleted);
 
   Section.find({}).exec((err, sections) => {
     if(err) {
@@ -127,9 +144,39 @@ exports.list = function(req, res) {
             sectionid: respon.sections[secti].sectionid,
             sectionname: respon.sections[secti].sectionname
           };
+          if(respon.sections[secti].isDeleted) {
+            sect.isDeleted = true;
+          }
           newrespon.sections.push(sect);
         }
         respon = newrespon;
+      }
+      if(!showDeleted) {
+        var newrespon = {sections : []};
+        for(var secti in respon.sections) {
+          var sect = respon.sections[secti];
+          if(!(sect.isDeleted)) {
+            var newquests = [];
+            for(var questi in sect.questions) {
+              if(!(sect.questions[questi].isDeleted)) {
+                newquests.push(sect.questions[questi]);
+              } else {
+                console.log('was deleted quest');
+                console.log(respon.sections[secti]);
+              }
+            }
+            sect.questions = newquests;
+            newrespon.sections.push(sect);
+          } else {
+            console.log('was deleted sect');
+            console.log(sect);
+          }
+        }
+        console.log('old respon');
+        console.log(respon);
+        respon = newrespon;
+        console.log('new respon');
+        console.log(newrespon);
       }
       res.json(respon);
     }

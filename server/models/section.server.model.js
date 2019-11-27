@@ -9,9 +9,11 @@ var sectionSchema = new Schema({
   questions: [{
     questionid: String,
     question: String,
+    isDeleted: Boolean,
     tips: [String],
     _id: false
-  }]
+  }],
+  isDeleted: Boolean
 }, {versionKey:false});
 
 /* Use your schema to instantiate a Mongoose model */
