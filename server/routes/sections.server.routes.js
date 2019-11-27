@@ -6,8 +6,12 @@
 
 /* Dependencies */
 var sections = require('../controllers/sections.server.controller.js'),
+    users = require('../controlelrs/users.server.controller.js'),
     express = require('express'), //refers to Express the middleware helper for Node.js
     router = express.Router(); //refers to the Router() function in Express the middleware helper for Node.js
+
+
+router.use('/', users.userFromId);
 
 /* 
   These method calls are responsible for routing requests to the correct request handler.
