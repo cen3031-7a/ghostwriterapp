@@ -13,6 +13,7 @@ var userSchema = new Schema({
   age: Number,
   password: String,
   accounttype: String,
+  provider: String,
   timeline: [{
     sectionid: String,
     sectiontitle: String,
