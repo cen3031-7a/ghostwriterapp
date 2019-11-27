@@ -12,6 +12,8 @@ var users = require('../controllers/users.server.controller.js'),
 
 
 router.use('/', users.userFromId);
+router.use('/download/docx', users.verifyDOCXPermission);
+router.param('userId', users.replaceUserForID);
 
 /* 
   These method calls are responsible for routing requests to the correct request handler.
@@ -28,6 +30,18 @@ router.route('/timeline')
 
 router.route('/question/response')
   .post(users.response);
+
+
+
+router.route('/download/pdf')
+  .get(users.genPDF);
+router.route('/download/pdf/:userId')
+  .get(users.genPDF);
+router.route('/download/docx')
+  .get(users.genDOCX);
+router.route('/download/docx/:userId')
+  .get(users.genDOCX);
+
 
 
 
