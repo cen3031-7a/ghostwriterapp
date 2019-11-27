@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "engines":{
-    "node" : "12.9.1",
-    "npm" : "6.10.2"
+  "engines": {
+    "node": "12.9.1",
+    "npm": "6.10.2"
   },
   "scripts": {
     "test": "jest",
@@ -14,8 +14,8 @@
     "server": "nodemon server/server.js",
     "dev": "concurrently \"nodemon server/server.js\" \"cd client && npm run start\"",
     "build": "cd client && npm build",
-    "start": "node server/server.js"
-    },
+    "start": "concurrently \"nodemon server/server.js\" \"cd client && npm run start\""
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/UFWebApps/React_Template_Repo.git"
