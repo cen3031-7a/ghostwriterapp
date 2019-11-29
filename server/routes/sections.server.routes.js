@@ -25,6 +25,10 @@ router.route('/')
 /*
   The ':' specifies a URL parameter. 
  */
+
+router.route('/:sectionId/questions')
+  .get(sections.read)
+  .post(sections.updateQ);
 router.route('/:sectionId')
   .get(sections.read)
   .post(sections.update)

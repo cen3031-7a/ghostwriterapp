@@ -97,6 +97,99 @@ exports.update = function(req, res) {
 
 };
 
+exports.updateQ = function(req, res) { // TODO THis functionality
+  var section = req.section;
+  var waspresent = false;
+
+  console.log('got update questions request');
+  console.log(req.body);
+
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('Not an admin');
+    return;
+  }
+
+  if(section) { // Section was present
+    console.log('section was present');
+    waspresent = true;
+    if(req.body.sectionname) section.sectionname = req.body.sectionname;
+    if(req.body.questions) {
+      console.log('updating questions');
+      var newquestions = [];
+      for(var qupdate in req.body.questions) {
+        var reqquest = req.body.questions[qupdate];
+        if(!reqquest.questionid) {
+          console.log('questionid not found for a question. Ignoring.');
+          continue;
+        }
+        var newquest = null;
+        var originalquestion = null;
+        for(var question in section.questions) {
+          if(section.questions[question].questionid == reqquest.questionid) { // Found the question, update it
+            console.log('found question to update');
+            originalquestion = section.questions[question];
+          }
+        }
+        if(originalquestion == null) { // Was not present to update, go ahead and add it
+          console.log('inserting question');
+          if(!reqquest.question) {
+            console.log('Could not find question text for new question. Ignoring.');
+            continue;
+          }
+          newquest = reqquest;
+        } else {
+          newquest = originalquestion;
+          if(reqquest.question) {
+            console.log('updated question text');
+            newquest.question = reqquest.question;
+          }
+          if(reqquest.tips) {
+            console.log('updated question tips');
+            newquest.tips = reqquest.tips;
+          }
+        }
+        newquestions.push(newquest);
+      }
+      for(var oquesti in section.questions) {
+        var oquestinnquest = false;
+        for(var nquesti in newquestions) {
+          if(section.questions[oquesti].questionid == newquestions[nquesti].questionid) {
+            oquestinnquest = true;
+            break;
+          }
+        }
+        if(!oquestinnquest) {
+          var onquest = section.questions[oquesti];
+          onquest.isDeleted = true;
+          newquestions.push(onquest);
+        }
+      }
+      section.questions = newquestions;
+    }
+  } else { // Section doesn't exist yet
+    console.log('inserting section');
+    section = new Section(req.body);
+    section.sectionid = req.params.sectionId;
+  }
+
+  console.log(section);
+ 
+  /* Save the listing */
+  section.save(err => {
+    if(err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      if(waspresent) {
+        res.status(200).end();
+      } else {
+        res.status(201).end();
+      }
+    }
+  })
+
+};
+
 /* Delete a listing */
 exports.delete = function(req, res) {
   var section = req.section;
