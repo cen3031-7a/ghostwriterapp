@@ -46,14 +46,11 @@ class Home extends Component {
 		const data = this.props.data;
 		const resData = this.props.resData;
 
-<<<<<<< HEAD
 		//const empty = resData.isEmpty()
 
 		if(resData.length === 0) this.state.empty = true
 		else this.state.empty = false
 		
-=======
->>>>>>> 30c258fea7cfd1110f332bfdd16b453f656de4d4
 		sectionData = resData
 			.map((q, i) => {	
 
