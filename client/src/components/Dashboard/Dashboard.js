@@ -3,6 +3,7 @@ import  './Dashboard.css';
 import Dragula from 'react-dragula';
 import 'dragula/dist/dragula.css';
 import Section from '../../components/Section/Section';
+import {AlignJustify,  ChevronDown } from 'react-feather'
 import { Accordion, Card } from 'react-bootstrap';
 
 var sectionData;
@@ -40,22 +41,26 @@ class Home extends Component {
 		
 		const data = this.props.data;
 		const resData = this.props.resData;
-		
+
 		sectionData = resData
-			.map((q, i) => {
+			.map((q, i) => {	
 
 				return(
 				
-					<Accordion id={q.sectionid} defaultActiveKey="0" style={{backgroundColor: 'white'}} key={q.sectionid}>
+					<Accordion id={q.sectionid} defaultActiveKey="0" style={{backgroundColor: 'e0e0e0'}} key={q.sectionid}>
 						<Card style={{borderRadius: '3px', backgroundColor: '#fafafa', border: '.5px solid silver'}}>
 						
 							<Accordion.Toggle as={Card.Header} className="accHeader" eventKey="1">
-								{data[data.findIndex((e) => e.sectionid === q.sectionid)].sectionname}
+								<div style={{display: 'inline', padding: '5px'}}> {data[data.findIndex((e) => e.sectionid === q.sectionid)].sectionname} </div>
+								<AlignJustify
+								style={{float: 'right'}} 
+								/>
+								<ChevronDown className="closeCollapse" />
 							</Accordion.Toggle>
 							
 							<Accordion.Collapse eventKey="1">
 								<Card.Body>
-									<Section className="SECTION" data={q} resData={data[data.findIndex((e) => e.sectionid === q.sectionid)]} id={q.sectionid} callbackDash={this.parentDash} />
+									<Section className="SECTION" resData={q} data={data[data.findIndex((e) => e.sectionid === q.sectionid)]} id={q.sectionid} callbackDash={this.parentDash} />
 								</Card.Body>
 							</Accordion.Collapse>
 
