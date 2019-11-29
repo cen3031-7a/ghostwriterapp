@@ -11,13 +11,14 @@ class Section extends Component {
 
 		const data = this.props.data;
 		const resData = this.props.resData;
+		
 
 		const questionData = data.questions
 			.map((q, i) => {
 				return(
 					<Question 
-						question={resData.questions[i].question}  
-						resText={data.questions[i]} 
+						question={data.questions[data.questions.findIndex((e) => e.questionid === q.questionid)].question}  
+						resText={resData.questions[i]} 
 						key={q.questionid} 
 						id={q.questionid} 
 						callbackQ={this.textRes} 

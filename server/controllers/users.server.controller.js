@@ -3,6 +3,9 @@
 var mongoose = require('mongoose'), 
     User = require('../models/user.server.model.js'),
     Section = require('../models/section.server.model.js');
+const PDFDocument = require('pdfkit');
+const officegen = require('officegen');
+const fs = require('fs');
   
 
 /*
@@ -31,6 +34,7 @@ exports.gettimeline = function(req, res) {
         console.log(err);
         res.status(500).send(err);
       } else {
+        console.log(req.user);
         var resp = {timeline:[]};
         for(var secti in req.user.timeline) {
           var sect = {
@@ -186,6 +190,195 @@ exports.response = function(req, res) {
   res.status(404).end();
 };
 
+findSection = function(allsections, sectionid) {
+  for(var secti in allsections) {
+    if(allsections[secti].sectionid == sectionid) {
+      return allsections[secti];
+    }
+  }
+  console.log('uh oh. findsection section ' + sectionid + ' not found');
+  return null;
+};
+
+findQuestion = function(allsections, sectionid, questionid) {
+  for(var secti in allsections) {
+    var sect = allsections[secti];
+    if(sectionid == null || sect.sectionid == sectionid) {
+      for(var questi in sect.questions) {
+        if(sect.questions[questi].questionid == questionid) {
+          return sect.questions[questi];
+        }
+      }
+    }
+  }
+  console.log('uh oh. findquestion question ' + questionid + ' not found');
+  return null;
+};
+
+exports.genPDF = function(req, res) {
+  var user = req.user;
+  var timeline = user.timeline;
+  var include_questions = req.query.include_questions == 'true';
+
+  Section.find({}).exec((err, allsections) => {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+
+
+      var options = {};
+      options.ownerPassword = 'akjhsdkjahdw';
+      options.permissions = {};
+      options.permissions.copying = false;
+      options.permissions.printing = 'highResolution';
+      const doc = new PDFDocument(options);
+      doc.info.Title = "My Story";
+      doc.info.Author = "Ghost Writer App";
+
+      res.setHeader("content-type", "application/pdf");
+      res.setHeader("Content-Disposition", 'attachment; filename="My Story.pdf"');
+      doc.pipe(res);
+
+      var username = user.firstname + " " + user.lastname;
+      doc.fontSize(48).font('Times-Roman');
+      doc.text(`${username}'s Story`, {align:'center'});
+
+      for(var secti in timeline) {
+        var section = timeline[secti];
+        var sectiondat = findSection(allsections, section.sectionid);
+
+        var sectiontitle = section.sectiontitle;
+        if(!sectiontitle) sectiontitle = sectiondat.sectionname;
+        doc.fontSize(24);
+        doc.text(`\n${sectiontitle}`);
+
+        var sectionstartage = section.sectionstartage;
+        var sectionendage = section.sectionendage;
+        doc.fontSize(11).fillColor('#575757');
+        if(sectionstartage && !sectionendage) {
+          doc.text(`Starting at ${sectionstartage} years old`);
+        } else if(!sectionstartage && sectionendage) {
+          doc.text(`Ending at ${sectionendage} years old`);
+        } else if(sectionstartage && sectionendage) {
+          doc.text(`From ${sectionstartage} to ${sectionendage} years old`);
+        }
+        doc.fillColor('#000000');
+
+
+        doc.fontSize(12);
+        doc.font('Times-Roman').text('\n');
+
+        for(var questi in section.questions) {
+          var question = section.questions[questi];
+          var response = question.response;
+          if(response) {
+            var questiondat = findQuestion(allsections, section.sectionid, question.questionid);
+
+            if(include_questions) {
+              var questiontext = questiondat.question;
+              doc.fontSize(16).text(`${questiontext}`);
+              doc.fontSize(12);
+            }
+
+            doc.text(`${response}`);
+            doc.text('\n');
+          }
+        }
+
+      }
+
+      doc.end();
+
+
+    }
+  });
+};
+
+exports.genDOCX = function(req, res) {
+  var user = req.user;
+  var timeline = user.timeline;
+  var include_questions = req.query.include_questions == 'true';
+
+  Section.find({}).exec((err, allsections) => {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+
+
+      const doc = officegen('docx');
+      doc.on('error', function(err) {
+        console.log(err);
+      });
+      res.setHeader("content-type", "application/application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+      res.setHeader("Content-Disposition", 'attachment; filename="My Story.docx"');
+      var style = {
+        font_face: 'Times-Roman',
+        font_size: 48,
+        color: '000000',
+        align: 'center'
+      };
+      var pobj = doc.createP();
+
+      var username = user.firstname + " " + user.lastname;
+      pobj.addText(`${username}'s Story`, Object.assign({}, style));
+
+      style.align = 'left';
+
+      for(var secti in timeline) {
+        var section = timeline[secti];
+        var sectiondat = findSection(allsections, section.sectionid);
+
+        var sectiontitle = section.sectiontitle;
+        if(!sectiontitle) sectiontitle = sectiondat.sectionname;
+        style.font_size = 24;
+        pobj = doc.createP();
+        pobj.addText(`\n${sectiontitle}`, Object.assign({}, style));
+
+        var sectionstartage = section.sectionstartage;
+        var sectionendage = section.sectionendage;
+        style.font_size = 11;
+        style.color = '575757';
+        if(sectionstartage && !sectionendage) {
+          pobj.addText(`\nStarting at ${sectionstartage} years old`, Object.assign({}, style));
+        } else if(!sectionstartage && sectionendage) {
+          pobj.addText(`\nEnding at ${sectionendage} years old`, Object.assign({}, style));
+        } else if(sectionstartage && sectionendage) {
+          pobj.addText(`\nFrom ${sectionstartage} to ${sectionendage} years old`, Object.assign({}, style));
+        }
+
+        style.color = '000000';
+
+        for(var questi in section.questions) {
+          var question = section.questions[questi];
+          var response = question.response;
+          if(response) {
+            var questiondat = findQuestion(allsections, section.sectionid, question.questionid);
+            pobj = doc.createP();
+
+            if(include_questions) {
+              var questiontext = questiondat.question;
+              style.font_size = 16;
+              pobj.addText(`${questiontext}`, Object.assign({}, style));
+            }
+
+            style.font_size = 12;
+            pobj.addText(`\n${response}`, Object.assign({}, style));
+          }
+        }
+
+      }
+
+      var out = fs.createWriteStream('test.docx');
+      doc.generate(out);
+      doc.generate(res);
+
+
+    }
+  });
+};
+
 
 
 /* 
@@ -196,6 +389,37 @@ exports.userFromId = function(req, res, next) {
   var userid = req.userid;
 
   User.findOne({userid:userid}).exec(function(err, user) {
+    if(err) {
+      res.status(400).send(err);
+      console.log(err);
+    } else {
+      req.user = user;
+      next();
+    }
+  });
+};
+
+exports.verifyDOCXPermission = function(req, res, next) {
+  // req.userid should be set by auth code
+  if(req.user.accounttype == 'premium' || req.user.accounttype == 'admin') {
+    next();
+  } else {
+    res.status(403).send('No permission to download editable file');
+    return;
+  }
+};
+
+exports.replaceUserForID = function(req, res, next, id) {
+  req.requestedid = id;
+  if(req.userid == id) {
+    next();
+    return;
+  }
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('No permission to view other users');
+    return;
+  }
+  User.findOne({userid:id}).exec(function(err, user) {
     if(err) {
       res.status(400).send(err);
       console.log(err);

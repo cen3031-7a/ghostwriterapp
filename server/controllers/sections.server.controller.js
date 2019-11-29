@@ -34,6 +34,11 @@ exports.update = function(req, res) {
   console.log('got update request');
   console.log(req.body);
 
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('Not an admin');
+    return;
+  }
+
   if(section) { // Section was present
     console.log('section was present');
     waspresent = true;
@@ -57,13 +62,111 @@ exports.update = function(req, res) {
       }
     }
     if(req.body.removequestions) {
-      section.questions = section.questions.filter(function (quest, index, array) {
+      /*section.questions = section.questions.filter(function (quest, index, array) {
         return !req.body.removequestions.includes(quest.questionid);
-      });
+      });*/
+      for(var question in section.questions) {
+        if(req.body.removequestions.includes(section.questions[question].questionid)) {
+          section.questions[question].isDeleted = true;
+        }
+      }
       console.log('removed questions');
     }
   } else { // Section doesn't exist yet
     req.body.removequestions = undefined;
+    console.log('inserting section');
+    section = new Section(req.body);
+    section.sectionid = req.params.sectionId;
+  }
+
+  console.log(section);
+ 
+  /* Save the listing */
+  section.save(err => {
+    if(err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      if(waspresent) {
+        res.status(200).end();
+      } else {
+        res.status(201).end();
+      }
+    }
+  })
+
+};
+
+exports.updateQ = function(req, res) { // TODO THis functionality
+  var section = req.section;
+  var waspresent = false;
+
+  console.log('got update questions request');
+  console.log(req.body);
+
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('Not an admin');
+    return;
+  }
+
+  if(section) { // Section was present
+    console.log('section was present');
+    waspresent = true;
+    if(req.body.sectionname) section.sectionname = req.body.sectionname;
+    if(req.body.questions) {
+      console.log('updating questions');
+      var newquestions = [];
+      for(var qupdate in req.body.questions) {
+        var reqquest = req.body.questions[qupdate];
+        if(!reqquest.questionid) {
+          console.log('questionid not found for a question. Ignoring.');
+          continue;
+        }
+        var newquest = null;
+        var originalquestion = null;
+        for(var question in section.questions) {
+          if(section.questions[question].questionid == reqquest.questionid) { // Found the question, update it
+            console.log('found question to update');
+            originalquestion = section.questions[question];
+          }
+        }
+        if(originalquestion == null) { // Was not present to update, go ahead and add it
+          console.log('inserting question');
+          if(!reqquest.question) {
+            console.log('Could not find question text for new question. Ignoring.');
+            continue;
+          }
+          newquest = reqquest;
+        } else {
+          newquest = originalquestion;
+          if(reqquest.question) {
+            console.log('updated question text');
+            newquest.question = reqquest.question;
+          }
+          if(reqquest.tips) {
+            console.log('updated question tips');
+            newquest.tips = reqquest.tips;
+          }
+        }
+        newquestions.push(newquest);
+      }
+      for(var oquesti in section.questions) {
+        var oquestinnquest = false;
+        for(var nquesti in newquestions) {
+          if(section.questions[oquesti].questionid == newquestions[nquesti].questionid) {
+            oquestinnquest = true;
+            break;
+          }
+        }
+        if(!oquestinnquest) {
+          var onquest = section.questions[oquesti];
+          onquest.isDeleted = true;
+          newquestions.push(onquest);
+        }
+      }
+      section.questions = newquestions;
+    }
+  } else { // Section doesn't exist yet
     console.log('inserting section');
     section = new Section(req.body);
     section.sectionid = req.params.sectionId;
@@ -93,17 +196,28 @@ exports.delete = function(req, res) {
   var isPresent = false;
   if(section) isPresent = true;
 
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('Not an admin');
+    return;
+  }
+
   /* Add your code to remove the listins */
 
-  Section.deleteOne(section, err => {
+  if(!isPresent) {
+    res.status(404).end();
+    return;
+  }
+
+  section.isDeleted = true;
+
+  section.save(err => {
     if(err) {
       console.log(err);
-      res.status(400).send(err);
+      res.status(500).send(err);
     } else {
-      if(isPresent)
-        res.status(200).end();
-      else
-        res.status(404).end();
+      console.log('deleted section: ');
+      console.log(section.sectionname);
+      res.status(200).end();
     }
   });
 
@@ -112,6 +226,12 @@ exports.delete = function(req, res) {
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
   /* Add your code */
+  var showDeleted = false;
+  if(req.query.showDeleted == 'true') {
+    showDeleted = true;
+  }
+  console.log('showing deleted:');
+  console.log(showDeleted);
 
   Section.find({}).exec((err, sections) => {
     if(err) {
@@ -127,9 +247,39 @@ exports.list = function(req, res) {
             sectionid: respon.sections[secti].sectionid,
             sectionname: respon.sections[secti].sectionname
           };
+          if(respon.sections[secti].isDeleted) {
+            sect.isDeleted = true;
+          }
           newrespon.sections.push(sect);
         }
         respon = newrespon;
+      }
+      if(!showDeleted) {
+        var newrespon = {sections : []};
+        for(var secti in respon.sections) {
+          var sect = respon.sections[secti];
+          if(!(sect.isDeleted)) {
+            var newquests = [];
+            for(var questi in sect.questions) {
+              if(!(sect.questions[questi].isDeleted)) {
+                newquests.push(sect.questions[questi]);
+              } else {
+                console.log('was deleted quest');
+                console.log(respon.sections[secti]);
+              }
+            }
+            sect.questions = newquests;
+            newrespon.sections.push(sect);
+          } else {
+            console.log('was deleted sect');
+            console.log(sect);
+          }
+        }
+        console.log('old respon');
+        console.log(respon);
+        respon = newrespon;
+        console.log('new respon');
+        console.log(newrespon);
       }
       res.json(respon);
     }

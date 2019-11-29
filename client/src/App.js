@@ -3,6 +3,7 @@ import { Route, Switch, Redirect  } from 'react-router-dom';
 import Home from "./views/Home/Home";
 import QuestionPage from "./views/QuestionPage/QuestionPage"
 import NotFound from "./views/NotFound";
+import AdminPage from "./views/AdminPage/AdminPage"
 import Header from "./components/Header/Header";
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
 			data: [],
 			resData: [],
 			intervalIsSet: false,
+			hasData: false
 			
 		 };
 
@@ -51,11 +53,14 @@ class App extends Component {
 	  
 		fetch('/api/sections?include_questions=true')
 			.then((data) => data.json())
-			.then((res) => this.setState({data: res.sections}));
+			.then((res) => this.setState({data: res.sections}))
+			.then(() => console.log("GOT DATA"))
+			.then(() => this.setState({hasData: true}));
 		  
-		fetch('/api/users/timeline?include_sections=true&include_questions=true')
+		fetch('/api/users/timeline?include_sections=true&include_questions=true&AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8')
 			.then((data) => data.json())
-			.then((res) => this.setState({resData: res.timeline}));
+			.then((res) => this.setState({resData: res.timeline}))
+			.then(() => console.log("GOT Res"));
 	  
 	}
 
@@ -65,11 +70,11 @@ class App extends Component {
   
 	postText = (text) => {
 	  
-		fetch('/api/users/question/response', {
+		fetch('/api/users/question/response?AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
 			
 			method: 'POST',
 			body: 
-				JSON.stringify({questionid: text.id, response: text.text.text}),
+				JSON.stringify({questionid: text.id, response: text.text}),
 			headers:
 			{
 				'Content-Type': 'application/json'
@@ -83,13 +88,14 @@ class App extends Component {
 		.then(function(body)
 		{
 			console.log('posting', body);
-		}); 
+		})
+		.then(() => this.getData());
 	 
 	}
   
 	postOrder = (order) => {
 		
-		fetch('/api/users/timeline', {
+		fetch('/api/users/timeline?AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
 			
 			method: 'POST',
 			body: 
@@ -107,12 +113,14 @@ class App extends Component {
 		.then(function(body)
 		{
 			console.log('posting', body);
-		}); 
+		})
+		.then(() => this.getData());
 
 	}
 	
 	render() {
-		
+	
+		if(this.state.hasData)
 		return (
 			<div>
 			
@@ -120,10 +128,11 @@ class App extends Component {
 				<Switch>
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
-					<Route exact path="/Questions" render={() => <QuestionPage questions={this.state.data} resData={this.state.resData} response={this.postText} secOrder={this.postOrder}/>}/>
+					<Route exact path="/Questions" render={() => <QuestionPage questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
 					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Admin" render={() => <AdminPage data={this.state.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>
@@ -134,6 +143,7 @@ class App extends Component {
 				
 			</div>
 		);
+		else return(<div />);
 	  
 	}
 	

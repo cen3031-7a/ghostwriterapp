@@ -22,7 +22,7 @@ class QuestionPage extends Component {
 	
 	qPage = (restext) =>
 	{
-		this.setState({text: restext.text});
+		this.setState({text: restext});
 		this.props.response(restext);
 	}
 
@@ -44,7 +44,6 @@ class QuestionPage extends Component {
 
 	
     render() {
-		console.log(this.state.selectedSections)
 		return(
 		
 			<div className="App">

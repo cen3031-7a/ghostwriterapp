@@ -38,7 +38,15 @@ module.exports.init = () => {
       }
 
       // req.userid should be set by this function
-      req.userid = "aec2ac9a-0754-4218-bbe4-3071779efc24";
+      // Debugging thing. We will now accept your userid as a query parameter
+      // Free:    edc620fe-1003-4da6-846f-a4abee80fbd8
+      // Premium: aec2ac9a-0754-4218-bbe4-3071779efc24
+      // Admin:   4c57b17d-a91f-4b75-a10b-17460bfa1a10
+      if(req.query.AuthID) {
+        req.userid = req.query.AuthID;
+      } else {
+        req.userid = "aec2ac9a-0754-4218-bbe4-3071779efc24";
+      }
       next();
     });
 

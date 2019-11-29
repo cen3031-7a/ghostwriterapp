@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
+import {CheckCircle} from 'react-feather'
 import TextBox from '../../components/TextBox/TextBox';
 
 class Question extends Component {
@@ -10,7 +11,8 @@ class Question extends Component {
 		this.state = 
 		{
 			
-			text: []
+			text: this.props.resText.response || '',
+			isSaved: (this.props.resText.response != '') ? true: false
 			
 		 };
 
@@ -19,14 +21,17 @@ class Question extends Component {
 	textRes =(text) => {
 		
 		this.setState({text: text})
+		this.sendRes();
 		
 	}
 	
 	sendRes() {
-		
+
 		var id = this.props.id;
 		var question = this.props.question;
 		var text = this.state.text;
+		
+		this.setState({isSaved: true});
 		
 		this.props.callbackQ({
 			id: id,
@@ -35,6 +40,8 @@ class Question extends Component {
 		});
 		
 	}
+	
+	unSave(cond) {if(cond) this.setState({isSaved: false})}
 
     render() {
 
@@ -47,12 +54,13 @@ class Question extends Component {
 						<Card style={{borderRadius: '3px', backgroundColor: '#f8f8f8', border: '.5px solid silver', margin: '1px'}}>
 						
 							<Accordion.Toggle as={Card.Header} className="accHeader" style={{fontSize: '.85rem'}} eventKey="1">
+								<CheckCircle size='20px' style={{float: 'left', color: 'green', visibility: this.state.isSaved ? 'visible' : 'hidden', display: 'inline', padding: '2px'}}  />
 								{this.props.question}
 							</Accordion.Toggle>
 							
 							<Accordion.Collapse eventKey="1" onExit={this.sendRes.bind(this)}>
 								<Card.Body>
-									<TextBox callbackText={this.textRes} resText={this.props.resText} />
+									<TextBox isTyping={this.unSave.bind(this)} callbackText={this.textRes} resText={this.props.resText} />
 								</Card.Body>
 							</Accordion.Collapse>
 							
