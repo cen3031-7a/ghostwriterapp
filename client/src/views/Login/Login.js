@@ -1,4 +1,4 @@
-import { React, Component} from 'react'
+import React, {Component} from 'react'
 
 class Login extends Component {
 
@@ -22,7 +22,7 @@ class Login extends Component {
             password: this.state.password
         }
 
-        fetch("/Login", 
+        fetch("/auth/Login", 
         {
             method: "POST",
             body: JSON.stringify(user),

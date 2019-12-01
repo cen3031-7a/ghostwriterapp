@@ -1,4 +1,4 @@
-import { React, Component} from 'react'
+import React, {Component} from 'react'
 
 class Signup extends Component {
 
@@ -28,7 +28,7 @@ class Signup extends Component {
             confirm_password: this.state.confirm_password
         }
 
-        fetch("/Signup", 
+        fetch("/auth/Signup", 
         {
             method: "POST",
             body: JSON.stringify(user),
@@ -37,7 +37,7 @@ class Signup extends Component {
 				'Content-Type': 'application/json'
             }
         })
-        .then(res => res.status(200).redirect("/login"))
+        .then(res => res.status(200).redirect("/Login"))
     }
 
     render() {
