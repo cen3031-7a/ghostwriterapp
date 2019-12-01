@@ -3,8 +3,8 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    exampleRouter = require('../routes/examples.server.routes'),
     sectionRouter = require('../routes/sections.server.routes'),
+    authRouter = require('../routes/auth.server.routes')
     userRouter = require('../routes/users.server.routes');
 
 module.exports.init = () => {
@@ -51,8 +51,9 @@ module.exports.init = () => {
       next();
     });
 
-    // add a router
-    app.use('/api/example', exampleRouter);
+    // login and signup routes
+    app.use('/Login', authRouter);
+    app.use('/Signup', authRouter);
 
     // add a router
     app.use('/api/sections', sectionRouter);
