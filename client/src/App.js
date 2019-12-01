@@ -63,6 +63,10 @@ class App extends Component {
 			.then(() => console.log("GOT Res"));
 	  
 	}
+
+	
+	
+
   
 	postText = (text) => {
 	  

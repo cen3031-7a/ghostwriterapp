@@ -15,8 +15,10 @@ class Home extends Component {
 		super(props);
 		this.state = 
 		{
-			order: []
+			order: [],
+			empty: true
 		}
+
 	}
 	
 	orderUpdate(value)
@@ -36,12 +38,19 @@ class Home extends Component {
 		this.props.callbackQPage(text);
 		
 	}
+
+	
 	
     render() {
 		
 		const data = this.props.data;
 		const resData = this.props.resData;
 
+		//const empty = resData.isEmpty()
+
+		if(resData.length === 0) this.state.empty = true
+		else this.state.empty = false
+		
 		sectionData = resData
 			.map((q, i) => {	
 
@@ -78,8 +87,10 @@ class Home extends Component {
 				<div className="section" ref={this.dragBox}>
 
 					{sectionData}
-				
+					{this.state.empty && <p className="noSections">Select a Section from the Select Section Dropdown to Add a Section to Your Story</p>}
+
 				</div>
+				
 				
 			</div>
 
