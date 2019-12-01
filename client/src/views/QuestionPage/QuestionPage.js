@@ -9,8 +9,7 @@ class QuestionPage extends Component {
 	constructor(props) {
 	 
 		super(props);
-		this.state = 
-		{
+		this.state = {
 			text: '',
 			block: [],
 			selectedSections: this.props.resData.map((id) => {
@@ -26,26 +25,42 @@ class QuestionPage extends Component {
 		this.props.response(restext);
 	}
 
-	updateSelectedSections = (arg) =>{
-		this.setState({selectedSections: arg})
-		console.log(this.state.selectedSections)
-		this.secOrder(this.props.questions.filter(item => {
-			return arg.includes(item.sectionid)
-		}))
-		console.log(this.props.questions.filter(item => {
-			return arg.includes(item.sectionid)
-		}))
+	updateSelectedSections = (arg, sectionId) =>{
+		console.log(arg.length)
+		console.log(this.props.resData)
+		if(arg.length > this.props.resData.length){
+			let temp = this.props.questions.filter(item => {
+				return item.sectionid === sectionId
+			})
+			console.log(temp)
+			let temp2 = this.props.resData
+			temp2.push(temp[0])
+			console.log(temp2)
+			this.props.secOrder(temp2)
+		} 
+		else{
+			let temp = this.props.resData.filter(item => {
+				return arg.includes(item.sectionid)
+			})
+			console.log(temp)
+			this.props.secOrder(temp)
+		}
 	}
 	secOrder = (order) => 
-	{
+	{	
+		console.log(order)
 		this.props.secOrder(order);
 		this.render()
 	}
 
 	
     render() {
+		const selectedSections = this.props.resData.map((id) => {
+			return id.sectionid;
+		})
+		console.log(selectedSections)
 		return(
-		
+			
 			<div className="App">
 			
 				<div style={{paddingTop: '50px'}} />
@@ -53,7 +68,7 @@ class QuestionPage extends Component {
 				<div className="toolbar" > 
 					<Toolbar 
 					data={this.props.questions}
-					selectedSections = {this.state.selectedSections}
+					selectedSections = {selectedSections}
 					updateSelectedSections = {this.updateSelectedSections.bind(this)}
 					/>
 				</div>

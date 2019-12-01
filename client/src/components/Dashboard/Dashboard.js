@@ -23,7 +23,6 @@ class Home extends Component {
 	
 	orderUpdate(value)
 	{
-	  
 		this.setState ({
 			order: value
 		})
