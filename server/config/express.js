@@ -13,7 +13,8 @@ module.exports.init = () => {
         - reference README for db uri
     */
     mongoose.connect(process.env.DB_URI || require('../config/config').db.uri, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true 
     });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
