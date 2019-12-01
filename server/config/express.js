@@ -4,7 +4,7 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     sectionRouter = require('../routes/sections.server.routes'),
-    authRouter = require('../routes/auth.server.routes')
+    authRouter = require('../routes/auth.server.routes'),
     userRouter = require('../routes/users.server.routes');
 
 module.exports.init = () => {
@@ -46,14 +46,13 @@ module.exports.init = () => {
       if(req.query.AuthID) {
         req.userid = req.query.AuthID;
       } else {
-        req.userid = "aec2ac9a-0754-4218-bbe4-3071779efc24";
+        req.userid = "edc620fe-1003-4da6-846f-a4abee80fbd8";
       }
       next();
     });
 
     // login and signup routes
-    app.use('/Login', authRouter);
-    app.use('/Signup', authRouter);
+    app.use('/auth', authRouter);
 
     // add a router
     app.use('/api/sections', sectionRouter);
