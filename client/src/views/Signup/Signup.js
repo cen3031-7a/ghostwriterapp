@@ -28,7 +28,7 @@ class Signup extends Component {
             confirm_password: this.state.confirm_password
         }
 
-        fetch("/api/users/register", 
+        fetch("/Signup", 
         {
             method: "POST",
             body: JSON.stringify(user),

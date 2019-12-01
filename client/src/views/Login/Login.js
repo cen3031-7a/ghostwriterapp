@@ -22,7 +22,7 @@ class Login extends Component {
             password: this.state.password
         }
 
-        fetch("/api/users/login", 
+        fetch("/Login", 
         {
             method: "POST",
             body: JSON.stringify(user),
@@ -32,6 +32,8 @@ class Login extends Component {
             }
         })
         .then(res => res.status(200).redirect("/Questions"))
+
+        // token on the front end
     }
 
     render() {
