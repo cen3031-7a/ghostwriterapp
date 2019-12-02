@@ -318,21 +318,21 @@ exports.list = function(req, res) {
       console.log('sorting');
       //console.log(respon);
       respon.sections.sort((a,b) => {
-        if((a.hasOwnProperty('pos') && a.pos != undefined) && (b.hasOwnProperty('pos') && b.pos != undefined)) {
-          //console.log('sorting... both had prop');
+        if(a.pos != null && b.pos != null) {
+          console.log('sorting... both had prop');
           return a.pos - b.pos;
-        } else if((a.hasOwnProperty('pos') && a.pos != undefined) && !(b.hasOwnProperty('pos') && b.pos != undefined)) {
-          //console.log('sorting... a had prop');
+        } else if(a.pos != null && b.pos == null) {
+          console.log('sorting... a had prop');
           return -1;
-        } else if(!(a.hasOwnProperty('pos') && a.pos != undefined) && (b.hasOwnProperty('pos') && b.pos != undefined)) {
-          //console.log('sorting... b had prop');
+        } else if(a.pos == null && b.pos != null) {
+          console.log('sorting... b had prop');
           return 1;
         } else {
-          //console.log('sorting... none had prop');
+          console.log('sorting... none had prop');
           return 0;
         }
       });
-      //console.log(respon);
+      console.log(respon);
       res.json(respon);
     }
   });
