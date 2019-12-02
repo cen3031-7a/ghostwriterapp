@@ -20,6 +20,39 @@ var mongoose = require('mongoose'),
   https://adrianmejia.com/getting-started-with-node-js-modules-require-exports-imports-npm-and-beyond/
  */
 
+
+exports.organize = function(req, res) {
+  console.log('got organize request');
+  console.log(req.body);
+
+  if(req.user.accounttype != 'admin') {
+    res.status(403).send('Not an admin');
+    return;
+  }
+
+  var error = false;
+  var done = 0;
+  var allset = false;
+
+  for(var secti in req.body.sections) {
+    var sectid = req.body.sections[secti];
+    done++;
+    Section.findOneAndUpdate({sectionid:sectid}, {pos:secti}, {}, (err, doc, raw) => {
+      if(err) {
+        console.log(err);
+        error = true;
+      }
+      done--;
+      if(allset && done == 0) {
+        res.status(200).end();
+        console.log('order updated');
+      }
+    });
+  }
+  allset = true;
+  console.log('done queuing updates');
+};
+
 /* Show the current listing */
 exports.read = function(req, res) {
   /* send back the listing as json from the request */
@@ -245,7 +278,8 @@ exports.list = function(req, res) {
         for(var secti in respon.sections) {
           var sect = {
             sectionid: respon.sections[secti].sectionid,
-            sectionname: respon.sections[secti].sectionname
+            sectionname: respon.sections[secti].sectionname,
+            pos: respon.sections[secti].pos
           };
           if(respon.sections[secti].isDeleted) {
             sect.isDeleted = true;
@@ -281,6 +315,24 @@ exports.list = function(req, res) {
         console.log('new respon');
         console.log(newrespon);
       }
+      console.log('sorting');
+      //console.log(respon);
+      respon.sections.sort((a,b) => {
+        if((a.hasOwnProperty('pos') && a.pos != undefined) && (b.hasOwnProperty('pos') && b.pos != undefined)) {
+          //console.log('sorting... both had prop');
+          return a.pos - b.pos;
+        } else if((a.hasOwnProperty('pos') && a.pos != undefined) && !(b.hasOwnProperty('pos') && b.pos != undefined)) {
+          //console.log('sorting... a had prop');
+          return -1;
+        } else if(!(a.hasOwnProperty('pos') && a.pos != undefined) && (b.hasOwnProperty('pos') && b.pos != undefined)) {
+          //console.log('sorting... b had prop');
+          return 1;
+        } else {
+          //console.log('sorting... none had prop');
+          return 0;
+        }
+      });
+      //console.log(respon);
       res.json(respon);
     }
   });

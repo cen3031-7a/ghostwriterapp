@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 var sectionSchema = new Schema({
   sectionid: String,
   sectionname: String,
+  pos: Number,
   questions: [{
     questionid: String,
     question: String,
