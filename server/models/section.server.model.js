@@ -6,12 +6,15 @@ var mongoose = require('mongoose'),
 var sectionSchema = new Schema({
   sectionid: String,
   sectionname: String,
+  pos: Number,
   questions: [{
     questionid: String,
     question: String,
+    isDeleted: Boolean,
     tips: [String],
     _id: false
-  }]
+  }],
+  isDeleted: Boolean
 }, {versionKey:false});
 
 /* Use your schema to instantiate a Mongoose model */

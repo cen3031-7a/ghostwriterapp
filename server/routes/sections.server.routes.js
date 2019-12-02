@@ -6,8 +6,12 @@
 
 /* Dependencies */
 var sections = require('../controllers/sections.server.controller.js'),
+    users = require('../controllers/users.server.controller.js'),
     express = require('express'), //refers to Express the middleware helper for Node.js
     router = express.Router(); //refers to the Router() function in Express the middleware helper for Node.js
+
+
+router.use('/', users.userFromId);
 
 /* 
   These method calls are responsible for routing requests to the correct request handler.
@@ -16,11 +20,16 @@ var sections = require('../controllers/sections.server.controller.js'),
   Note: the listings variable above and the file it is connected to help you trace
  */
 router.route('/')
-  .get(sections.list);
+  .get(sections.list)
+  .post(sections.organize);
 
 /*
   The ':' specifies a URL parameter. 
  */
+
+router.route('/:sectionId/questions')
+  .get(sections.read)
+  .post(sections.updateQ);
 router.route('/:sectionId')
   .get(sections.read)
   .post(sections.update)

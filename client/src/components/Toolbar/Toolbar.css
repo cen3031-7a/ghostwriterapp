@@ -1,0 +1,120 @@
+.SelectSection-wrapper {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:default;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.SelectSection-wrapper:hover {
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
+}
+.SelectSection-wrapper:active {
+	position:relative;
+	top:1px;
+}
+
+
+.toolbar-wrapper{
+    position: auto;
+    display: inline-block;
+    padding: 5px;
+}
+
+.hintBox{
+    background-color: white;
+    background: white;
+    color: lightblue;
+}
+.hintButton {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+    padding-bottom: 10px;
+}
+.hintButton:hover {
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
+}
+.hintButton:active {
+	position:relative;
+	top:1px;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+
+
+.toolbar-wrapper {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    position: relative;
+    width: 222px;
+  }
+  .SelectSection-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    line-height: 38px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+  }
+  .SelectSection-header span {
+    margin-right: 20px;
+  }
+  .SelectSection-title {
+    font-weight: 200;
+    margin: 2px 20px;
+    margin-right: 30px;
+  }
+
+  .SelectSection-list{
+      border-width: 2px;
+      border-color: black;
+
+
+  }
+
+  .SelectSection-list-item{
+      border-top: #dcdcdc;
+      border-top-width: 1px;
+      border-top-style: solid;
+
+  }

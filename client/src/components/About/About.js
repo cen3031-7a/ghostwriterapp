@@ -7,13 +7,18 @@ class About extends Component{
         return(
             <div className="about-box">
                 <h3 className="about-title">About Us</h3>
-                    <p className="about-body">This app helps people develop books. The business owner is a Ghost Writer 
-                    and frequently works with people to write memoirs. She is looking to make her business more scalable 
-                    by automating the initial capture of people’s ideas through a wizard that walks the user through a 
-                    number of prompts. This  will decrease the cost of having a memoir written and can help them have a 
-                    first draft of a book faster. If people are interested in a more polished draft they can subscribe 
-                    to the premium version of the app which gets them time with the business owner to polish the draft 
-                    to publishable quality in less time.
+                    <p className="about-body">
+                        If you’ve been dreaming about writing your life story, dream no more—Ghostwriter makes it easy for anyone to write a book about their life, even if you have no professional writing experience. 
+                        <br></br><br></br>
+                        With Ghostwriter, you can say goodbye to writer’s block or wondering what to write about next.  Just sign up for a free account and open the easy-to-use web app.  Next, choose the topics you’d like to write about—from your childhood to your travels to your family and professional life. 
+                        <br></br><br></br>
+                        To guide you through your writing, Ghostwriter asks you a set of questions about each topic you’ve chosen.  All you have to do is answer the questions in the text boxes provided—Ghostwriter even gives you helpful tips on writing, ways to spark old memories, and ways to stay motivated as you write.
+                        <br></br><br></br>
+                        And don’t worry if you can’t finish your story in one sitting—Ghostwriter automatically saves your story, so you can pick up where you left off at any time.
+                        <br></br><br></br>
+                        When you’re done, just print out your story so you can share it with your friends and family. It’s just that simple.
+                        <br></br><br></br>
+                        Your story and life lessons are too important to go untold.  Sign up for Ghostwriter now so you too can make your book a reality.
                     </p>
             </div>
         )
