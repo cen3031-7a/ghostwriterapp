@@ -1,4 +1,5 @@
 var bcrypt = require('bcryptjs'),
+    mongoose = require("mongoose"),
     jwt = require('jsonwebtoken'),
     key = require('../config/config').secrets.jwt_secret
     User = require('../models/user.server.model.js'),
@@ -9,7 +10,7 @@ var bcrypt = require('bcryptjs'),
 // deals with registration
 exports.register = (req, res) => {
     // checks if there are any errors and if so send them out
-    console.log(req.body.firstname)
+    console.log(req.body)
     const {errs, isValid} = reg_validation.validUser(req.body)
     
     if(!isValid){

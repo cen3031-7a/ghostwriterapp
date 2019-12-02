@@ -32,7 +32,7 @@ module.exports.init = () => {
     // set up passport
     app.use(passport.initialize());
 
-    require("./config/passport")(passport);
+    require("./passport").passport;
 
     // Add auth middleware
     app.use('/api', function(req, res, next) {// Dummy function

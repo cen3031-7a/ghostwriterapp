@@ -21,23 +21,21 @@ class Signup extends Component {
         event.preventDefault()
 
         const user = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            password: this.state.password,
-            confirm_password: this.state.confirm_password
+            firstname: "bob",
+            lastname: "this.state.lastname",
+            email: "this.state.email",
+            password: "this.state.password",
+            confirm_password: "this.state.confirm_password"
         }
 
-        fetch("/auth/Signup", 
+        fetch('/auth/Signup', 
         {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify(user),
-            headers:
-			{
-				'Content-Type': 'application/json'
-            }
+            headers:{'Content-Type': 'application/json'}
         })
-        .then(res => res.status(200).redirect("/Login"))
+        .then(res => {return res})
+        .then(body => {console.log(body)})
     }
 
     render() {
