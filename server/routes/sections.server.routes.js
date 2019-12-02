@@ -20,7 +20,8 @@ router.use('/', users.userFromId);
   Note: the listings variable above and the file it is connected to help you trace
  */
 router.route('/')
-  .get(sections.list);
+  .get(sections.list)
+  .post(sections.organize);
 
 /*
   The ':' specifies a URL parameter. 
