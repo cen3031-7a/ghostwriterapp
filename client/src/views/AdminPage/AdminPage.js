@@ -16,6 +16,7 @@ class AdminPage extends Component {
 		this.state = 
 		{
 			order: [],
+			token: this.props.token,
 			data: this.props.data,
 			dragSections: true,
 			link: ''
@@ -30,14 +31,30 @@ class AdminPage extends Component {
 	
 	getData = () => {
 		
-		fetch('/api/sections?include_questions=true&AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10')
+		fetch('/api/sections?include_questions=true&AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+			
+			method: 'GET',
+			headers:
+			{
+				'Authorization': this.state.token
+			}
+			
+		})
 			.then((data) => data.json())
 			.then((res) => this.setState({data: res.sections}))
 			.then(() => console.log("GOT DATA"));
 		
 		console.log('reading')
 			
-		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10')
+		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+			
+			method: 'GET',
+			headers:
+			{
+				'Authorization': this.state.token
+			}
+			
+		})
 			.then((data) => data.json())
 			.then(function(body)
 		{
@@ -55,7 +72,8 @@ class AdminPage extends Component {
 				JSON.stringify({questions: order}),
 			headers: 
 			{
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
             }
 			
 		})
@@ -81,7 +99,8 @@ class AdminPage extends Component {
 				JSON.stringify({questions: order}),
 			headers: 
 			{
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
             }
 			
 		})
@@ -107,7 +126,8 @@ class AdminPage extends Component {
 				JSON.stringify(order),
 			headers: 
 			{
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
             }
 			
 		})
@@ -135,7 +155,8 @@ class AdminPage extends Component {
 				JSON.stringify({sections: order}),
 			headers: 
 			{
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
             }
 			
 		})
@@ -159,7 +180,8 @@ class AdminPage extends Component {
 			method: 'DELETE',
 			headers: 
 			{
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
             }
 			
 		})
@@ -358,7 +380,12 @@ class AdminPage extends Component {
 	  
 		if (componentBackingInstance) {
 			
-		  let options = { };
+		  let options = {
+				moves: function (el, source, handle, sibling) {
+					if(el.childNodes[0].childNodes[0].childNodes[2].style.visibility == 'visible') return true;
+					else return false;
+				},
+			};
 		  const dragula = Dragula([componentBackingInstance], options);
 		  dragula.on('drop', (el, target, source, sibling) => {
 			  
