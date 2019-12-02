@@ -1,14 +1,22 @@
-/* div:not(.header, .header > *) {
-    margin-top: 1000px;
-} */
+@import "../About/About.css";
+@import "../HomeVideo/HomeVideo.css";
+
+.player-wrapper {
+    position: relative;
+}
+
+.about-box {
+    position: relative;
+    margin-bottom: 50px;
+}
 
 .header {
-    /* position: fixed;
-    top: 0;
+    position: relative;
     width: 100%;
-    z-index: 10; */
+    top: 0;
+    height: 150px;
     padding: 3px;
-    background-image: linear-gradient(to top,#2b2b2b, #f7d3e5);
+    background-image: linear-gradient(to top,#77766400, #f4f2c9);
     font-family: Montserrat, sans-serif;
 }
 
@@ -19,11 +27,11 @@
 }
 
 #logo-link {
-    color: #5c5c5c;
+    color: #2d5270;
 }
 
 #logo-link:hover {
-    background: linear-gradient(to top,#0f0f0f, #5c5c5c);
+    background: linear-gradient(to top,#4276a1, #2d5270);
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -59,35 +67,21 @@
 
 #homepage {
     margin-left: 10px;
-    color: #a7a7a7;
+    color: #2d5270;
 }
 
 #aboutpage {
     margin-left: 50px;
-    color: #a7a7a7;
+    color: #2d5270;
 }
 
 #questionpage {
-    margin-left: 40px;
-    color: #a7a7a7;
+    margin-left: 50px;
+    color: #2d5270;
 }
 
-#homepage:hover {
-    background: linear-gradient(to top,#a7a7a7, #5f5f5f);
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#aboutpage:hover {
-    background: linear-gradient(to top,#a7a7a7, #5f5f5f);
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#questionpage:hover {
-    background: linear-gradient(to top,#a7a7a7, #5f5f5f);
+#homepage:hover, #aboutpage:hover, #questionpage:hover {
+    background: linear-gradient(to top,#4276a1, #2d5270);
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -97,6 +91,8 @@
     float: right;
     display: inline-flex;
     justify-content: flex-end;
+    flex-wrap: nowrap;
+    align-self: stretch;
     padding: auto;
 }
 
@@ -117,7 +113,7 @@
     margin-right: 15px;
 }
 
-#sign-out {
+#sign-out, #sign-in {
     color: black;
     background-color: #a7a7a7;
     border-color: black;
@@ -127,7 +123,7 @@
     margin-right: 10px;
 }
 
-#sign-out:hover {
+#sign-out:hover, #sign-in:hover {
     background-color: #5f5f5f;
 }
 

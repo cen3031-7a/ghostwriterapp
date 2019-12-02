@@ -11,7 +11,7 @@ class HomeVideo extends Component{
           <div className="player-wrapper">
             <ReactPlayer 
               classname='react-player'
-              url='https://www.youtube.com/watch?v=VlgZi1UHk_E'
+              url='https://www.youtube.com/watch?v=t9rBgDtC51U'
               controls={true}
               width="800px"
               height="450px"
