@@ -171,9 +171,9 @@ class App extends Component {
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
 					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
-					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Admin" render={() => <AdminPage data={this.state.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
@@ -194,9 +194,9 @@ class App extends Component {
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
 					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
-					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>

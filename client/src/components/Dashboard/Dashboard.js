@@ -8,7 +8,7 @@ import { Accordion, Card } from 'react-bootstrap';
 
 var sectionData;
 
-class Home extends Component {
+class Dashboard extends Component {
 	
 	constructor(props)
 	{
@@ -124,4 +124,4 @@ class Home extends Component {
 }
 
 
-export default Home;
+export default Dashboard;
