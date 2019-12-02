@@ -30,7 +30,7 @@ class Header extends Component {
 
                     <div id="account" align="right">
                         {/* if user logged in */}
-                            <Link id="account-link" to="/Account">My Account</Link>
+                            <Link id="account-link" to="/MyAccount">My Account</Link>
                             <a href='/'>
                                 <button type="button" id="sign-out">Sign Out</button>
                             </a>
