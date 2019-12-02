@@ -25,37 +25,18 @@ class Header extends Component {
 
                     <div id="pages" align="left">
                         <Link id="homepage" to='/Home'>Home</Link>
-                        <Link id="aboutpage" to='/Home'>About</Link>
                         <Link id="questionpage" to='/Questions'>Questions</Link>
                     </div>
 
                     <div id="account" align="right">
                         {/* if user logged in */}
-                            <a href='/Account'>
-                                <img src='https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1' id="account-image"/>
-                            </a>
+                            <Link id="account-link" to="/Account">My Account</Link>
                             <a href='/'>
                                 <button type="button" id="sign-out">Sign Out</button>
                             </a>
-                        {/* else */}
-                            {/* <a href='/'>
-                                <button type="button" id="sign-in">Sign In</button>
-                            </a> */}
                     </div>
 
                 </div>
-                {/* Page Links */}
-                {/* <div className="header-right">
-                    <Link className="header-link" to='/Register'>Sign in</Link>
-                    <Link className="header-link" to='/projects'>Projects</Link>
-                    <a className="header-link" target='_blank' rel="noopener noreferrer" href="https://www.facebook.com/groups/ufosc/events/?source=4&action_history=null&filter=calendar">
-                        Events
-                    </a>
-                    <a className="header-link" target='_blank' rel="noopener noreferrer" href="https://github.com/ufosc/club-resources">
-                        Resources
-                    </a>
-                    <Link className="header-link" to="/about">About</Link>
-                </div> */}
             </div>
         )
     }

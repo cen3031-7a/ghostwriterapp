@@ -20,9 +20,8 @@ class Home extends Component {
 								<HomeVideo />	
 							</div>
 						</div>
-						{/* <div class="col">
-							<LoginBar />
-						</div> */}
+						{/*if user not logged in */}
+						<LoginBar />
 					</div>
 					<div class="row">
 						<About />

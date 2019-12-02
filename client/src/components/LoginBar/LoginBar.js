@@ -7,43 +7,44 @@ import { Button, ButtonGroup } from 'reactstrap'
 class LoginBar extends Component{
     render(){
         return(
+            <div className="login-bar">
+                <div className="btn-box">
+                    <ButtonGroup vertical>
+                            <Button
+                                tag={Link}
+                                to="/Signup"
+                                outline color="danger"
+                                size="lg"
+                                block
+                                >
+                                Sign Up
+                            </Button>
+                            &nbsp;&nbsp;&nbsp;
 
-            <div className="btn-box">
-                <ButtonGroup vertical>
-                        <Button
-                            tag={Link}
-                            to="/Signup"
-                            outline color="danger"
-                            size="lg"
-                            block
-                            >
-                            Sign Up
-                        </Button>
-                        &nbsp;&nbsp;&nbsp;
+                            <Button
+                                tag={Link}
+                                to="/Login"               
+                                outline color="dark"
+                                size="lg"
+                                block
+                                >
+                                Login
+                            </Button>
 
-                        <Button
-                            tag={Link}
-                            to="/Login"               
-                            outline color="dark"
-                            size="lg"
-                            block
-                            >
-                            Login
-                        </Button>
+                            &nbsp;&nbsp;&nbsp;
 
-                        &nbsp;&nbsp;&nbsp;
+                            <Button
+                                tag={Link}
+                                to="/Loginfb"
+                                outline color="primary"
+                                size="lg"
+                                block
+                                >
+                                Login via Facebook
+                            </Button>
+                    </ButtonGroup>
 
-                        <Button
-                            tag={Link}
-                            to="/Loginfb"
-                            outline color="primary"
-                            size="lg"
-                            block
-                            >
-                            Login via Facebook
-                        </Button>
-                </ButtonGroup>
-
+                </div>
             </div>
         )
     }
