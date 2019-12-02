@@ -43,7 +43,7 @@ class Home extends Component {
 	
     render() {
 		
-		const data = this.props.data;
+		const data = this.props.oldData;
 		const resData = this.props.resData;
 
 		//const empty = resData.isEmpty()
