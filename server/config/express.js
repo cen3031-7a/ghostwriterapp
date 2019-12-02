@@ -6,7 +6,8 @@ const path = require('path'),
     passport = require('passport'),
     sectionRouter = require('../routes/sections.server.routes'),
     authRouter = require('../routes/auth.server.routes'),
-    userRouter = require('../routes/users.server.routes');
+    userRouter = require('../routes/users.server.routes'),
+    dataRouter = require('../routes/data.server.routes');
 
 module.exports.init = () => {
     /* 
@@ -62,7 +63,8 @@ module.exports.init = () => {
 
     // add a router
     app.use('/api/sections', sectionRouter);
-    app.use('/api/users', userRouter)
+    app.use('/api/users', userRouter);
+    app.use('/api/publicdata', dataRouter);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files

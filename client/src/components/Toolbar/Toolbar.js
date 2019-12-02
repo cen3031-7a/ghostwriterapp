@@ -31,37 +31,37 @@ class Toolbar extends Component {
     }
     
     setSection(sectionid){
-        if(this.state.selectedSections.includes(sectionid)){
+        console.log(this.props.selectedSections)
+        if(this.props.selectedSections.includes(sectionid)){
             this.removeSection(sectionid)
         }
         else{
             this.addSection(sectionid)
         }
-        console.log(sectionid)
     }
 
     addSection = (sectionId) =>
 	{
-		let temp = this.state.selectedSections
+		let temp = this.props.selectedSections
 		temp.push(sectionId)
         this.setState({selectedSections: temp})
         console.log(temp)
-        console.log(sectionId)
-        this.props.updateSelectedSections(temp)
+        this.props.updateSelectedSections(temp, sectionId)
 	}
 
 	removeSection = (sectionId) =>
 	{
-		let temp = this.state.selectedSections.filter(item => {
+		let temp = this.props.selectedSections.filter(item => {
 			return item != sectionId
         })
         this.setState({selectedSections: temp})
-		this.props.updateSelectedSections(temp)
+        console.log(temp)
+		this.props.updateSelectedSections(temp, sectionId)
 	}
     
     render(){
-        const {data, listOpen} = this.state
-        const {selectedSections} = this.props      
+        const selectedSections = this.props.selectedSections
+        const {data, listOpen} = this.state      
         console.log(selectedSections)
         return(
             <div className = "toolbar-wrapper">

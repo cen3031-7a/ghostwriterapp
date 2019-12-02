@@ -17,9 +17,12 @@ class App extends Component {
 		{
 			
 			data: [],
+			oldData: [],
 			resData: [],
+			userInfo: [],
 			intervalIsSet: false,
-			hasData: false
+			hasData: false,
+			hasOld: false
 			
 		 };
 
@@ -58,11 +61,21 @@ class App extends Component {
 			.then((res) => this.setState({data: res.sections}))
 			.then(() => console.log("GOT DATA"))
 			.then(() => this.setState({hasData: true}));
+			
+		fetch('/api/sections?include_questions=true&showDeleted=true')
+			.then((data) => data.json())
+			.then((res) => this.setState({oldData: res.sections}))
+			.then(() => console.log("GOT OLD DATA"))
+			.then(() => this.setState({hasOld: true}));
 		  
 		fetch('/api/users/timeline?include_sections=true&include_questions=true&AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8')
 			.then((data) => data.json())
 			.then((res) => this.setState({resData: res.timeline}))
 			.then(() => console.log("GOT Res"));
+	  
+		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10')
+			.then((data) => data.json())
+			.then((res) => this.setState({userInfo: res.accounttype}) );
 	  
 	}
 
@@ -121,8 +134,8 @@ class App extends Component {
 	}
 	
 	render() {
-	
-		if(this.state.hasData)
+		console.log(this.state.resData)
+		if(this.state.hasData && this.state.hasOld && this.state.userInfo == 'admin')
 		return (
 			<div>
 			
@@ -134,6 +147,28 @@ class App extends Component {
 					<Route exact path="/Login" render={() => <Login data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <Signup data={this.props.data} />}/>
 					<Route exact path="/Admin" render={() => <AdminPage data={this.state.data} />}/>
+					<Route exact path="/">
+						<Redirect to="/Home" />
+					</Route>
+					
+					<Route component={NotFound}/>
+					
+				</Switch>
+				
+			</div>
+		);
+		else if(this.state.hasData && this.state.hasOld)
+		return (
+			<div>
+			
+				<Header />
+				<Switch>
+				
+					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
+					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
+					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>

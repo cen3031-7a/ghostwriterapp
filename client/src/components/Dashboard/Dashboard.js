@@ -8,7 +8,7 @@ import { Accordion, Card } from 'react-bootstrap';
 
 var sectionData;
 
-class Home extends Component {
+class Dashboard extends Component {
 	
 	constructor(props)
 	{
@@ -23,7 +23,6 @@ class Home extends Component {
 	
 	orderUpdate(value)
 	{
-	  
 		this.setState ({
 			order: value
 		})
@@ -43,7 +42,7 @@ class Home extends Component {
 	
     render() {
 		
-		const data = this.props.data;
+		const data = this.props.oldData;
 		const resData = this.props.resData;
 
 		//const empty = resData.isEmpty()
@@ -123,4 +122,4 @@ class Home extends Component {
 }
 
 
-export default Home;
+export default Dashboard;
