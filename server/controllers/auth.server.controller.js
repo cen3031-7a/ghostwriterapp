@@ -48,7 +48,7 @@ exports.login = (req, res) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if(!user){
-                res.status(400).json("No user found")
+                res.status(400).redirect('/Login')
             }
             else{
                 bcrypt.compare(req.body.password, user.password).then(isMatch => {
@@ -60,11 +60,12 @@ exports.login = (req, res) => {
 
                         jwt.sign(load, key, { expiresIn: 7889232 }, // expires in 3 months
                             (err, token) => {
+                                if(err) res.status(400)
                                 res.json({token: 'Bearer' + token})
                             })
                     }
                     else{
-                        res.status(400).json({bad_password: "incorect password"})
+                        res.status(400).redirect('/Login')
                     }
                 })
             }
