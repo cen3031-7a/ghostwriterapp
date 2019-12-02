@@ -14,11 +14,28 @@ class QuestionPage extends Component {
 			block: [],
 			selectedSections: this.props.resData.map((id) => {
 				return id.sectionid;
-			})
+			}),
+			questionsOpen: []
 		};
 
 	}
 	
+	toggleQuestionBoolean = (id) => {
+		if(this.state.questionsOpen.includes(id)){
+			let temp = this.state.questionsOpen.filter(questionid=>{
+				return id !== questionid
+			})
+			this.setState({questionsOpen: temp})
+		}
+		else{
+			let temp = this.state.questionsOpen
+			temp.push(id)
+			this.setState({questionsOpen: temp})
+		}
+		//console.log(this.state.questionsOpen)
+	}
+
+
 	qPage = (restext) =>
 	{
 		this.setState({text: restext});
@@ -70,13 +87,15 @@ class QuestionPage extends Component {
 					data={this.props.questions}
 					selectedSections = {selectedSections}
 					updateSelectedSections = {this.updateSelectedSections.bind(this)}
+					questionsOpen = {this.state.questionsOpen}
+					
 					/>
 				</div>
 				
 				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
 				
 				<div className="Dashboard">
-					<Dashboard data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)}/>
+					<Dashboard data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)} toggleQuestionBoolean={this.toggleQuestionBoolean}/>
 				</div>
 				
 				<div style={{width: '20%'}}>  </div>

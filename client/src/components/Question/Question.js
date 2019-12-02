@@ -17,7 +17,7 @@ class Question extends Component {
 		 };
 
 	}
-	
+
 	textRes =(text) => {
 		
 		this.setState({text: text})
@@ -40,6 +40,10 @@ class Question extends Component {
 		});
 		
 	}
+
+	toggleQuestionBoolean = (id) =>{
+		this.props.toggleQuestionBoolean(id)
+	}
 	
 	unSave(cond) {if(cond) this.setState({isSaved: false})}
 
@@ -50,15 +54,15 @@ class Question extends Component {
 			<div className="App">	
 				<div className="textBox">
 				
-					<Accordion defaultActiveKey="0">
+					<Accordion defaultActiveKey="0" onClick = {() => this.toggleQuestionBoolean(this.props.id)}>
 						<Card style={{borderRadius: '3px', backgroundColor: '#f8f8f8', border: '.5px solid silver', margin: '1px'}}>
 						
-							<Accordion.Toggle as={Card.Header} className="accHeader" style={{fontSize: '.85rem'}} eventKey="1">
+							<Accordion.Toggle as={Card.Header} className="accHeader" style={{fontSize: '.85rem'}} eventKey="1" >
 								<CheckCircle size='20px' style={{float: 'left', color: 'green', visibility: this.state.isSaved ? 'visible' : 'hidden', display: 'inline', padding: '2px'}}  />
 								{this.props.question}
 							</Accordion.Toggle>
 							
-							<Accordion.Collapse eventKey="1" onExit={this.sendRes.bind(this)}>
+							<Accordion.Collapse eventKey="1"  onExit={this.sendRes.bind(this)}>
 								<Card.Body>
 									<TextBox isTyping={this.unSave.bind(this)} callbackText={this.textRes} resText={this.props.resText} />
 								</Card.Body>

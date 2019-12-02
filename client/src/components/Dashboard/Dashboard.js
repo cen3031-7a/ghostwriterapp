@@ -20,7 +20,7 @@ class Home extends Component {
 		}
 
 	}
-	
+
 	orderUpdate(value)
 	{
 		this.setState ({
@@ -38,7 +38,9 @@ class Home extends Component {
 		
 	}
 
-	
+	toggleQuestionBoolean = (id) =>{
+		this.props.toggleQuestionBoolean(id)
+	}
 	
     render() {
 		
@@ -68,7 +70,7 @@ class Home extends Component {
 							
 							<Accordion.Collapse eventKey="1">
 								<Card.Body>
-									<Section className="SECTION" resData={q} data={data[data.findIndex((e) => e.sectionid === q.sectionid)]} id={q.sectionid} callbackDash={this.parentDash} />
+									<Section className="SECTION" resData={q} data={data[data.findIndex((e) => e.sectionid === q.sectionid)]} id={q.sectionid} callbackDash={this.parentDash} toggleQuestionBoolean = {this.toggleQuestionBoolean} />
 								</Card.Body>
 							</Accordion.Collapse>
 

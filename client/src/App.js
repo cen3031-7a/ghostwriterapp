@@ -13,7 +13,8 @@ class App extends Component {
 		super(props);
 		this.state = 
 		{
-			
+
+			hints: [],
 			data: [],
 			resData: [],
 			intervalIsSet: false,
@@ -61,7 +62,8 @@ class App extends Component {
 			.then((data) => data.json())
 			.then((res) => this.setState({resData: res.timeline}))
 			.then(() => console.log("GOT Res"));
-	  
+		
+		fetch('/api/hints')
 	}
 
 	
@@ -117,9 +119,27 @@ class App extends Component {
 		.then(() => this.getData());
 
 	}
+
+	postHints = (hints) =>{
+		fetch('/api/sections/questions/tips?',{
+			method: 'POST',
+			body: 
+				JSON.stringify({tips: hints}),
+			headers:
+			{
+				'Content-Type': 'application/json'
+			}
+		})
+		.then(function(response)
+		{
+			console.log('posting', body);
+		})
+		.then(() => this.getData());
+	}
 	
 	render() {
-		console.log(this.state.resData)
+		
+
 		if(this.state.hasData)
 		return (
 			<div>
