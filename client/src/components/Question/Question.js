@@ -11,8 +11,8 @@ class Question extends Component {
 		this.state = 
 		{
 			
-			text: this.props.resText.response || '',
-			isSaved: (this.props.resText.response != '') ? true: false
+			text: (this.props.resText !== undefined) ? this.props.resText.response : '',
+			isSaved: (this.props.resText !== undefined && this.props.resText.response !== '') ? true: false
 			
 		 };
 

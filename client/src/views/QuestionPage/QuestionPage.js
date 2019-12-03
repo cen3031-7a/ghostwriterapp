@@ -101,6 +101,7 @@ class QuestionPage extends Component {
 				<div className="toolbar" > 
 					<Toolbar 
 					data={this.props.questions}
+					resData = {this.props.resData}
 					selectedSections = {selectedSections}
 					updateSelectedSections = {this.updateSelectedSections.bind(this)}
 					questionsOpen = {this.state.questionsOpen}
@@ -108,9 +109,7 @@ class QuestionPage extends Component {
 					/>
 				</div>
 				
-				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
-				
-				<div className="Dashboard">
+				<div className="Dashboard" style={{marginLeft: '20%'}}>
 					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)} toggleQuestionBoolean = {this.toggleQuestionBoolean}/>
 				</div>
 				

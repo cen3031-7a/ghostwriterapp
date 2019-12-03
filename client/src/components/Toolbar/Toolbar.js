@@ -9,7 +9,8 @@ class Toolbar extends Component {
 		this.state = {
             listOpen: false,
             hintShowing: false,
-            allHints: this.props.allHints
+            allHints: this.props.allHints,
+            toolbarSections: this.populateToolbarSections()
     		}
 	}
     
@@ -17,6 +18,7 @@ class Toolbar extends Component {
         this.setState(prevState => ({
             listOpen: !prevState.listOpen
         }))
+        console.log(this.state.listOpen)
     }
 
     toggleHint(){
@@ -50,7 +52,7 @@ class Toolbar extends Component {
 	removeSection = (sectionId) =>
 	{
 		let temp = this.props.selectedSections.filter(item => {
-			return item != sectionId
+			return item !== sectionId
         })
         console.log(temp)
 		this.props.updateSelectedSections(temp, sectionId)
@@ -69,20 +71,33 @@ class Toolbar extends Component {
         })
         return temp
     }
+
+    populateToolbarSections = () => {
+        let temp = []
+        let temp2 = this.props.data.map((section) => {
+            return section.sectionid
+        })
+        temp = this.props.data
+        this.props.resData.forEach((section) => {
+            if(!temp2.includes(section.sectionid)){
+                temp.push(section)
+            }
+        })
+        return temp
+    }
     
 
     render(){
         const selectedSections = this.props.selectedSections
         const data = this.props.data 
-        const listOpen = this.state  
+        const listOpen = this.state.listOpen
         const questionsOpen = this.props.questionsOpen
         const questionsOpenIsFilled = !(questionsOpen.length === 0)
         let currentHints = []
         currentHints = this.getCurrentHints()
         let hintChoice = Math.round(Math.random() * currentHints.length)
         let hintChoice2 = Math.round(Math.random() * this.state.allHints.length)
-        console.log(currentHints)
-        
+        console.log(data)
         return(
             <div className = "toolbar-wrapper">
             <div className = "HintButton-wrapper">
@@ -99,7 +114,7 @@ class Toolbar extends Component {
                     
                 </div>
                 {listOpen && <ul className="SelectSection-list">
-                    {data.map((item) => (
+                    {this.state.toolbarSections.map((item) => (
                         <li className="SelectSection-list-item" 
                             key={item.sectionname}
                             onClick = {() => this.setSection(item.sectionid)}>

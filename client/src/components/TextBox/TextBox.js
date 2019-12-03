@@ -10,7 +10,7 @@ class TextBox extends Component {
 	constructor(props) {
 
 		super(props);
-		this.state = {text: (this.props.resText.response || ''), saving: 0};
+		this.state = {text: ((this.props.resText !== undefined) ? this.props.resText.response : ''), saving: 0};
 		this.onChange = this.onChange.bind(this);
 
 	}
@@ -24,9 +24,9 @@ class TextBox extends Component {
 	saveInfo = () =>
 	{
 		
-		if(this.state.saving == 1) this.setState({saving: 2});
+		if(this.state.saving === 1) this.setState({saving: 2});
 		
-		if(this.state.saving == 2)
+		if(this.state.saving === 2)
 		{
 			this.setState({saving: 0});
 			console.log('posted', this.state.text);

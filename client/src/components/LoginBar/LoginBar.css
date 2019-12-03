@@ -1,24 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
+
 .btn-group-vertical > button{
     margin-bottom:30px;
-    border-radius:5px;
+	border-radius:5px;
+	font-size: 140px;
+}
+
+.btn-font
+{
+	font-family: Montserrat, sans-serif;
+	border: 7px;
+
 }
 
 .btn-box
 {
 	position: absolute;
-	top: 17%;
-	left: 25%;
+	top: 20%;
+	left: 20%;
     padding: 1%;
-	padding-top: 10%;
-	padding-right: 5%;
+	padding-top: 7%;
 	padding-left: 5%;
-	padding-bottom: 2%;
+	padding-right: 5%;
+	padding-bottom: 15%;
 	text-align: center;
-	display: block;
-	background-color: #f0f0f0;
+	background-color: #f8f5d6;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 7px;
 	width: auto;
-	height: 60%;
+	float: left;
+}
+
+.button-right
+{	
+	position: relative;
+	top: 7%;
+	left: 1%;
+	right: 2%;
+	border-radius: 3px;
+	background-color: #f4f2c9;
+	border: 2px;
+	border-width: 5px;
+	color: #4488bf;
+	text-align: center;
+	font-size: 17px;
+    font-weight: 500;
+	font-family: Montserrat, sans-serif;
+	padding: 20px;
+	width: 200px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 15px;
 	float: right;
+	display: block;
+}
+
+.button-right:hover {
+	opacity:1;
+	color: #f4f2c9;
+	background: #4488bf;
 }
