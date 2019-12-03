@@ -333,11 +333,11 @@ class AdminPage extends Component {
 
 			var questions = q.questions.map((r, i) => { 
 				return(
-					<Card key={r.questionid} id={r.questionid} sectionid={q.sectionid} style={{margin: '5px', borderRadius: '3px', backgroundColor: '#fafafa', border: '.5px solid silver'}}> 
+					<Card key={r.questionid} id={r.questionid} sectionid={q.sectionid} style={{margin: '5px', borderRadius: '3px', backgroundColor: '#fafafa', border: '.5px solid silver', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}}> 
 						<form onSubmit={this.updateQuestion}>
 						<p style={{width: '98%'}}> 
 							<AlignJustify style={{float: 'left'}} />
-							<input type="submit" style={{margin: '1px', marginLeft: '10px', backgroundColor: '#0275d8', color: 'white', borderRadius: '3px', border: 'none'}} value="Save"></input>  
+							<input type="submit" style={{margin: '1px', marginLeft: '10px', backgroundColor: '#0275d8', color: 'white', borderRadius: '3px', border: 'none', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}} value="Save"></input>  
 							<CheckCircle size='20px' style={{margin: 'auto', color: 'green', visibility: (r.question != '') ? 'visible' : 'hidden', display: 'inline', padding: '2px', marginLeft: '5px'}}  />
 							<X size='20px' style={{float: 'right', color: 'red'}}   onClick={() => this.removeQuestion(q.sectionid, r.questionid)} /> 
 						</p> 
@@ -349,15 +349,15 @@ class AdminPage extends Component {
 
 				return(
 				
-					<Accordion id={q.sectionid} draggable={this.state.dragSections.toString()} defaultActiveKey="0" style={{backgroundColor: 'e0e0e0', width: '75%', margin: 'auto'}} key={q.sectionid}>
-						<Card style={{borderRadius: '3px', backgroundColor: '#fafafa', border: '.5px solid silver'}}>
+					<Accordion id={q.sectionid} draggable={this.state.dragSections.toString()} defaultActiveKey="0" style={{backgroundColor: 'e0e0e0', width: '75%', margin: 'auto', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}} key={q.sectionid}>
+						<Card style={{borderRadius: '3px', backgroundColor: '#fafafa', border: '.5px solid silver', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}}>
 						<div style={{display: 'inline', padding: '5px'}}> 
 							
-							<AlignJustify size='20px' style={{float: 'left', margin: '5px', display: 'inline'}} />
+							<AlignJustify size='20px' style={{float: 'left', margin: '5px', display: 'inline', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}} />
 								
 							<form id={q.sectionid} style={{display: 'inline'}} onSubmit={this.updateSection}>
-								<input type="text" onChange={(event) => event.target.parentNode.parentNode.childNodes[2].style.visibility = 'hidden' } style={{width: '70%'}} defaultValue={data[data.findIndex((e) => e.sectionid === q.sectionid)].sectionname} /> 
-								<input type="submit" style={{margin: '1px', marginLeft: '10px', backgroundColor: '#0275d8', color: 'white', borderRadius: '3px', border: 'none'}} value="Save"></input>  
+								<input type="text" onChange={(event) => event.target.parentNode.parentNode.childNodes[2].style.visibility = 'hidden' } style={{width: '70%', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}} defaultValue={data[data.findIndex((e) => e.sectionid === q.sectionid)].sectionname} /> 
+								<input type="submit" style={{margin: '1px', marginLeft: '10px', backgroundColor: '#0275d8', color: 'white', borderRadius: '3px', border: 'none', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}} value="Save"></input>  
 							</form>
 
 							<CheckCircle size='20px' style={{margin: 'auto', color: 'green', visibility: (data[data.findIndex((e) => e.sectionid === q.sectionid)].sectionname != '') ? 'visible' : 'hidden', display: 'inline', padding: '2px', marginLeft: '5px'}}  />
@@ -389,12 +389,12 @@ class AdminPage extends Component {
 		
 			<div className="App">
 			<Card>
-			<div style={{margin: '2.5%'}}>
+			<div style={{margin: '2.5%', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}}>
 			Home Page Video (Youtube Link): <form onSubmit={this.submitLink}> <input type='text' style={{width:' 50%'}} /> <input type="submit" style={{margin: '1px', marginLeft: '10px', backgroundColor: '#0275d8', color: 'white', borderRadius: '3px', border: 'none'}} value="Save"></input>  </form>
 			</div>
 			</Card>
-			<div>
-				<Button style={{margin: '1%', marginLeft: '10%'}} onClick={this.addSection}>Add Section</Button>
+			<div style={{fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}}>
+				<Button style={{margin: '1%', marginLeft: '10%', fontFamily: 'Montserrat, sans-serif', fontSize: '20px'}} onClick={this.addSection}>Add Section</Button>
 				NOTE: Please save Questions before rearranging them. This is to prevent empty questions from being posted.
 				<div className="section" ref={this.dragSection}>
 					{sectionData}

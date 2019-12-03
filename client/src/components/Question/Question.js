@@ -57,7 +57,7 @@ class Question extends Component {
 					<Accordion defaultActiveKey="0" onClick = {() => this.toggleQuestionBoolean(this.props.id)}>
 						<Card style={{borderRadius: '3px', backgroundColor: '#f8f8f8', border: '.5px solid silver', margin: '1px'}}>
 						
-							<Accordion.Toggle as={Card.Header} className="accHeader" style={{fontSize: '.85rem'}} eventKey="1" >
+							<Accordion.Toggle as={Card.Header} className="accHeader" style={{fontSize: '1rem'}} eventKey="1">
 								<CheckCircle size='20px' style={{float: 'left', color: 'green', visibility: this.state.isSaved ? 'visible' : 'hidden', display: 'inline', padding: '2px'}}  />
 								{this.props.question}
 							</Accordion.Toggle>

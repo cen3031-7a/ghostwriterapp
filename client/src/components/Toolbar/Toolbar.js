@@ -18,7 +18,6 @@ class Toolbar extends Component {
         this.setState(prevState => ({
             listOpen: !prevState.listOpen
         }))
-        console.log(this.state.listOpen)
     }
 
     toggleHint(){
@@ -32,7 +31,6 @@ class Toolbar extends Component {
     }
     
     setSection(sectionid){
-        console.log(this.props.selectedSections)
         if(this.props.selectedSections.includes(sectionid)){
             this.removeSection(sectionid)
         }
@@ -45,7 +43,6 @@ class Toolbar extends Component {
 	{
 		let temp = this.props.selectedSections
 		temp.push(sectionId)
-        console.log(temp)
         this.props.updateSelectedSections(temp, sectionId)
 	}
 
@@ -54,7 +51,6 @@ class Toolbar extends Component {
 		let temp = this.props.selectedSections.filter(item => {
 			return item !== sectionId
         })
-        console.log(temp)
 		this.props.updateSelectedSections(temp, sectionId)
 	}
     
@@ -97,7 +93,6 @@ class Toolbar extends Component {
         currentHints = this.getCurrentHints()
         let hintChoice = Math.round(Math.random() * currentHints.length)
         let hintChoice2 = Math.round(Math.random() * this.state.allHints.length)
-        console.log(data)
         return(
             <div className = "toolbar-wrapper">
             <div className = "HintButton-wrapper">
@@ -107,7 +102,6 @@ class Toolbar extends Component {
                 {this.state.hintShowing && questionsOpenIsFilled ? <p>{currentHints[hintChoice]}</p>: <p></p>}
                 {this.state.hintShowing && <p>{this.state.allHints[hintChoice2]}</p>}
             </div>
-            <br></br>
             <div className="SelectSection-wrapper">
                 <div className="SelectSection-header" onClick = {()=>this.toggleList()}>
                     <b className="SelectSection-header-title">Select Section {listOpen ? <b>^</b>: <b>></b>}</b>
