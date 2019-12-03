@@ -6,6 +6,7 @@ import NotFound from "./views/NotFound";
 import AdminPage from "./views/AdminPage/AdminPage"
 import Login from "./views/Login/Login"
 import Signup from "./views/Signup/Signup"
+import AccountPage from "./views/AccountPage/AccountPage"
 import Header from "./components/Header/Header";
 
 class App extends Component {
@@ -165,6 +166,7 @@ class App extends Component {
 					<Route exact path="/Signup" render={() => <Signup data={this.props.data} />}/>
 					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
 					<Route exact path="/Admin" render={() => <AdminPage data={this.state.data} />}/>
+					<Route exact path="/MyAccount" render={() => <AccountPage data={this.state.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>
@@ -187,6 +189,7 @@ class App extends Component {
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/MyAccount" render={() => <AccountPage data={this.state.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>
