@@ -23,6 +23,7 @@ class App extends Component {
 			intervalIsSet: false,
 			hasData: false,
 			hasOld: false,
+			userid: ''
 
 		 };
 	}
@@ -108,7 +109,7 @@ class App extends Component {
 			.then((body) => this.setState({userid: body.userid}))
 			.then((body) =>console.log(this.state.userid))
 			
-		fetch('/api/users/download/pdf/:4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+		fetch('/api/users/download/pdf?AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
 			
 			method: 'GET',
 			headers:
@@ -118,7 +119,7 @@ class App extends Component {
 			
 		})
 			.then((data) => data.json())
-			.then(function(body)
+			.then((body) =>
 			{
 			console.log(body)
 			});

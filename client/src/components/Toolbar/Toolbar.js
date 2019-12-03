@@ -96,7 +96,7 @@ class Toolbar extends Component {
         return(
             <div className = "toolbar-wrapper">
             <div className = "HintButton-wrapper">
-                <button className="hintButton" onClick = {() => this.toggleHint()}>Show Me a Writing Tip</button>
+                <button className="hintButton" onClick = {() => this.toggleHint()}>Writing Tips</button>
             </div>
             <br className="linebreak"></br>
             <div className = "hintBox">
