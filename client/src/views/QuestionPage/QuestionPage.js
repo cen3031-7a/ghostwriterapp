@@ -115,12 +115,12 @@ class QuestionPage extends Component {
 				
 				<br></br>
 				<div className = "exportButtons-wrapper">
-					<button className = "downloadFree">
+					<button className = "downloadFree" onClick = {() => this.props.printPDF()}>
 						Download Free
 					</button>
 					<br></br>
 					<br></br>
-					<button className = "downloadPaid">
+					<button className = "downloadPaid" onClick = {() => this.props.printPDF()}>
 						Download Paid
 					</button>
 				</div>

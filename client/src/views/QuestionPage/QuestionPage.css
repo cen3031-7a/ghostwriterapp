@@ -28,6 +28,7 @@ body
 	color: #f8f5d6;
 	height: 50%;
 	float: left;
+	margin: auto;
 }
 
 .SelectSection-list > li {
@@ -37,9 +38,10 @@ body
 
 .Dashboard
 {
-	padding-left: 1.5%;
+	padding-left: 5%;
 	width: 60%;
 	float: left;
+	margin: auto;
 }
 
 .downloadFree {
@@ -84,7 +86,9 @@ body
 	position: fixed;
 	float: right;
 	top: 25%;
-	padding: 7%;
+	right: 5%;
+	padding: 10%;
+	margin-left: 20px;
 }
 
 .downloadPaid {

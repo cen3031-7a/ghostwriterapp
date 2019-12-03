@@ -25,7 +25,6 @@ class App extends Component {
 			hasOld: false,
 
 		 };
-
 	}
 	
 	componentDidMount() {
@@ -96,7 +95,34 @@ class App extends Component {
 			.then((res) => this.setState({userInfo: res.accounttype}) );
 	}
 
-	
+	printPDF = () => {
+		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+
+			method: 'GET',
+			headers:
+			{
+				'Authorization': this.state.token
+			}
+		})
+			.then((data) => data.json())
+			.then((body) => this.setState({userid: body.userid}))
+			.then((body) =>console.log(this.state.userid))
+			
+		fetch('/api/users/download/pdf/:4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+			
+			method: 'GET',
+			headers:
+			{
+			'Authorization': this.state.token
+			}
+			
+		})
+			.then((data) => data.json())
+			.then(function(body)
+			{
+			console.log(body)
+			});
+	}
 	
 
   
@@ -163,7 +189,7 @@ class App extends Component {
 				<Switch>
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
-					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} allHints={this.state.allHints}/>}/>
+					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} allHints={this.state.allHints} printPDF = {this.printPDF.bind(this)}/>}/>
 					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
@@ -187,7 +213,7 @@ class App extends Component {
 				<Switch>
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
-					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
+					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} allHints={this.state.allHints} printPDF = {this.printPDF.bind(this)}/>}/>
 					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>

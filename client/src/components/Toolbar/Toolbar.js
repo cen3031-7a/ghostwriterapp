@@ -98,10 +98,12 @@ class Toolbar extends Component {
             <div className = "HintButton-wrapper">
                 <button className="hintButton" onClick = {() => this.toggleHint()}>Show Me a Writing Tip</button>
             </div>
+            <br className="linebreak"></br>
             <div className = "hintBox">
                 {this.state.hintShowing && questionsOpenIsFilled ? <p>{currentHints[hintChoice]}</p>: <p></p>}
                 {this.state.hintShowing && <p>{this.state.allHints[hintChoice2]}</p>}
             </div>
+            <br className="linebreak"></br>
             <div className="SelectSection-wrapper">
                 <div className="SelectSection-header" onClick = {()=>this.toggleList()}>
                     <b className="SelectSection-header-title">Select Section {listOpen ? <b>^</b>: <b>></b>}</b>
