@@ -14,6 +14,10 @@ class Login extends Component {
         this.setState({ [event.target.id]: event.target.value })
     }
 
+    updateToken(token){
+        // call app.js version of this function
+    }
+
     submit(event){
         event.preventDefault()
 
@@ -31,8 +35,8 @@ class Login extends Component {
 				'Content-Type': 'application/json'
             }
         })
-        .then(function(res){return res})
-        .then(function(body){console.log(body)})
+        .then(data => console.log('data', data.json()))
+        .then(res => this.updateToken(res.token))
         // token on the front end
     }
 

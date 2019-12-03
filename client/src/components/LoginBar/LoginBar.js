@@ -19,21 +19,21 @@ class LoginBar extends Component{
                             height="30%"
                             block
                             >
-                            Sign Up / Sign In
+                            Sign Up
                         </Button>
                         &nbsp;&nbsp;&nbsp;
 
 
                         <Button
                             tag={Link}
-                            to="/google"               
+                            to="/Login"               
                             outline color="warning"
                             size="lg"
                             width="20%"
                             height="30%"
                             block
                             >
-                            Login via Google
+                            Login
                         </Button>
 
                         &nbsp;&nbsp;&nbsp;

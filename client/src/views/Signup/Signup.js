@@ -34,7 +34,8 @@ class Signup extends Component {
             body: JSON.stringify(user),
             headers:{'Content-Type': 'application/json'}
         })
-        .then(res => {return res})
+        .then(function(res){return res})
+        .then(function(body){console.log(body)})
     }
 
     render() {
