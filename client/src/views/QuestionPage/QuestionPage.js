@@ -73,9 +73,7 @@ class QuestionPage extends Component {
 					/>
 				</div>
 				
-				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
-				
-				<div className="Dashboard">
+				<div className="Dashboard" style={{marginLeft: '20%'}}>
 					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)}/>
 				</div>
 				
