@@ -72,7 +72,7 @@ class QuestionPage extends Component {
 					updateSelectedSections = {this.updateSelectedSections.bind(this)}
 					/>
 				</div>
-				
+
 				<div className="Dashboard">
 					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)}/>
 				</div>
