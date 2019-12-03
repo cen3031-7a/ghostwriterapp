@@ -7,10 +7,9 @@ class Toolbar extends Component {
 	{
 		super(props);
 		this.state = {
-            data: this.props.data,
             listOpen: false,
             hintShowing: false,
-            selectedSections: this.props.selectedSections
+            allHints: this.props.allHints
     		}
 	}
     
@@ -44,7 +43,6 @@ class Toolbar extends Component {
 	{
 		let temp = this.props.selectedSections
 		temp.push(sectionId)
-        this.setState({selectedSections: temp})
         console.log(temp)
         this.props.updateSelectedSections(temp, sectionId)
 	}
@@ -54,22 +52,45 @@ class Toolbar extends Component {
 		let temp = this.props.selectedSections.filter(item => {
 			return item != sectionId
         })
-        this.setState({selectedSections: temp})
         console.log(temp)
 		this.props.updateSelectedSections(temp, sectionId)
 	}
     
+    getCurrentHints = () => {
+        let temp = []
+        this.props.data.forEach((section) => {
+            section.questions.forEach((question) => {
+                if(this.props.questionsOpen.includes(question.questionid)){
+                    question.tips.forEach((tip) => {
+                        temp.push(tip)
+                    })
+                }
+            })
+        })
+        return temp
+    }
+    
+
     render(){
         const selectedSections = this.props.selectedSections
-        const {data, listOpen} = this.state      
-        console.log(selectedSections)
+        const data = this.props.data 
+        const listOpen = this.state  
+        const questionsOpen = this.props.questionsOpen
+        const questionsOpenIsFilled = !(questionsOpen.length === 0)
+        let currentHints = []
+        currentHints = this.getCurrentHints()
+        let hintChoice = Math.round(Math.random() * currentHints.length)
+        let hintChoice2 = Math.round(Math.random() * this.state.allHints.length)
+        console.log(currentHints)
+        
         return(
             <div className = "toolbar-wrapper">
             <div className = "HintButton-wrapper">
-                <button className="hintButton" onClick = {() => this.toggleHint()}>I Want A Hint</button>
+                <button className="hintButton" onClick = {() => this.toggleHint()}>Show Me a Writing Tip</button>
             </div>
             <div className = "hintBox">
-                {this.state.hintShowing && <p>hi</p>}
+                {this.state.hintShowing && questionsOpenIsFilled ? <p>{currentHints[hintChoice]}</p>: <p></p>}
+                {this.state.hintShowing && <p>{this.state.allHints[hintChoice2]}</p>}
             </div>
             <br></br>
             <div className="SelectSection-wrapper">

@@ -14,15 +14,14 @@ class App extends Component {
 		this.state = 
 		{
 
-			hints: [],
 			data: [],
 			oldData: [],
 			resData: [],
 			userInfo: [],
 			intervalIsSet: false,
 			hasData: false,
-			hasOld: false
-			
+			hasOld: false,
+
 		 };
 
 	}
@@ -31,6 +30,8 @@ class App extends Component {
 		
 		this.getData();
 		
+		
+		
 		if (!this.state.intervalIsSet)
 		{
 		
@@ -38,7 +39,7 @@ class App extends Component {
 			this.setState({ intervalIsSet: interval });
 			
 		}
-	
+		
 	}
 
 	componentWillUnmount() {
@@ -71,16 +72,10 @@ class App extends Component {
 			.then((data) => data.json())
 			.then((res) => this.setState({resData: res.timeline}))
 			.then(() => console.log("GOT Res"));
-<<<<<<< HEAD
-		
-		fetch('/api/hints')
-=======
 	  
 		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10')
 			.then((data) => data.json())
 			.then((res) => this.setState({userInfo: res.accounttype}) );
-	  
->>>>>>> 44b32e7f6b461687203f3ecb1cd4ae457fc3cca2
 	}
 
 	
@@ -137,32 +132,11 @@ class App extends Component {
 
 	}
 
-	postHints = (hints) =>{
-		fetch('/api/sections/questions/tips?',{
-			method: 'POST',
-			body: 
-				JSON.stringify({tips: hints}),
-			headers:
-			{
-				'Content-Type': 'application/json'
-			}
-		})
-		.then(function(response)
-		{
-			console.log('posting', body);
-		})
-		.then(() => this.getData());
-	}
 	
-	render() {
-<<<<<<< HEAD
-		
 
-		if(this.state.hasData)
-=======
+	render() {
 		console.log(this.state.resData)
 		if(this.state.hasData && this.state.hasOld && this.state.userInfo == 'admin')
->>>>>>> 44b32e7f6b461687203f3ecb1cd4ae457fc3cca2
 		return (
 			<div>
 			
@@ -170,10 +144,10 @@ class App extends Component {
 				<Switch>
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
-					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
+					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} allHints={this.state.allHints}/>}/>
+					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Admin" render={() => <AdminPage data={this.state.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
@@ -194,9 +168,9 @@ class App extends Component {
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
 					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
+					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>

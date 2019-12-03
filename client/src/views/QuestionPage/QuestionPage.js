@@ -15,7 +15,8 @@ class QuestionPage extends Component {
 			selectedSections: this.props.resData.map((id) => {
 				return id.sectionid;
 			}),
-			questionsOpen: []
+			questionsOpen: [],
+			allHints: []
 		};
 
 	}
@@ -70,12 +71,27 @@ class QuestionPage extends Component {
 		this.render()
 	}
 
+	populateHints = () => {
+        let temp = []
+        this.props.questions.forEach((section) =>{
+            section.questions.forEach((question) => {
+                question.tips.forEach(tips => {
+                    if(!temp.includes(tips)){
+                        temp.push(tips)
+                    }
+                })
+            })
+		})
+		return temp
+    }
+
 	
     render() {
 		const selectedSections = this.props.resData.map((id) => {
 			return id.sectionid;
 		})
-		console.log(selectedSections)
+		const allHints = this.populateHints()
+		console.log(allHints)
 		return(
 			
 			<div className="App">
@@ -88,18 +104,14 @@ class QuestionPage extends Component {
 					selectedSections = {selectedSections}
 					updateSelectedSections = {this.updateSelectedSections.bind(this)}
 					questionsOpen = {this.state.questionsOpen}
-					
+					allHints= {allHints}
 					/>
 				</div>
 				
 				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
 				
 				<div className="Dashboard">
-<<<<<<< HEAD
-					<Dashboard data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)} toggleQuestionBoolean={this.toggleQuestionBoolean}/>
-=======
-					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)}/>
->>>>>>> 44b32e7f6b461687203f3ecb1cd4ae457fc3cca2
+					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)} toggleQuestionBoolean = {this.toggleQuestionBoolean}/>
 				</div>
 				
 				<div style={{width: '20%'}}>  </div>
