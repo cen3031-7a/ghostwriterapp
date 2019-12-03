@@ -10,7 +10,7 @@ class TextBox extends Component {
 	constructor(props) {
 
 		super(props);
-		this.state = {text: (this.props.resText.response || ''), saving: 0};
+		this.state = {text: ((this.props.resText != undefined) ? this.props.resText.response : ''), saving: 0};
 		this.onChange = this.onChange.bind(this);
 
 	}

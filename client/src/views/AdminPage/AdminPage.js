@@ -172,6 +172,37 @@ class AdminPage extends Component {
 
 	}
 	
+	submitLink = (event) =>
+	{
+		
+		event.preventDefault();
+		this.postYoutube(event.target.parentNode.childNodes[1].childNodes[1].value);
+		
+	}
+	
+	postYoutube = (ytlink) => {
+		
+		console.log(ytlink)
+		fetch('/api/publicdata/front-page-youtube-link?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+			
+			method: 'POST',
+			body: 
+				JSON.stringify({link: ytlink}),
+			headers: 
+			{
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
+            }
+			
+		})
+		.then(function(response)
+		{
+			return response;
+		});
+
+	}
+	
+	
 	
 	deleteSection = (ID) => {
 		
@@ -359,7 +390,7 @@ class AdminPage extends Component {
 			<div className="App">
 			<Card>
 			<div style={{margin: '2.5%'}}>
-			Home Page Video (Youtube Link): <input type='text' style={{width:' 50%'}} /> <input type="submit" style={{margin: '1px', marginLeft: '10px', backgroundColor: '#0275d8', color: 'white', borderRadius: '3px', border: 'none'}} value="Save"></input>  
+			Home Page Video (Youtube Link): <form onSubmit={this.submitLink}> <input type='text' style={{width:' 50%'}} /> <input type="submit" style={{margin: '1px', marginLeft: '10px', backgroundColor: '#0275d8', color: 'white', borderRadius: '3px', border: 'none'}} value="Save"></input>  </form>
 			</div>
 			</Card>
 			<div>

@@ -11,28 +11,27 @@ class Home extends Component {
     render() {
 		
 		return(
-			
-			<div className="App">
-				<div>
-				<Link id="question-link" to="/Questions">
-					<button style={{width: '100px', height: '100px'}}>CLICK FOR QUESTIONS </button>
-				</Link>
-				</div>
-				<div class="container">
-					<div class="row">
-						<div class="col-10">
+
+			 <div className="App">
+
+				<div className="container">
+					 <div className="row">
+						<div className="col-9">
 							<div classname="HomeVideo">
 								<HomeVideo />	
-							</div>
-						</div>
-						<div class="col">
+			 				</div> 
+						</div> 
+						<div className="col">
 							<LoginBar />
 						</div>
-					</div>
-					<div class="row">
+						
+					 </div> 
+
+				</div>  
+				<div class="row">
 						<About />
 					</div>
-				</div>
+				
 			</div>
 
 		);
