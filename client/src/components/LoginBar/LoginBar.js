@@ -14,21 +14,6 @@ class LoginBar extends Component{
                         <SignModal className="button-right"/>
                         &nbsp;
 
-
-                        <Button
-                            className="btn-font"
-                            tag={Link}
-                            to="/google"               
-                            outline color="danger"
-                            size="md"
-                            width="auto"
-                            height="auto"
-                            >
-                            Login
-                        </Button>
-
-                        &nbsp;
-
                         <Button
                             className="btn-font"
                             tag={Link}
