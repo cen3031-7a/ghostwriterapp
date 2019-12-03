@@ -152,7 +152,7 @@ class App extends Component {
 	}
 	
 	render() {
-		if(this.state.hasData && this.state.hasOld && this.state.userInfo == 'admin')
+		if(this.state.hasData && this.state.hasOld && this.state.userInfo === 'admin')
 		return (
 			<div>
 			

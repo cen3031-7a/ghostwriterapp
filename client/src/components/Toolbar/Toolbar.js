@@ -52,7 +52,7 @@ class Toolbar extends Component {
 	removeSection = (sectionId) =>
 	{
 		let temp = this.props.selectedSections.filter(item => {
-			return item != sectionId
+			return item !== sectionId
         })
         this.setState({selectedSections: temp})
         console.log(temp)

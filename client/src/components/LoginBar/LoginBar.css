@@ -2,14 +2,14 @@
 
 .btn-group-vertical > button{
     margin-bottom:30px;
-    border-radius:5px;
+	border-radius:5px;
+	font-size: 140px;
 }
 
 .btn-font
 {
 	font-family: Montserrat, sans-serif;
 	border: 7px;
-
 
 }
 
@@ -24,8 +24,7 @@
 	padding-right: 5%;
 	padding-bottom: 15%;
 	text-align: center;
-	display: block;
-	background-color: #f0f0f0;
+	background-color: #f8f5d6;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 7px;
 	width: auto;
