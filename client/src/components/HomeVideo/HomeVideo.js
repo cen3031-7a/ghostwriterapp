@@ -1,26 +1,40 @@
 import React, {Component} from 'react';
-import ReactPlayer from 'react-player';
 import './HomeVideo.css';
 
 class HomeVideo extends Component{
+  constructor(props) {
+
+		super(props);
+		this.state = 
+		{	
+			urlData: '',
+			url: ''		 
+		};
+	}
+
+  componentDidMount() {
+		
+    this.getURL();
+
+  }
+
+  getURL = () => {
+		fetch('/api/publicdata/front-page-youtube-link')
+      .then((urlData) => urlData.json())
+      .then((res) => this.setState({url: res.link}))
+	  }
 
     render() {
-
         return (
-          
-          <div className="player-wrapper">
-            <ReactPlayer 
-              classname='react-player'
-              url='https://www.youtube.com/watch?v=d-NYK3dlgzA'
-              controls={true}
-              width="800px"
-              height="450px"
-              config={{
-                youtube: {
-                  playerVars: { playsinline: 1 }
-                }}} 
-              />
-          </div>
+          <div className="videoWrapper">
+            <iframe 
+            width="800" 
+            height="450" 
+            src={this.state.url}
+            frameborder="0" 
+            allowfullscreen>
+            </iframe>
+        </div>
         );
       }
 }
