@@ -14,11 +14,29 @@ class QuestionPage extends Component {
 			block: [],
 			selectedSections: this.props.resData.map((id) => {
 				return id.sectionid;
-			})
+			}),
+			questionsOpen: [],
+			allHints: []
 		};
 
 	}
 	
+	toggleQuestionBoolean = (id) => {
+		if(this.state.questionsOpen.includes(id)){
+			let temp = this.state.questionsOpen.filter(questionid=>{
+				return id !== questionid
+			})
+			this.setState({questionsOpen: temp})
+		}
+		else{
+			let temp = this.state.questionsOpen
+			temp.push(id)
+			this.setState({questionsOpen: temp})
+		}
+		//console.log(this.state.questionsOpen)
+	}
+
+
 	qPage = (restext) =>
 	{
 		this.setState({text: restext});
@@ -53,12 +71,27 @@ class QuestionPage extends Component {
 		this.render()
 	}
 
+	populateHints = () => {
+        let temp = []
+        this.props.questions.forEach((section) =>{
+            section.questions.forEach((question) => {
+                question.tips.forEach(tips => {
+                    if(!temp.includes(tips)){
+                        temp.push(tips)
+                    }
+                })
+            })
+		})
+		return temp
+    }
+
 	
     render() {
 		const selectedSections = this.props.resData.map((id) => {
 			return id.sectionid;
 		})
-		console.log(selectedSections)
+		const allHints = this.populateHints()
+		console.log(allHints)
 		return(
 			
 			<div className="App">
@@ -68,23 +101,26 @@ class QuestionPage extends Component {
 				<div className="toolbar" > 
 					<Toolbar 
 					data={this.props.questions}
+					resData = {this.props.resData}
 					selectedSections = {selectedSections}
 					updateSelectedSections = {this.updateSelectedSections.bind(this)}
+					questionsOpen = {this.state.questionsOpen}
+					allHints= {allHints}
 					/>
 				</div>
 
 				<div className="Dashboard">
-					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)}/>
+					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)} toggleQuestionBoolean = {this.toggleQuestionBoolean}/>
 				</div>
 				
 				<br></br>
 				<div className = "exportButtons-wrapper">
-					<button className = "downloadFree">
+					<button className = "downloadFree" onClick = {() => this.props.printPDF()}>
 						Download Free
 					</button>
 					<br></br>
 					<br></br>
-					<button className = "downloadPaid">
+					<button className = "downloadPaid" onClick = {() => this.props.printPDF()}>
 						Download Paid
 					</button>
 				</div>
