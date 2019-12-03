@@ -31,15 +31,15 @@ class Login extends Component {
 				'Content-Type': 'application/json'
             }
         })
-        .then(res => res.status(200).redirect("/Questions"))
-
+        .then(function(res){return res})
+        .then(function(body){console.log(body)})
         // token on the front end
     }
 
     render() {
         return(
         <div>
-            <form>                
+            <form onSubmit={this.submit.bind(this)}>                
                 <input
                 id="email"
                 placeholder="Email"
@@ -52,7 +52,7 @@ class Login extends Component {
                 type="password"
                 onChange={this.update.bind(this)}/>
 
-                <button type="submit" onSubmit={this.submit.bind(this)}></button>
+                <button type="submit"></button>
             </form>
         </div>
         )

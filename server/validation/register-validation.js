@@ -1,5 +1,6 @@
 // Form validation
 const validator = require("validator");
+      isEmpty = require("is-empty");
 
 module.exports.validUser = (user) => {
     var err_list = {}
@@ -16,7 +17,7 @@ module.exports.validUser = (user) => {
         err_list.empty_password = "Need both password fields"
     }
 
-    if(!validator.equals(data.password, data.confirm_password)){
+    if(!validator.equals(user.password, user.confirm_password)){
         err_list.not_matching = "Passwords dont match"
     }
 

@@ -21,11 +21,11 @@ class Signup extends Component {
         event.preventDefault()
 
         const user = {
-            firstname: "bob",
-            lastname: "this.state.lastname",
-            email: "this.state.email",
-            password: "this.state.password",
-            confirm_password: "this.state.confirm_password"
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            email: this.state.email,
+            password: this.state.password,
+            confirm_password: this.state.confirm_password
         }
 
         fetch('/auth/Signup', 
@@ -35,13 +35,12 @@ class Signup extends Component {
             headers:{'Content-Type': 'application/json'}
         })
         .then(res => {return res})
-        .then(body => {console.log(body)})
     }
 
     render() {
         return(
         <div>
-            <form>
+            <form onSubmit={this.submit.bind(this)}>
                 <input
                 id="firstname"
                 placeholder="First Name"
@@ -72,7 +71,7 @@ class Signup extends Component {
                 type="password"
                 onChange={this.update.bind(this)}/>
 
-                <button type="submit" onSubmit={this.submit.bind(this)}></button>
+                <button type="submit"></button>
             </form>
         </div>
         )

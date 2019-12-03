@@ -11,7 +11,7 @@ var userSchema = new Schema({
   lastname: String,
   email: String,
   age: Number,
-  passowrd: String,
+  password: String,
   accounttype: String,
   timeline: [{
     sectionid: String,
@@ -31,10 +31,9 @@ var userSchema = new Schema({
 var User = mongoose.model('User', userSchema);
 
 userSchema.pre('save', next => {
-  // hash password and create the userid
-  User.userid = uuidv4();
-
+  // hash password
   bcrypt.genSalt(10, (err, salt) => {
+    if (err) throw err;
     bcrypt.hash(User.password, salt, (err, hash) => {
       if (err) throw err;
       User.password = hash;
