@@ -112,7 +112,7 @@ class Toolbar extends Component {
                         <li className="SelectSection-list-item" 
                             key={item.sectionname}
                             onClick = {() => this.setSection(item.sectionid)}>
-                            {item.sectionname} {selectedSections.includes(item.sectionid) ? <b>*</b> : <b></b>}
+                            {item.sectionname} {selectedSections.includes(item.sectionid) ? <b>✓</b> : <b></b>}
                         </li>
                     ))}
                 </ul>}

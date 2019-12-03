@@ -12,7 +12,8 @@
 	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #f8f5d6;
+  text-shadow:0px 1px 0px #f8f5d6;
+  padding-top: 10px;
 }
 .SelectSection-wrapper:hover {
 	background:linear-gradient(to bottom, #eeeacb 5%, #eeeacb 100%);
@@ -39,7 +40,6 @@
     border: 1px solid #cdcdcd;
     border-color: rgba(0, 0, 0, .15);
     font-size: 16px;
-    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
 }
 .hintButton {
 	box-shadow:inset 0px 1px 0px 0px #f8f5d6;
