@@ -118,10 +118,16 @@ class App extends Component {
 			}
 			
 		})
-			.then((data) => data.json())
-			.then((body) =>
+			.then((data) => data.blob())
+			.then((blob) =>
 			{
-			console.log(body)
+				const url = window.URL.createObjectURL(new Blob([blob]));
+				const link = document.createElement('a');
+				link.href = url;
+				link.setAttribute('download', `myStory.pdf`);
+				document.body.appendChild(link);
+				link.click();
+				link.parentNode.removeChild(link);
 			});
 	}
 	
