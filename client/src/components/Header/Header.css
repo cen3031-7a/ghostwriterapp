@@ -1,15 +1,5 @@
 @import "../About/About.css";
-@import "../HomeVideo/HomeVideo.css";
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
-
-.player-wrapper {
-    position: relative;
-}
-
-.about-box {
-    position: relative;
-    margin-bottom: 50px;
-}
 
 .header {
     position: relative;
@@ -22,7 +12,7 @@
 }
 
 .header-logo {
-    margin-top: 0px;
+    margin-top: 5px;
     text-align: center;
     font-size: 40px;
     font-family: 'Indie Flower', cursive;
@@ -111,6 +101,8 @@
     border-color: #193349;
     border-width: 1px;
     margin-right: 5px;
+    height: 125%;
+    transform: translate(0px, -5px);
 }
 
 #sign-out:hover, #sign-in:hover {

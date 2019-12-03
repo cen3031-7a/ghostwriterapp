@@ -17,7 +17,7 @@ class LoginBar extends Component{
                             tag={Link}
                             to="/google"               
                             outline color="danger"
-                            size="md"
+                            size="lg"
                             width="auto"
                             height="auto"
                             >
@@ -31,7 +31,7 @@ class LoginBar extends Component{
                             tag={Link}
                             to="/facebook"
                             outline color="primary"
-                            size="md"
+                            size="lg"
                             width="auto"
                             height="auto"
                             >

@@ -13,7 +13,7 @@ class Header extends Component {
                 <div className='header-logo'>
 
                     <a href='/'>
-                        <img src='http://www.transparentpng.com/thumb/ghost/qImZcm-ghost-comictransparent-picture.png' id="logo-image" />
+                        <img src='http://www.transparentpng.com/thumb/ghost/qImZcm-ghost-comictransparent-picture.png' id="logo-image" alt=""/>
                     </a>
 
                     <Link id="logo-link" to="/">
