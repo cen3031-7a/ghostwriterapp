@@ -72,14 +72,11 @@ class QuestionPage extends Component {
 					updateSelectedSections = {this.updateSelectedSections.bind(this)}
 					/>
 				</div>
-				
-				<div style={{width: '20%', float: 'left'}}> <p></p>  </div>
-				
+
 				<div className="Dashboard">
 					<Dashboard oldData={this.props.oldData} data={this.props.questions} resData={this.props.resData} callbackQPage={this.qPage} callbackOrder={this.secOrder.bind(this)}/>
 				</div>
 				
-				<div style={{width: '20%'}}>  </div>
 				<br></br>
 				<div className = "exportButtons-wrapper">
 					<button className = "downloadFree">

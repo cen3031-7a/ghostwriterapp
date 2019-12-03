@@ -8,18 +8,16 @@ import SignModal from '../../components/SignModal/SignModal.js';
 class LoginBar extends Component{
     render(){
         return(
-
             <div className="btn-box">
                 <ButtonGroup vertical>
                         <SignModal className="button-right"/>
                         &nbsp;
-
                         <Button
                             className="btn-font"
                             tag={Link}
-                            to="/auth/facebook"
-                            outline color="primary"
-                            size="md"
+                            to="/google"               
+                            outline color="danger"
+                            size="lg"
                             width="auto"
                             height="auto"
                             >
@@ -33,14 +31,15 @@ class LoginBar extends Component{
                             to="/auth/google"
                             outline color="primary"
                             size="lg"
-                            block
+                            width="auto"
+                            height="auto"
                             >
                             Login via Google
                         </Button>
 
                 </ButtonGroup>
 
-            </div>
+                </div>
         )
     }
 }
