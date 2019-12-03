@@ -1,22 +1,19 @@
-* {
-	font-family: Montserrat, sans-serif;
-}
-
 html
 {
 	overflow-y: scroll;
-	font-family: Montserrat, sans-serif;
-	font-size: 110%;
 }
 
 body
 {
 	background-color: #e0e0e0;
-	font-family: Montserrat, sans-serif;
 }
 
 .accHeader.card-header {
-	font-size: 20px;
+	font-size: 24px;
+}
+
+.card > div {
+	line-height: 1.5;
 }
 
 .toolbar
@@ -31,6 +28,11 @@ body
 	color: #f8f5d6;
 	height: 50%;
 	float: left;
+}
+
+.SelectSection-list > li {
+	margin: 5px;
+	line-height: 1.5;
 }
 
 .Dashboard

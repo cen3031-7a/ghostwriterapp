@@ -5,9 +5,9 @@ html
 	overflow-y: scroll;
 }
 
-.App > div {
-	font-family: Montserrat, sans-serif;
-	font-size: 20px;
+.card {
+	background-color: transparent;
+	border-color: transparent;
 }
 
 .section
