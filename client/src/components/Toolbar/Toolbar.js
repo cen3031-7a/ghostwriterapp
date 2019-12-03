@@ -7,10 +7,10 @@ class Toolbar extends Component {
 	{
 		super(props);
 		this.state = {
-            data: this.props.data,
             listOpen: false,
             hintShowing: false,
-            selectedSections: this.props.selectedSections
+            allHints: this.props.allHints,
+            toolbarSections: this.populateToolbarSections()
     		}
 	}
     
@@ -31,7 +31,6 @@ class Toolbar extends Component {
     }
     
     setSection(sectionid){
-        console.log(this.props.selectedSections)
         if(this.props.selectedSections.includes(sectionid)){
             this.removeSection(sectionid)
         }
@@ -44,8 +43,6 @@ class Toolbar extends Component {
 	{
 		let temp = this.props.selectedSections
 		temp.push(sectionId)
-        this.setState({selectedSections: temp})
-        console.log(temp)
         this.props.updateSelectedSections(temp, sectionId)
 	}
 
@@ -54,31 +51,66 @@ class Toolbar extends Component {
 		let temp = this.props.selectedSections.filter(item => {
 			return item !== sectionId
         })
-        this.setState({selectedSections: temp})
-        console.log(temp)
 		this.props.updateSelectedSections(temp, sectionId)
 	}
     
+    getCurrentHints = () => {
+        let temp = []
+        this.props.data.forEach((section) => {
+            section.questions.forEach((question) => {
+                if(this.props.questionsOpen.includes(question.questionid)){
+                    question.tips.forEach((tip) => {
+                        temp.push(tip)
+                    })
+                }
+            })
+        })
+        return temp
+    }
+
+    populateToolbarSections = () => {
+        let temp = []
+        let temp2 = this.props.data.map((section) => {
+            return section.sectionid
+        })
+        temp = this.props.data
+        this.props.resData.forEach((section) => {
+            if(!temp2.includes(section.sectionid)){
+                temp.push(section)
+            }
+        })
+        return temp
+    }
+    
+
     render(){
         const selectedSections = this.props.selectedSections
-        const {data, listOpen} = this.state      
-        console.log(selectedSections)
+        const data = this.props.data 
+        const listOpen = this.state.listOpen
+        const questionsOpen = this.props.questionsOpen
+        const questionsOpenIsFilled = !(questionsOpen.length === 0)
+        let currentHints = []
+        currentHints = this.getCurrentHints()
+        let hintChoice = Math.round(Math.random() * currentHints.length)
+        let hintChoice2 = Math.round(Math.random() * this.state.allHints.length)
         return(
             <div className = "toolbar-wrapper">
             <div className = "HintButton-wrapper">
-                <button className="hintButton" onClick = {() => this.toggleHint()}>I Want A Hint</button>
+                <button className="hintButton" onClick = {() => this.toggleHint()}>Writing Tips</button>
             </div>
+            <br className="linebreak"></br>
             <div className = "hintBox">
-                {this.state.hintShowing && <p>hi</p>}
+                {this.state.hintShowing && questionsOpenIsFilled ? <p>{currentHints[hintChoice]}</p>: <p></p>}
+                {this.state.hintShowing && <p>{this.state.allHints[hintChoice2]}</p>}
             </div>
-            <br></br>
+            <br className="linebreak"></br>
             <div className="SelectSection-wrapper">
                 <div className="SelectSection-header" onClick = {()=>this.toggleList()}>
                     <b className="SelectSection-header-title">Select Section {listOpen ? <b>^</b>: <b>></b>}</b>
                     
                 </div>
                 {listOpen && <ul className="SelectSection-list">
-                    {data.map((item) => (
+                    {this.state.toolbarSections.map((item) => (
                         <li className="SelectSection-list-item" 
                             key={item.sectionname}
                             onClick = {() => this.setSection(item.sectionid)}>

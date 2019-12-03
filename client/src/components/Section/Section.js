@@ -7,6 +7,18 @@ class Section extends Component {
 		this.props.callbackDash(text);
 	}
 
+	questionIsClosed = (questionId) =>{
+		this.props.questionIsClosed(questionId)
+	}
+
+	questionIsOpen = (questionId) =>{
+		this.props.questionIsOpen(questionId)
+	}
+
+	toggleQuestionBoolean = (id) =>{
+		this.props.toggleQuestionBoolean(id)
+	}
+
     render() {
 
 		const data = this.props.data;
@@ -21,7 +33,8 @@ class Section extends Component {
 						resText={resData.questions[i]} 
 						key={q.questionid} 
 						id={q.questionid} 
-						callbackQ={this.textRes} 
+						callbackQ={this.textRes}
+						toggleQuestionBoolean = {this.toggleQuestionBoolean} 
 					/>
 				)
 			})

@@ -14,7 +14,7 @@ class App extends Component {
 		super(props);
 		this.state = 
 		{
-			
+
 			data: [],
 			oldData: [],
 			resData: [],
@@ -22,15 +22,17 @@ class App extends Component {
 			token: '',
 			intervalIsSet: false,
 			hasData: false,
-			hasOld: false
-			
-		 };
+			hasOld: false,
+			userid: ''
 
+		 };
 	}
 	
 	componentDidMount() {
 		
 		this.getData();
+		
+		
 		
 		if (!this.state.intervalIsSet)
 		{
@@ -39,7 +41,7 @@ class App extends Component {
 			this.setState({ intervalIsSet: interval });
 			
 		}
-	
+		
 	}
 
 	componentWillUnmount() {
@@ -92,10 +94,42 @@ class App extends Component {
 		})
 			.then((data) => data.json())
 			.then((res) => this.setState({userInfo: res.accounttype}) );
-	  
 	}
 
-	
+	printPDF = () => {
+		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+
+			method: 'GET',
+			headers:
+			{
+				'Authorization': this.state.token
+			}
+		})
+			.then((data) => data.json())
+			.then((body) => this.setState({userid: body.userid}))
+			.then((body) =>console.log(this.state.userid))
+			
+		fetch('/api/users/download/pdf?AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
+			
+			method: 'GET',
+			headers:
+			{
+			'Authorization': this.state.token
+			}
+			
+		})
+			.then((data) => data.blob())
+			.then((blob) =>
+			{
+				const url = window.URL.createObjectURL(new Blob([blob]));
+				const link = document.createElement('a');
+				link.href = url;
+				link.setAttribute('download', `myStory.pdf`);
+				document.body.appendChild(link);
+				link.click();
+				link.parentNode.removeChild(link);
+			});
+	}
 	
 
   
@@ -150,7 +184,9 @@ class App extends Component {
 		.then(() => this.getData());
 
 	}
+
 	
+
 	render() {
 		if(this.state.hasData && this.state.hasOld && this.state.userInfo === 'admin')
 		return (
@@ -160,10 +196,10 @@ class App extends Component {
 				<Switch>
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
-					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
+					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} allHints={this.state.allHints} printPDF = {this.printPDF.bind(this)}/>}/>
+					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Admin" render={() => <AdminPage data={this.state.data} />}/>
 					<Route exact path="/MyAccount" render={() => <AccountPage data={this.state.data} />}/>
 					<Route exact path="/">
@@ -184,7 +220,8 @@ class App extends Component {
 				<Switch>
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
-					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
+					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} allHints={this.state.allHints} printPDF = {this.printPDF.bind(this)}/>}/>
+					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
