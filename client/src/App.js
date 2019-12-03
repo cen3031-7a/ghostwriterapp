@@ -20,6 +20,7 @@ class App extends Component {
 			oldData: [],
 			resData: [],
 			userInfo: [],
+			token: '',
 			intervalIsSet: false,
 			hasData: false,
 			hasOld: false
@@ -68,12 +69,28 @@ class App extends Component {
 			.then(() => console.log("GOT OLD DATA"))
 			.then(() => this.setState({hasOld: true}));
 		  
-		fetch('/api/users/timeline?include_sections=true&include_questions=true&AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8')
+		fetch('/api/users/timeline?include_sections=true&include_questions=true&AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
+			
+			method: 'GET',
+			headers:
+			{
+				'Authorization': this.state.token
+			}
+			
+		})
 			.then((data) => data.json())
 			.then((res) => this.setState({resData: res.timeline}))
 			.then(() => console.log("GOT Res"));
 	  
-		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10')
+		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
+			
+			method: 'GET',
+			headers:
+			{
+				'Authorization': this.state.token
+			}
+			
+		})
 			.then((data) => data.json())
 			.then((res) => this.setState({userInfo: res.accounttype}) );
 	  
@@ -92,7 +109,8 @@ class App extends Component {
 				JSON.stringify({questionid: text.id, response: text.text}),
 			headers:
 			{
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
 			}
 			
 		})
@@ -117,7 +135,8 @@ class App extends Component {
 				JSON.stringify({timeline: order}),
 			headers: 
 			{
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': this.state.token
             }
 			
 		})
@@ -134,7 +153,6 @@ class App extends Component {
 	}
 	
 	render() {
-		console.log(this.state.resData)
 		if(this.state.hasData && this.state.hasOld && this.state.userInfo == 'admin')
 		return (
 			<div>
@@ -143,9 +161,9 @@ class App extends Component {
 				<Switch>
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
-					<Route exact path="/Questions" render={() => <QuestionPage questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
 					<Route exact path="/Login" render={() => <Login data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <Signup data={this.props.data} />}/>
+					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
 					<Route exact path="/Admin" render={() => <AdminPage data={this.state.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
@@ -166,9 +184,9 @@ class App extends Component {
 				
 					<Route exact path="/Home" render={() => <Home data={this.state.data} />}/>
 					<Route exact path="/Questions" render={() => <QuestionPage oldData={this.state.oldData} questions={this.state.data} resData={this.state.resData} response={this.postText.bind(this)} secOrder={this.postOrder.bind(this)} />}/>
-					<Route exact path="/Login" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/Signup" render={() => <NotFound data={this.props.data} />}/>
-					<Route exact path="/Loginfb" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/google" render={() => <NotFound data={this.props.data} />}/>
+					<Route exact path="/facebook" render={() => <NotFound data={this.props.data} />}/>
 					<Route exact path="/">
 						<Redirect to="/Home" />
 					</Route>

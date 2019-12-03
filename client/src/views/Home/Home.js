@@ -11,25 +11,27 @@ class Home extends Component {
     render() {
 		
 		return(
-			
-			<div className="App">
 
-				<div class="container">
-					<div class="row">
-						<div class="col-10">
+			 <div className="App">
+
+				<div className="container">
+					 <div className="row">
+						<div className="col-9">
 							<div classname="HomeVideo">
-								&nbsp;&nbsp;&nbsp;
 								<HomeVideo />	
-							</div>
-						</div>
-						<div >
+			 				</div> 
+						</div> 
+						<div className="col">
 							<LoginBar />
 						</div>
-					</div>
-					<div class="row">
+						
+					 </div> 
+
+				</div>  
+				<div class="row">
 						<About />
 					</div>
-				</div>
+				
 			</div>
 
 		);

@@ -13,22 +13,27 @@ class LoginBar extends Component{
                         <Button
                             tag={Link}
                             to="/Signup"
-                            outline color="danger"
+                            outline color="dark"
                             size="lg"
+                            width="20%"
+                            height="30%"
                             block
                             >
-                            Sign Up
+                            Sign Up / Sign In
                         </Button>
                         &nbsp;&nbsp;&nbsp;
 
+
                         <Button
                             tag={Link}
-                            to="/Login"               
-                            outline color="dark"
+                            to="/google"               
+                            outline color="warning"
                             size="lg"
+                            width="20%"
+                            height="30%"
                             block
                             >
-                            Login
+                            Login via Google
                         </Button>
 
                         &nbsp;&nbsp;&nbsp;
@@ -38,6 +43,8 @@ class LoginBar extends Component{
                             to="/auth/facebook"
                             outline color="primary"
                             size="lg"
+                            width="20%"
+                            height="30%"
                             block
                             >
                             Login via Facebook
