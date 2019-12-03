@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import  './LoginBar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup } from 'reactstrap'
+import SignModal from '../../components/SignModal/SignModal.js';
 
 class LoginBar extends Component{
     render(){
@@ -10,42 +11,32 @@ class LoginBar extends Component{
 
             <div className="btn-box">
                 <ButtonGroup vertical>
-                        <Button
-                            tag={Link}
-                            to="/Signup"
-                            outline color="dark"
-                            size="lg"
-                            width="20%"
-                            height="30%"
-                            block
-                            >
-                            Sign Up / Sign In
-                        </Button>
-                        &nbsp;&nbsp;&nbsp;
+                        <SignModal className="button-right"/>
+                        &nbsp;
 
 
                         <Button
+                            className="btn-font"
                             tag={Link}
                             to="/google"               
-                            outline color="warning"
-                            size="lg"
-                            width="20%"
-                            height="30%"
-                            block
+                            outline color="danger"
+                            size="md"
+                            width="auto"
+                            height="auto"
                             >
                             Login via Google
                         </Button>
 
-                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;
 
                         <Button
+                            className="btn-font"
                             tag={Link}
                             to="/facebook"
                             outline color="primary"
-                            size="lg"
-                            width="20%"
-                            height="30%"
-                            block
+                            size="md"
+                            width="auto"
+                            height="auto"
                             >
                             Login via Facebook
                         </Button>
