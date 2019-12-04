@@ -6,7 +6,8 @@ class Login extends Component {
         super()
         this.state={
             email: "",
-            password: ""
+            password: "",
+            token: ""
         }
     }
 
@@ -15,6 +16,7 @@ class Login extends Component {
     }
 
     updateToken(token){
+        this.props.updateToken(this.state.token);
         // call app.js version of this function
     }
 
@@ -35,8 +37,9 @@ class Login extends Component {
 				'Content-Type': 'application/json'
             }
         })
-        .then(data => console.log('data', data.json()))
-        .then(res => this.updateToken(res.token))
+        .then(data => {return data.json()})
+        .then(res => {this.setState({token: res.token})})
+        .then(() => {this.updateToken()})
         // token on the front end
     }
 

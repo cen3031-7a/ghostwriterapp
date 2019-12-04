@@ -73,7 +73,7 @@ exports.login = (req, res) => {
                         jwt.sign(load, key, { expiresIn: 7889232 }, // expires in 3 months
                             (err, token) => {
                                 if(err) res.status(400)
-                                res.status(200).json({token: token})
+                                res.status(200).json({token: 'Bearer ' + token})
                             })
                     }
                     else{
