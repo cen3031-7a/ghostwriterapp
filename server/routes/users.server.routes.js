@@ -9,8 +9,6 @@ var users = require('../controllers/users.server.controller.js'),
     express = require('express'), //refers to Express the middleware helper for Node.js
     router = express.Router(); //refers to the Router() function in Express the middleware helper for Node.js
 
-
-
 router.use('/', users.userFromId);
 router.use('/download/docx', users.verifyDOCXPermission);
 router.param('userId', users.replaceUserForID);
@@ -43,6 +41,7 @@ router.route('/download/docx/:userId')
   .get(users.genDOCX);
 
 
-
+router.route('/upgrade-paid')
+  .post(users.upgradePaid);
 
 module.exports = router;

@@ -429,3 +429,12 @@ exports.replaceUserForID = function(req, res, next, id) {
     }
   });
 };
+
+exports.upgradePaid = function(req, res){
+  User.findOneAndUpdate({userid: req.user.userid},{accounttype: req.accounttype}, (err, user) => {
+    if(err){
+      res.status(400).send(err)
+    }
+    res.status(200)
+  })
+}
