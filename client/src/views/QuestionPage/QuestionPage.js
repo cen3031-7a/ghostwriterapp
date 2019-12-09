@@ -38,7 +38,7 @@ class QuestionPage extends Component {
 		//console.log(this.state.questionsOpen)
 	}
 
-
+	//Callback to POST response text in App.js
 	qPage = (restext) =>
 	{
 		this.setState({text: restext});
@@ -70,6 +70,8 @@ class QuestionPage extends Component {
 
 	//calls the post order from app.js to make the api call to the database to update the users "timeline"
 	//"timeline" is the users data of sections questions and responses
+	
+	//Callback to POST section order
 	secOrder = (order) => 
 	{	
 		console.log(order)
@@ -94,6 +96,7 @@ class QuestionPage extends Component {
     }
 
 	
+	//Render Dashboard with Toolbar, Questions/Sections, and Download buttons
     render() {
 		const selectedSections = this.props.resData.map((id) => {
 			return id.sectionid;

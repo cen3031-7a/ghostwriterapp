@@ -23,6 +23,7 @@ class AdminPage extends Component {
 		}
 	}
 	
+	//Get data upon creation
 	componentDidMount() {
 		
 		this.getData();
@@ -31,6 +32,9 @@ class AdminPage extends Component {
 	
 	getData = () => {
 		
+		//fetch requests written with help from https://medium.com/@maison.moa/create-a-simple-weather-app-using-node-js-express-and-react-54105094647a
+		
+		//Fetch sections and questions
 		fetch('/api/sections?include_questions=true&AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
 			
 			method: 'GET',
@@ -62,7 +66,8 @@ class AdminPage extends Component {
 		});
 	  
 	} 
-		
+	
+	//Post new question order
 	postQOrder = (order, ID) => {
 		
 		fetch('/api/sections/' + ID + '/questions?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
@@ -90,6 +95,7 @@ class AdminPage extends Component {
 
 	}
 	
+	//Post questions
 	postQText = (order, ID) => {
 		
 		fetch('/api/sections/' + ID + '/questions?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
@@ -117,6 +123,7 @@ class AdminPage extends Component {
 
 	}
 	
+	//Post section names
 	postSection = (order, ID) => {
 		
 		fetch('/api/sections/' + ID + '?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
@@ -144,6 +151,7 @@ class AdminPage extends Component {
 
 	}
 	
+	//Post section order
 	postSecOrder = (order) => {
 		
 		console.log('posting!!', order)
@@ -172,6 +180,7 @@ class AdminPage extends Component {
 
 	}
 	
+	//Post YT link
 	submitLink = (event) =>
 	{
 		
@@ -203,7 +212,7 @@ class AdminPage extends Component {
 	}
 	
 	
-	
+	//Delete current section
 	deleteSection = (ID) => {
 		
 		fetch('/api/sections/' + ID + '?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
@@ -229,6 +238,7 @@ class AdminPage extends Component {
 		
 	}
 	
+	//Add new section
 	addSection = () =>
 	{
 
@@ -246,6 +256,7 @@ class AdminPage extends Component {
 		
 	}
 	
+	//Add new question
 	addQuestion = (sectionID) =>
 	{
 		
@@ -263,6 +274,7 @@ class AdminPage extends Component {
 		
 	}
 	
+	//Remove current question
 	removeQuestion = (sID, qID) =>
 	{
 		
@@ -280,6 +292,7 @@ class AdminPage extends Component {
 		
 	}
 	
+	//Update section name
 	updateSection = (event) =>
 	{
 		
@@ -297,6 +310,7 @@ class AdminPage extends Component {
 		
 	}
 	
+	//Update question name
 	updateQuestion = (event) =>
 	{
 		
@@ -325,9 +339,12 @@ class AdminPage extends Component {
     render() {
 		
 		const data = this.state.data;
+		//Sections are only draggable if all are collapsed
 		if(this.state.dragSections) console.log('draggable')
 			else console.log('not')
 		
+		//Render groups of questions within a section, and render all sections as sectionData. Use bootstrap Cards for questions, and bootstrap Accordion for collapsible sections
+		//Uses forms to submit admin responses
 		sectionData = data
 			.map((q, i) => {
 
@@ -407,6 +424,7 @@ class AdminPage extends Component {
 		
     }
   
+	//react-dragula for draggable questions, keeps track of and POSTs order, if question is saved!
 	dragQuestion = (componentBackingInstance) => {
 	  
 		if (componentBackingInstance) {
@@ -436,6 +454,7 @@ class AdminPage extends Component {
 		
 	};
 	
+	//react-dragula for sections, keeps track of and POSTs order, if sections are collapsed
 	dragSection = (componentBackingInstance) => {
 
 		if (componentBackingInstance) {
