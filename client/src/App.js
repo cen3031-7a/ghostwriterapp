@@ -103,6 +103,8 @@ class App extends Component {
 			.then((res) => this.setState({userInfo: res.accounttype}) );
 	}
 
+	//method to print out pdf
+	//go to users routes in server folder to see where fetch is coming from
 	printPDF = () => {
 		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
 
