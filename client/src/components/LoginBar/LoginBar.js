@@ -6,11 +6,16 @@ import { Button, ButtonGroup } from 'reactstrap'
 import SignModal from '../../components/SignModal/SignModal.js';
 
 class LoginBar extends Component{
+
     render(){
+        //renders the login bar containing sign up/sign in button
+        //and social media login buttons
+        //sign up/sign in button component from SignModal.js (react-modal-login)
         return(
             <div className="btn-box">
                 <ButtonGroup vertical>
                         <SignModal className="button-right"/>
+
                         &nbsp;
                         <Button
                             className="btn-font"

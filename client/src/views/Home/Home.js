@@ -7,7 +7,8 @@ import About from '../../components/About/About.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Home extends Component {
-
+	//main home page 
+	//renders welcome video, sign up/in bar, and about section
     render() {
 		
 		return(

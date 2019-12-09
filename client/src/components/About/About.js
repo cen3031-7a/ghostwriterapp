@@ -3,6 +3,8 @@ import  './About.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class About extends Component{
+
+    //renders simple text about box
     render(){
         return(
             <div className="about-box">
