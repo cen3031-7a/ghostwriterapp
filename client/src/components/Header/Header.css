@@ -1,0 +1,111 @@
+@import "../About/About.css";
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+
+.header {
+    position: relative;
+    width: 100%;
+    top: 0;
+    height: 150px;
+    padding: 3px;
+    background-image: linear-gradient(to top,#77766400, #f4f2c9);
+    font-family: Montserrat, sans-serif;
+}
+
+.header-logo {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Indie Flower', cursive;
+}
+
+#logo-link {
+    color: #5783a7;
+}
+
+#logo-link:hover {
+    background: linear-gradient(to bottom,#4d7ba1, #0b1824);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#logo-image {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+#logo-image:hover {
+    width: 40px;
+    height: 40px;
+    margin-top: 0px;
+    margin-right: 5px;
+    transform: translate(-5px, -3px);
+    margin-bottom: -5px;
+}
+
+.navbar {
+    display: block;
+    height:75px;
+}
+
+#pages {
+    display: inline-flex;
+    justify-content: flex-start;
+    padding: auto;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+#homepage {
+    margin-left: 10px;
+    color: #5783a7;;
+}
+
+#questionpage {
+    margin-left: 50px;
+    color: #5783a7;
+}
+
+#homepage:hover, #questionpage:hover {
+    background: linear-gradient(to bottom,#1e3446, #0b1824);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#account {
+    float: right;
+    display: inline-flex;
+    justify-content: flex-end;
+    padding: auto;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+#account-link {
+    margin-right: 15px;
+    color: #5783a7;
+}
+
+#account-link:hover {
+    background: linear-gradient(to bottom,#1e3446, #0b1824);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#sign-out, #sign-in {
+    color: black;
+    background-color: #8cbbe2;
+    border-color: #193349;
+    border-width: 1px;
+    margin-right: 5px;
+    height: 125%;
+    transform: translate(0px, -5px);
+}
+
+#sign-out:hover, #sign-in:hover {
+    background-color: #4e8abb;
+}
+
