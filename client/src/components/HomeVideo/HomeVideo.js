@@ -12,12 +12,14 @@ class HomeVideo extends Component{
 		};
 	}
 
+  //Get url of video
   componentDidMount() {
 		
     this.getURL();
 
   }
 
+	//Fetch url link from database
   getURL = () => {
 		fetch('/api/publicdata/front-page-youtube-link')
       .then((urlData) => urlData.json())
@@ -26,6 +28,8 @@ class HomeVideo extends Component{
 
     render() {
         return (
+          //wrapper class that makes home video responsive
+          //uses iframe for embedded video, using link set in state from Mongo
           <div className="videoWrapper">
             <iframe 
             width="800" 

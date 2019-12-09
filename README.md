@@ -13,6 +13,7 @@ You can find a demo of GhostWriter online at [http://ghostwriter-7a.herokuapp.co
 * [react-dragula](https://github.com/bevacqua/react-dragula)
 * [react-feather](https://github.com/feathericons/react-feather)
 * [react-quill](https://github.com/zenoamaro/react-quill)
+* [react-modal-login](https://github.com/thebeaverhead/react-modal-login)
 
 ## Features
 Homepage:

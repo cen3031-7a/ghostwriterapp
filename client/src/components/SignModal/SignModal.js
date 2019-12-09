@@ -4,6 +4,9 @@ import ReactModalLogin from 'react-modal-login';
 
 class SignModal extends Component {
 
+  //code tweaked from :
+  //https://github.com/thebeaverhead/react-modal-login/blob/master/demo/es/samples/Sample.js
+
   constructor(props) {
     super(props);
 
@@ -22,7 +25,9 @@ class SignModal extends Component {
 
   }
 
-
+  //upon pressing sign in, sets user input to state for email, password, etc.
+  //if nothing is entered in either email or password, sends an error
+  //otherwise the state is set and login success
   onLogin() {
     console.log('__onLogin__');
     this.setState({email: document.querySelector('#email').value});
@@ -42,6 +47,9 @@ class SignModal extends Component {
     }
   }
 
+  //upon pressing sign up, sets user input to state for email, password, etc.
+  //if any fields are empty, or password confirmation doesn't match, sends an error
+  //otherwise the state is set and login success
   onRegister() {
     console.log('__onRegister__');
     // console.log('login: ' + document.querySelector('#login').value);
@@ -73,6 +81,7 @@ class SignModal extends Component {
     }
   }
 
+  //sets state to make login pop up visible
   openModal(initialTab) {
     this.setState({
       initialTab: initialTab
@@ -83,6 +92,7 @@ class SignModal extends Component {
     });
   }
 
+  //upon login success, closes pop up and sets method of log in
   onLoginSuccess(method, response) {
 
     this.closeModal();
@@ -92,6 +102,7 @@ class SignModal extends Component {
     })
   }
 
+  //upon login fail, keeps pop up open and gives error 
   onLoginFail(method, response) {
 
     this.setState({
@@ -112,12 +123,14 @@ class SignModal extends Component {
     })
   }
 
+  //error state after changing tabs for sign in/up
   afterTabsChange() {
     this.setState({
       error: null,
     });
   }
 
+  //sets state to make login pop up not visible
   closeModal() {
     this.setState({
       showModal: false,
@@ -126,16 +139,18 @@ class SignModal extends Component {
   }
 
   render() {
-
+    
     const loggedIn = this.state.loggedIn;
 
     const isLoading = this.state.loading;
 
+    //renders the main button that triggers the pop up
+    //default states for pop up are set, fill in fields for user
+    //are defined (email, password, name, etc.)
     return (
       <div>
 
         <button
-        //   className="btn btn-outline-secondary btn-lg"
         className="button-right"
           onClick={() => this.openModal('login')}
         >

@@ -17,26 +17,29 @@ class AccountPage extends Component{
 		};
     }
     
+    //gets user data
     componentDidMount() {
 		
         this.getUserAcc();
     
       }
 
-getUserAcc = () => {
-    fetch('/api/users/info')
-    .then((uInfo) => uInfo.json())
-    .then((res) => this.setState(
-        {
-        first: res.firstname, 
-        last: res.lastname, 
-        email: res.email,
-        age: res.age, 
-        accType: res.accounttype
-         }
-         ))
-}
+    //fetches each user info from Mongo
+    getUserAcc = () => {
+        fetch('/api/users/info')
+        .then((uInfo) => uInfo.json())
+        .then((res) => this.setState(
+            {
+                first: res.firstname, 
+                last: res.lastname, 
+                email: res.email,
+                age: res.age, 
+                accType: res.accounttype
+            }
+            ))
+    }
 
+    //renders account page displaying user info
     render(){
         return(
             <div className="acc-box">
