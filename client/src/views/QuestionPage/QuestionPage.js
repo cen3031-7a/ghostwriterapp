@@ -36,7 +36,7 @@ class QuestionPage extends Component {
 		//console.log(this.state.questionsOpen)
 	}
 
-
+	//Callback to POST response text in App.js
 	qPage = (restext) =>
 	{
 		this.setState({text: restext});
@@ -64,6 +64,8 @@ class QuestionPage extends Component {
 			this.props.secOrder(temp)
 		}
 	}
+	
+	//Callback to POST section order
 	secOrder = (order) => 
 	{	
 		console.log(order)
@@ -86,6 +88,7 @@ class QuestionPage extends Component {
     }
 
 	
+	//Render Dashboard with Toolbar, Questions/Sections, and Download buttons
     render() {
 		const selectedSections = this.props.resData.map((id) => {
 			return id.sectionid;

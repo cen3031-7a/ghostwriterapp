@@ -28,6 +28,7 @@ class App extends Component {
 		 };
 	}
 	
+	//Fetch data upon render
 	componentDidMount() {
 		
 		this.getData();
@@ -44,6 +45,7 @@ class App extends Component {
 		
 	}
 
+	//Stop data fetching interval upon close
 	componentWillUnmount() {
 	  
 		if (this.state.intervalIsSet)
@@ -56,20 +58,24 @@ class App extends Component {
 	
 	}
   
+	//Fetch statements written with help from https://medium.com/@maison.moa/create-a-simple-weather-app-using-node-js-express-and-react-54105094647a
 	getData = () => {
 	  
+		//Fetch sections and questions
 		fetch('/api/sections?include_questions=true')
 			.then((data) => data.json())
 			.then((res) => this.setState({data: res.sections}))
 			.then(() => console.log("GOT DATA"))
 			.then(() => this.setState({hasData: true}));
-			
+		
+		//Fetch deleted sections/questions
 		fetch('/api/sections?include_questions=true&showDeleted=true')
 			.then((data) => data.json())
 			.then((res) => this.setState({oldData: res.sections}))
 			.then(() => console.log("GOT OLD DATA"))
 			.then(() => this.setState({hasOld: true}));
-		  
+		 
+		 //Fetch user's responses
 		fetch('/api/users/timeline?include_sections=true&include_questions=true&AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
 			
 			method: 'GET',
@@ -83,6 +89,7 @@ class App extends Component {
 			.then((res) => this.setState({resData: res.timeline}))
 			.then(() => console.log("GOT Res"));
 	  
+		//Fetch user information
 		fetch('/api/users/info?AuthID=4c57b17d-a91f-4b75-a10b-17460bfa1a10', {
 			
 			method: 'GET',
@@ -132,7 +139,7 @@ class App extends Component {
 	}
 	
 
-  
+	//POST user responses
 	postText = (text) => {
 	  
 		fetch('/api/users/question/response?AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
@@ -159,6 +166,7 @@ class App extends Component {
 	 
 	}
   
+	//Post user's section order
 	postOrder = (order) => {
 		
 		fetch('/api/users/timeline?AuthID=edc620fe-1003-4da6-846f-a4abee80fbd8', {
@@ -186,7 +194,7 @@ class App extends Component {
 	}
 
 	
-
+	//Additional routes available depending on whether user is admin or not
 	render() {
 		if(this.state.hasData && this.state.hasOld && this.state.userInfo === 'admin')
 		return (

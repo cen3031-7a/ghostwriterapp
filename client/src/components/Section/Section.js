@@ -3,6 +3,7 @@ import Question from '../../components/Question/Question';
 
 class Section extends Component {
 
+	//Callback to App.js to POST text
 	textRes = (text) => {
 		this.props.callbackDash(text);
 	}
@@ -24,7 +25,7 @@ class Section extends Component {
 		const data = this.props.data;
 		const resData = this.props.resData;
 		
-
+		//Render Questions in section
 		const questionData = data.questions
 			.map((q, i) => {
 				return(

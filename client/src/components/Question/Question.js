@@ -10,7 +10,7 @@ class Question extends Component {
 		super(props);
 		this.state = 
 		{
-			
+			//Store whether user has response and if so store response
 			text: (this.props.resText !== undefined) ? this.props.resText.response : '',
 			isSaved: (this.props.resText !== undefined && this.props.resText.response !== '') ? true: false
 			
@@ -18,6 +18,7 @@ class Question extends Component {
 
 	}
 
+	//Set current text state and send response to server
 	textRes =(text) => {
 		
 		this.setState({text: text})
@@ -25,6 +26,7 @@ class Question extends Component {
 		
 	}
 	
+	//Callback function to App.js to post to server
 	sendRes() {
 
 		var id = this.props.id;
@@ -49,6 +51,7 @@ class Question extends Component {
 
     render() {
 
+		//Render bootstrap accordion box with question TextBox, icons, and question text
 		return(
 		
 			<div className="App">	
