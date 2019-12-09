@@ -56,12 +56,28 @@ Admin Page:
 
 ## Connect the Database
 In order to connect the database to the backend, you need to provide a Mongo connection URI. You can get your Mongo connection string from the database software you are using. If using Atlas, for example, you can click on Clusters->Connect->Application->Node.js to get a connection string that will look like `mongodb+srv://<username>:<password>@cluster0-xxxxx.mongodb.net/example?retryWrites=true&w=majority`. Replace `<username>` and `<password>` with your Mongo database user's credentials. Once you have your string, depending on your deployment, you can use one of the following options to connect your database.
+
+## Passport requirements and other keys
+In addition, to be able to use the passports methods for authentication (gogole jwt facebook), and sessions such as express sessions, you need to go the developer portals for facebook and google to generate your credentials for your application to then be able to use those methods of authentication. for the sessions and jwt, just create a secret of your own and make sure you have it in the proper section of the `config.js` as shown in the next section.
+
 ### Local File
 Create a file in `/ghostwriterapp/server/config/` called `config.js`. Put the following in the file:
 ```
 module.exports = {
     db: {
         uri: 'mongodb+srv://<username>:<password>@cluster0-xxxxx.mongodb.net/example?retryWrites=true&w=majority'
+    },
+    facebook: {
+        appid: YOUR_APPID_HERE,
+        clientsecret: YOUR_CLIENTSECRET_HERE
+    },
+    google: {
+        clientid: YOUR_CLIENTID_HERE,
+        clientsecret: YOUR_CLIENTSECRET_HERE
+    },
+    secrets: {
+        session: YOUR_SECRET_HERE,
+        jwt_secret: YOUR_SECRET_HERE
     }
 };
 ```
