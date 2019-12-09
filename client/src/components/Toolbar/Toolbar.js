@@ -14,22 +14,27 @@ class Toolbar extends Component {
     		}
 	}
     
+    //toggles on the click of the select sections toolbar header whether the dropdown is open or closed
     toggleList(){
         this.setState(prevState => ({
             listOpen: !prevState.listOpen
         }))
     }
 
+    //toggles on the click of the hint button whether there is a hint showing or not
     toggleHint(){
         this.setState(prevState =>({
             hintShowing: !prevState.hintShowing
         }))
     }
 
+    //not yet implemented but will toggle the dropdown to close on a click outside of the dropdown
     handleClickOutside(){
         this.setState({listOpen: false})
     }
     
+
+    //called on the click of an item in the dropdown checks whether or not it is a selected section then calls the appropriate method
     setSection(sectionid){
         if(this.props.selectedSections.includes(sectionid)){
             this.removeSection(sectionid)
@@ -39,6 +44,7 @@ class Toolbar extends Component {
         }
     }
 
+    //called by setSection method; adds the section id of the newly selected section to an array and passes it up to questions page where it is sent futher to the database
     addSection = (sectionId) =>
 	{
 		let temp = this.props.selectedSections
@@ -46,6 +52,7 @@ class Toolbar extends Component {
         this.props.updateSelectedSections(temp, sectionId)
 	}
 
+    //called by setSection method; removes the section id of the newly selected section to an array and passes it up to questions page where it is sent futher to the database
 	removeSection = (sectionId) =>
 	{
 		let temp = this.props.selectedSections.filter(item => {
@@ -54,6 +61,7 @@ class Toolbar extends Component {
 		this.props.updateSelectedSections(temp, sectionId)
 	}
     
+    //on the render of this component this method is called to check the questionids in the questionsOpen array and return an array with the hints associated with those questions
     getCurrentHints = () => {
         let temp = []
         this.props.data.forEach((section) => {
@@ -68,6 +76,8 @@ class Toolbar extends Component {
         return temp
     }
 
+    //this method is a check if the admin has deleted a section available it will no longer appear in the data array
+    //however if the section is still in the users "resData" it will still appear until the user deletes that section then it will no longer be available
     populateToolbarSections = () => {
         let temp = []
         let temp2 = this.props.data.map((section) => {
@@ -77,8 +87,10 @@ class Toolbar extends Component {
         this.props.resData.forEach((section) => {
             if(!temp2.includes(section.sectionid)){
                 temp.push(section)
+                console.log(temp)
             }
         })
+        console.log(temp2)
         return temp
     }
     

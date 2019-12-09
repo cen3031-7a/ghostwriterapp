@@ -21,6 +21,7 @@ class Dashboard extends Component {
 
 	}
 
+	//Set state of question order, and callback to POST order to Mongo
 	orderUpdate(value)
 	{
 		this.setState ({
@@ -31,6 +32,7 @@ class Dashboard extends Component {
 
 	}
 	
+	//Callback to POST responses to Mongo
 	parentDash = (text) =>
 	{
 
@@ -52,6 +54,7 @@ class Dashboard extends Component {
 		if(resData.length === 0) this.state.empty = true
 		else this.state.empty = false
 		
+		//Render sections with bootstrap Accordion box, Section component filled with questions, icons, etc.
 		sectionData = resData
 			.map((q, i) => {	
 
@@ -81,6 +84,7 @@ class Dashboard extends Component {
 				
 			})
 		
+		//Render sections, and make 'draggable'
 		return(
 		
 			<div className="App">
@@ -99,6 +103,7 @@ class Dashboard extends Component {
 		
     }
   
+	//react-dragula allows for draggable sections - order is kept track of and then POSTed to Mongo
 	dragBox = (componentBackingInstance) => {
 	  
 		if (componentBackingInstance) {

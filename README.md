@@ -10,6 +10,9 @@ You can find a demo of GhostWriter online at [http://ghostwriter-7a.herokuapp.co
 * Express
 * [officegen](https://github.com/Ziv-Barber/officegen)
 * [PDFKit](https://github.com/foliojs/pdfkit)
+* [react-dragula](https://github.com/bevacqua/react-dragula)
+* [react-feather](https://github.com/feathericons/react-feather)
+* [react-quill](https://github.com/zenoamaro/react-quill)
 
 ## Features
 Homepage:

@@ -21,6 +21,8 @@ class QuestionPage extends Component {
 
 	}
 	
+	//callback when question is clicked to add it to toggle it in the array of questions that are open
+	//array is populated with the question ids that are open
 	toggleQuestionBoolean = (id) => {
 		if(this.state.questionsOpen.includes(id)){
 			let temp = this.state.questionsOpen.filter(questionid=>{
@@ -36,13 +38,14 @@ class QuestionPage extends Component {
 		//console.log(this.state.questionsOpen)
 	}
 
-
+	//Callback to POST response text in App.js
 	qPage = (restext) =>
 	{
 		this.setState({text: restext});
 		this.props.response(restext);
 	}
 
+	//callback from toolbar to update the array of selected sections that will appear in the dashboard
 	updateSelectedSections = (arg, sectionId) =>{
 		console.log(arg.length)
 		console.log(this.props.resData)
@@ -64,6 +67,11 @@ class QuestionPage extends Component {
 			this.props.secOrder(temp)
 		}
 	}
+
+	//calls the post order from app.js to make the api call to the database to update the users "timeline"
+	//"timeline" is the users data of sections questions and responses
+	
+	//Callback to POST section order
 	secOrder = (order) => 
 	{	
 		console.log(order)
@@ -71,6 +79,8 @@ class QuestionPage extends Component {
 		this.render()
 	}
 
+
+	//when no questions are selected the writing tips button will randomly select from the list of all available hints, this method populates that array
 	populateHints = () => {
         let temp = []
         this.props.questions.forEach((section) =>{
@@ -86,6 +96,7 @@ class QuestionPage extends Component {
     }
 
 	
+	//Render Dashboard with Toolbar, Questions/Sections, and Download buttons
     render() {
 		const selectedSections = this.props.resData.map((id) => {
 			return id.sectionid;

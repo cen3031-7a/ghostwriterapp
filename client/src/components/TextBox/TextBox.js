@@ -21,6 +21,7 @@ class TextBox extends Component {
 			
 		}
 	
+	//Front-end autosaving, checks and updates status every 5 seconds between: typing, not typing, and currently saved
 	saveInfo = () =>
 	{
 		
@@ -35,6 +36,7 @@ class TextBox extends Component {
 		
 	}
 
+	//On type, set state to typing, set text value
 	onChange(value) {
 		
 		this.setState({ text: value });
@@ -45,6 +47,7 @@ class TextBox extends Component {
 
 	render() {
 
+		//Render ReactQuill rich text box
 		return (
 			<div className="innerTextBox">
 			
