@@ -1,79 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-This project contains an example project board meant to showcase how one can be used. The issues posted to it are not real issues.
+# GhostWriterApp
+## Live
+You can find a demo of GhostWriter online at [http://ghostwriter-7a.herokuapp.com/](http://ghostwriter-7a.herokuapp.com/)
 
-#### _**IMPORTANT NOTE**_ - 
-This project does not have a mongoDB connection setup. For:
-- local development: create a config file (make sure to name it config.js) in the config folder, which exports your db.uri connection. An example is provided, config/config.example.js. This file will be ignored by git so your db credentials will be kept safe when the app is deployed.
-- production: Since the config file is not pushed when you deploy your app, you must specifiy your db uri in heorku. Set the uri in heroku as specified in [this](https://devcenter.heroku.com/articles/config-vars) resource. Make sure you name the environement variable "DB_URI".
+## Libraries and Tools Used
+* Node.js
+* React
+* Bootstrap
+* MongoDB
+* Express
+* [officegen](https://github.com/Ziv-Barber/officegen)
+* [PDFKit](https://github.com/foliojs/pdfkit)
 
-## Getting Started
-This repository aims to assist you in beginning work on a MERN stack application with a solid file structure as a foundation. To get started make a copy of this template repo for your project teams.
+## Features
+Homepage:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/homepage.png)
+Sign Up:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/signup.png)
+Login:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/login.png)
+My Account:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/myaccount.png)
+Timeline Page:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/questions.png)
+Question Editor:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/questioneditor.png)
+More Questions:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/questions2.png)
+Writing Tip:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/writingtip.png)
+Download PDF:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/downloadpdf.png)
+Download DOCX:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/downloaddocx.png)
+Admin Page:
+![](https://github.com/cen3031-7a/ghostwriterapp/raw/master/img/adminpage.png)
 
-Since this project will hold both the client application and the server application there will be node modules in two different places. First run `npm install` from the root. After this you will run `npm run-script install-all` from the root. From now on run this command anytime you want to install all modules again. This is a script we have defined in package.json .
+## Run the App
+### Locally
+1. Download or clone the repository.
+2. In the root directory of the project, run `npm install`
+3. After that finishes, run `npm install all`
+4. Connect the database
+5. Run `npm run-script dev` to launch the server
 
-This app can be deployed directly to heroku since there is a script defined in package.json which will automatically handle building and deploying the app. For more information on deploying to heroku reference the extra resources at the bottom of this file. 
-
-## File structure
-#### `client` - Holds the client application
-- #### `public` - This holds all of our static files
-- #### `src`
-    - #### `assets` - This folder holds assets such as images, docs, and fonts
-    - #### `components` - This folder holds all of the different components that will make up our views
-    - #### `views` - These represent a unique page on the website i.e. Home or About. These are still normal react components.
-    - #### `App.js` - This is what renders all of our browser routes and different views
-    - #### `index.js` - This is what renders the react app by rendering App.js, should not change
-- #### `package.json` - Defines npm behaviors and packages for the client
-#### `server` - Holds the server application
-- #### `config` - This holds our configuration files, like mongoDB uri
-- #### `controllers` - These hold all of the callback functions that each route will call
-- #### `models` - This holds all of our data models
-- #### `routes` - This holds all of our HTTP to URL path associations for each unique url
-- #### `tests` - This holds all of our server tests that we have defined
-- #### `server.js` - Defines npm behaviors and packages for the client
-#### `package.json` - Defines npm behaviors like the scripts defined in the next section of the README
-#### `.gitignore` - Tells git which files to ignore
-#### `README` - This file!
-
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run-script dev`
-
-Runs both the client app and the server app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
-
-### `npm run-script client`
-
-Runs just the client app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
-
-
-### `npm run-script server`
-
-Runs just the server in development mode.<br>
+### Heroku
+1. In your GitHub account, fork the repository.
+2. Create a new app in Heroku
+3. Select Deploy->GitHub
+4. Select your account and find the cloned repository
+5. Click Search, then connect
+6. Connect the database with the Environment Variable method
+7. Return to the Deploy tab and select Deploy Branch
+8. Click Open App to see the deployed website
 
 
-### `npm run build`
+## Connect the Database
+In order to connect the database to the backend, you need to provide a Mongo connection URI. You can get your Mongo connection string from the database software you are using. If using Atlas, for example, you can click on Clusters->Connect->Application->Node.js to get a connection string that will look like `mongodb+srv://<username>:<password>@cluster0-xxxxx.mongodb.net/example?retryWrites=true&w=majority`. Replace `<username>` and `<password>` with your Mongo database user's credentials. Once you have your string, depending on your deployment, you can use one of the following options to connect your database.
+### Local File
+Create a file in `/ghostwriterapp/server/config/` called `config.js`. Put the following in the file:
+```
+module.exports = {
+    db: {
+        uri: 'mongodb+srv://<username>:<password>@cluster0-xxxxx.mongodb.net/example?retryWrites=true&w=majority'
+    }
+};
+```
+Save the file and launch the server.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Environment Variable
+If an environment variable is found, it will be used before a local file. If you know how to use environment variables, you can use one for a local installation. The process varies depending on your setup. If you are using Heroku for deployment, you can set one as described below.
+1. Configure your app at https://dashboard.heroku.com/apps/xxxxx
+2. Select Settings->Revel Config Vars
+3. For `Key` type `DB_URI`
+4. For `Value` type your connection string
+5. Save and launch
 
-If deploying to heroku this does not need to be run since it is handled by the heroku-postbuild script<br>
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn how to setup a local MongoDB instance for testing, check out how to [Connect to MongoDB](https://docs.mongodb.com/guides/server/drivers/).
-
-To learn how to deploy a full-stack web app to heroku, check out [this great guide](https://daveceddia.com/deploy-react-express-app-heroku/).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The connection string will be loaded when the application starts.
