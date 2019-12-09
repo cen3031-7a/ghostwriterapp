@@ -13,12 +13,14 @@ class Signup extends Component {
         }
     }
 
+    // updates a given state based on the id ex: event.target.id = "firstname", event.target.value = "Bob"
     update(event){
         this.setState({ [event.target.id]: event.target.value })
     }
 
+    // grabs all the login details and sends request, and on response, just returns it
     submit(event){
-        event.preventDefault()
+        event.preventDefault() // prevent refresh important
 
         const user = {
             firstname: this.state.firstname,
@@ -41,7 +43,7 @@ class Signup extends Component {
     render() {
         return(
         <div>
-            <form onSubmit={this.submit.bind(this)}>
+            <form onSubmit={this.submit.bind(this)}> {/*Form has to have the submission bind or will not work*/}
                 <input
                 id="firstname"
                 placeholder="First Name"

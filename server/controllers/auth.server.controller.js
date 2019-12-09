@@ -8,7 +8,7 @@ var bcrypt = require('bcryptjs'),
     log_validation = require('../validation/login-validation');
 
 
-// deals with registration
+// Registration:
 exports.register = (req, res) => {
     // checks if there are any errors and if so send them out
     const {errs, isValid} = reg_validation.validUser(req.body)
@@ -17,6 +17,7 @@ exports.register = (req, res) => {
         return res.status(400).json(errs)
     }
 
+    // sees if the user exists, if not saves user with hashed passsword and uuid userid (look at user.model for uuid generation)
     User.findOne({email: req.body.email})
         .then(user => {
             if(user){
@@ -50,14 +51,16 @@ exports.register = (req, res) => {
 
 }
 
-// deals with login
+// Login: 
 exports.login = (req, res) => {
+    // checks if there is a proper login attempt (password and proper email)
     const {errs, isValid} = log_validation.validUser(req.body)
     
     if(!isValid){
         return res.status(400).json(errs)
     }
 
+    // tries to find a user, if not error, if yes then check the user pasword and if thats good creates token 
     User.findOne({email: req.body.email})
         .then(user => {
             if(!user){

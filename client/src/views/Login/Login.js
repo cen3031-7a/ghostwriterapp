@@ -11,15 +11,17 @@ class Login extends Component {
         }
     }
 
+    // updates a given state based on the id ex: event.target.id = "firstname", event.target.value = "Bob"
     update(event){
         this.setState({ [event.target.id]: event.target.value })
     }
 
+    // returns the token from login to app.js to be used for auth on all routes that need it
     updateToken(token){
         this.props.updateToken(this.state.token);
-        // call app.js version of this function
     }
 
+    // submit the login info and on return takes the token from the response and brings it app.js
     submit(event){
         event.preventDefault()
 
@@ -46,7 +48,7 @@ class Login extends Component {
     render() {
         return(
         <div>
-            <form onSubmit={this.submit.bind(this)}>                
+            <form onSubmit={this.submit.bind(this)}> {/* Submit has to be in the form or will not work */}             
                 <input
                 id="email"
                 placeholder="Email"

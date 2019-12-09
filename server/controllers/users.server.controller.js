@@ -430,6 +430,7 @@ exports.replaceUserForID = function(req, res, next, id) {
   });
 };
 
+// finds a user from the request and updates their status to paid; returns either error or success, no object
 exports.upgradePaid = function(req, res){
   User.findOneAndUpdate({userid: req.user.userid},{accounttype: req.accounttype}, (err, user) => {
     if(err){

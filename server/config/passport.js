@@ -6,10 +6,10 @@ const passport = require('passport'),
       key = require("./config").secrets.jwt_secret,
       opts = {};
 
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken(); // header token strategy
 opts.secretOrKey = key;
 
-// token for local auth
+// Passport strategy: takes the user and auths based off the token
 passport.use(
   new JwtStrategy(opts, (load, done) => {
     User.findById(load.email)
@@ -23,7 +23,7 @@ passport.use(
   })
 );
 
-// google auth
+// google auth (buggy)
 
 // facebook auth
 
