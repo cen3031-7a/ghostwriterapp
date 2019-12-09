@@ -7,12 +7,24 @@ You can find a demo of GhostWriter online at [http://ghostwriter-7a.herokuapp.co
 * React
 * Bootstrap
 * MongoDB
+* Mongoose
 * Express
 * [officegen](https://github.com/Ziv-Barber/officegen)
 * [PDFKit](https://github.com/foliojs/pdfkit)
 * [react-dragula](https://github.com/bevacqua/react-dragula)
 * [react-feather](https://github.com/feathericons/react-feather)
 * [react-quill](https://github.com/zenoamaro/react-quill)
+* [react-paypal-button-v2](https://github.com/Luehang/react-paypal-button-v2)
+* [passport](https://github.com/jaredhanson/passport)
+* [passport-jwt](https://github.com/mikenicholson/passport-jwt)
+* [passport-google-oauth](https://github.com/jaredhanson/passport-google-oauth)
+* [passport-facebook](https://github.com/jaredhanson/passport-facebook)
+* [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+* [bycryptjs](https://github.com/dcodeIO/bcrypt.js)
+* [is-empty](https://github.com/ianstormtaylor/is-empty)
+* [validator](validatorjs/validator.js)
+
+[Big shout out to Rishi Prasad and his tutorial](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669)
 
 ## Features
 Homepage:
